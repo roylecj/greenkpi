@@ -1,0 +1,45 @@
+<template name="header">
+  <nav class="navbar navbar-default navbar-expand" role="navigation">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <img src="logo.png" class="navbar-brand"/>
+      <a class="navbar-brand" href="{{pathFor 'home'}}">Green KPI</a>
+    </div>
+
+    {{#if currentUser}}
+    <div class="collapse navbar-collapse" id="navigation">
+
+      <ul class="nav navbar-nav">
+        <li><a href="{{pathFor 'myActionList'}}" class="navbar-link">My Actions
+            {{#if isActions}}
+            <span class="sr-only">(current)</span>
+            {{/if}}
+            {{#if incompleteActions}}
+              <span class="badge">
+              {{actionCount}}
+              </span>
+            {{/if}}</a></li>
+
+            <li><a href="{{pathFor 'actionList'}}" class="navbar-link">My Plan
+            {{#if isPlan}}
+            <span class="sr-only">(current)</span>
+            {{/if}}
+          </a></li>
+
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <div class="btn-toolbar">
+          <button type="button" class="btn btn-info">Change Password</button>
+          <button type="button" class="btn btn-danger btnLogout">Logout {{currentUserName}}</button>
+        </div>
+      </ul>
+    </div>
+    {{/if}}
+  </nav>
+</template>

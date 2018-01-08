@@ -1,0 +1,66 @@
+<template name="actionItem">
+  <tr>
+    <td></td>
+    <td>
+      {{#if plannedPressed}}<b>{{actionText}}</b>
+      {{else}}
+        {{#if donePressed}}<b>{{actionText}}</b>
+        {{else}}
+      {{actionText}}
+      {{/if}}
+      {{/if}}
+
+      {{#if isinMyAction}}
+      <br/>
+      <div class="list-group">
+        {{#each actionItemList}}
+          {{> myItem}}
+        {{/each}}
+      </div>
+      {{/if}}
+    </td>
+<!--
+    {{#if isActive}}
+    <td><button class="btn btn-xs btn-outline-info btnPlan">Plan</button> <button class="btn btn-xs btn-outline-success btnDone">Done</button></td>
+    {{/if}}
+  -->
+  </tr>
+  <!--
+  {{#if plannedPressed}}
+  <tr>
+    <td></td>
+    <td>
+  <div class="form-group">
+    <fieldset>
+      <label class="control-label" for="plannedDate">Planned Completion Date</label>
+      <input class="form-control" id="plannedDate" type="date" placeholder="">
+    </fieldset>
+    <fieldset>
+      <label class="control-label" for="plannedNoteText">Note</label>
+      <input class="form-control" id="plannedNoteText" type="text" placeholder="Enter a note">
+    </fieldset>
+    <button class="btn btn-xs btn-success btnPlanSave">Save</button>
+    <button class="btn btn-xs btn-danger btnPlanCancel">Cancel</button>
+  </div>
+</td>
+</tr>
+  {{/if}}
+
+  {{#if donePressed}}
+  <tr>
+    <td></td>
+    <td>
+  <div class="form-group">
+    <fieldset>
+      <label class="control-label" for="completedNoteText">Note</label>
+      <input class="form-control" id="completedNoteText" type="text" placeholder="Enter a note">
+    </fieldset>
+    <button class="btn btn-xs btn-success btnDoneSave">Save</button>
+    <button class="btn btn-xs btn-danger btnDoneCancel">Cancel</button>
+
+  </div>
+</td>
+</tr>
+  {{/if}}
+-->
+</template>

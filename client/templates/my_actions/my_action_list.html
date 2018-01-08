@@ -1,0 +1,29 @@
+<template name="myActionList">
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      Planned
+    </div>
+      <div class="panel-body">
+        {{> myPlannedList}}
+      </div>
+  </div>
+
+  <div class="panel panel-warning">
+    <div class="panel-heading">
+      Outstanding
+    </div>
+      <div class="panel-body">
+        {{> myOutstandingList}}
+      </div>
+  </div>
+
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      Completed
+    </div>
+    <div class="panel-body">
+      {{> myCompletedList}}
+    </div>
+  </div>
+</template>

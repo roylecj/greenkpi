@@ -1,0 +1,83 @@
+<template name="myItem">
+
+  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+<!--      <h5 class="mb-1">{{questionText}}</h5>
+      <p></p>-->
+      {{#if notPlan}}
+      <h6 class="mb-1">{{actionText}}</h6>
+      {{else}}
+      <b>Current Status:</b>
+      {{/if}}
+      <small>{{dateCreated}} ({{daysAgo}})</small>
+    </div>
+
+    {{#if notPlan}}
+    {{else}}
+    <div class="label {{currentStatusState}}">{{currentStatus}}</div>
+    {{/if}}
+
+    {{#if isActive}}
+    <button class="btn btn-xs btn-outline-info btnPlan">Plan</button> <button class="btn btn-xs btn-outline-success btnDone">Complete</button>
+    {{/if}}
+
+    {{#if isCompleted}}
+    <p class="mb-1 label label-primary">Date Completed: {{dateCompleted}}</p>
+    {{/if}}
+    {{#if isPlanned}}
+    <p class="mb-1 label label-primary">Target Completion Date: {{datePlanned}}</p>
+    {{/if}}
+        <p></p>
+
+    {{#if enteringNotes}}
+    <div class="form-group">
+      <fieldset>
+        <label class="control-label" for="noteText">Note</label>
+        <input class="form-control" id="noteText" name="noteText" type="text" placeholder="Enter a note">
+      </fieldset>
+      <button class="btn btn-xs btn-success btnNoteSave">Save</button>
+      <button class="btn btn-xs btn-danger btnNoteCancel">Cancel</button>
+    </div>
+    {{else}}
+    <button class="btn btn-xs btn-primary btnAddNotes">Add Note</button>
+
+    {{/if}}
+<p></p>
+
+{{#if plannedPressed}}
+<div class="form-group">
+  <fieldset>
+    <label class="control-label" for="plannedDate">Planned Completion Date</label>
+    <input class="form-control" id="plannedDate" name="plannedDate" type="date" placeholder="">
+  </fieldset>
+  <fieldset>
+    <label class="control-label" for="plannedNoteText">Note</label>
+    <input class="form-control" id="plannedNoteText" name="plannedNoteText" type="text" placeholder="Enter a note">
+  </fieldset>
+  <button class="btn btn-xs btn-success btnPlanSave">Save</button>
+  <button class="btn btn-xs btn-danger btnPlanCancel">Cancel</button>
+</div>
+{{/if}}
+
+{{#if donePressed}}
+<div class="form-group">
+  <fieldset>
+    <label class="control-label" for="completedNoteText">Note</label>
+    <input class="form-control" id="completedNoteText" name="completedNoteText" type="text" placeholder="Enter a note">
+  </fieldset>
+  <button class="btn btn-xs btn-success btnDoneSave">Save</button>
+  <button class="btn btn-xs btn-danger btnDoneCancel">Cancel</button>
+
+</div>
+{{/if}}
+
+    {{#if hasNotes}}
+    <p class="mb-1"><b>Notes</b></p>
+    {{#each actionNotes}}
+      {{> myActionNotes}}
+    {{/each}}
+    {{/if}}
+
+  </a>
+
+</template>

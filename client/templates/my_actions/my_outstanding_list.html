@@ -1,0 +1,12 @@
+<template name="myOutstandingList">
+  {{#if noneOutstanding}}
+    No outstanding actions
+  {{else}}
+  <div class="list-group">
+    {{#each outstandingItem}}
+      {{> myItem}}
+    {{/each}}
+
+</div>
+{{/if}}
+</template>

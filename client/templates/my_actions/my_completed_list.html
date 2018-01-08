@@ -1,0 +1,12 @@
+<template name="myCompletedList">
+  {{#if noneComplete}}
+  No completed actions
+  {{else}}
+<div class="list-group">
+  {{#each completedItem}}
+    {{> myItem}}
+  {{/each}}
+
+</div>
+{{/if}}
+</template>

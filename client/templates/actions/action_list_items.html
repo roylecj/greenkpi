@@ -1,0 +1,11 @@
+<template name="actionListItems">
+  <li class="liItem list-group-item">
+    <button class="btn btn-xs {{isButtonYes}} btnYes">Yes</button>
+    <button class="btn btn-xs {{isButtonNo}} btnNo">No</button>
+    <div class="pull-left">{{questionText}}</div>
+    <span class="badge badge-primary badge-pill pull-right">{{actionCount}}</span>
+  </li>
+  {{#if isExpanded}}
+    {{> actionItems}}
+  {{/if}}
+</template>

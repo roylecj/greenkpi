@@ -1,0 +1,11 @@
+<template name="myPlannedList">
+  {{#if nonePlanned}}
+  No planned actions
+  {{else}}
+    <div class="list-group">
+  {{#each plannedItem}}
+    {{> myItem}}
+  {{/each}}
+</div>
+  {{/if}}
+</template>
