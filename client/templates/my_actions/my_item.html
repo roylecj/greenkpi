@@ -49,11 +49,21 @@
   <fieldset>
     <label class="control-label" for="plannedDate">Planned Completion Date</label>
     <input class="form-control" id="plannedDate" name="plannedDate" type="date" placeholder="">
-  </fieldset>
-  <fieldset>
+<!--  </fieldset>
+  <fieldset> -->
+    <label class="control-label" for="plannedAssignedTo">Assigned To</label>
+    <select class="form-control" id="plannedAssignedTo" name="plannedAssignedTo">
+      {{#each userInfo}}
+      {{> assignedUser}}
+      {{/each}}
+      </select>
+<!--  </fieldset>
+  <fieldset> -->
     <label class="control-label" for="plannedNoteText">Note</label>
-    <input class="form-control" id="plannedNoteText" name="plannedNoteText" type="text" placeholder="Enter a note">
+    <textarea class="form-control" id="plannedNoteText" name="plannedNoteText" rows="3"></textarea>
   </fieldset>
+  <br/>
+  <p></p>
   <button class="btn btn-xs btn-success btnPlanSave">Save</button>
   <button class="btn btn-xs btn-danger btnPlanCancel">Cancel</button>
 </div>

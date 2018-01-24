@@ -1,3 +1,4 @@
+
 Template.myItem.helpers({
   isCompleted: function() {
     if (this.completeFlag === true) {
@@ -5,6 +6,9 @@ Template.myItem.helpers({
     } else {
       return false
     }
+  },
+  userInfo: function() {
+    return Meteor.users.find().fetch()
   },
   plannedPressed: function(){
     if (Session.get("plannedPressed") === this._id) {
@@ -165,7 +169,7 @@ var noteText =  $(e.target.parentNode).find('[name=noteText]').val();
     datePlannedFormat = moment(plannedDate).format("DD MMM YYYY");
 
     noteText = noteText + " - Planned Date set to " + datePlannedFormat;
-    
+
     Meteor.call("addActionNote", this._id, noteText);
     Meteor.call("saveActionPlanned", this._id, plannedDate);
 
