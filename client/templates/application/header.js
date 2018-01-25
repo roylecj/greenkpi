@@ -58,5 +58,10 @@ Template.header.events({
 
     Session.set("signedIn", false);
     Router.go("login");
+  },
+  'click .btnSettings': function(e) {
+
+    e.preventDefault();
+    Router.go("settings");
   }
 });

@@ -1,2 +1,14 @@
 <template name="sms">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      Energy Bills
+      <button class="btn btn-xs btn-primary pull-right"><i class="fa fa-plus"></i> Add Bill</button>
+    </div>
+      <div class="panel-body">
+        {{#each myBills}}
+          {{> billEntry}}
+        {{/each}}
+      </div>
+  </div>
+
 </template>

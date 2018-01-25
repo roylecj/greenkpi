@@ -24,3 +24,7 @@ Meteor.publish('myActionNotes', function() {
 Meteor.publish("userDirectory", function () {
   return Meteor.users.find({}, {fields: {_id: 1, username: 1, emails: 1, profile: 1}});
 });
+
+Meteor.publish("mySettings", function() {
+  return MySettings.find();
+})

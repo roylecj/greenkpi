@@ -27,10 +27,13 @@
           <li><a href="{{pathFor 'actionList'}}" class="navbar-link">My Plan {{{isCurrentMenu 'PLAN'}}}</a></li>
 
           <li><a href="{{pathFor 'sms'}}" class="navbar-link">SMS {{{isCurrentMenu 'SMS'}}}</a></li>
+          <li><a href="{{pathFor 'reports'}}" class="navbar-link">Reports {{{isCurrentMenu 'REPORTS'}}}</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
         <div class="btn-toolbar">
+          <button type="button" class="btn btn-primary btnSettings"><i class="fa fa-cog"></i></button>
+
           <button type="button" class="btn btn-info">Change Password</button>
           <button type="button" class="btn btn-danger btnLogout">Logout {{currentUserName}}</button>
         </div>

@@ -1,7 +1,31 @@
 <template name="actionList">
-  <ul class="list-group">
-    {{#each ecoQuestions}}
-      {{> actionListItems}}
-    {{/each}}
-  </ul>
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      Energy
+    </div>
+    <div class="panel-body">
+      <ul class="list-group">
+        {{#each ecoQuestions}}
+          {{> actionListItems}}
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Water
+    </div>
+    <div class="panel-body">
+    </div>
+  </div>
+
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      Waste
+    </div>
+    <div class="panel-body">
+    </div>
+  </div>
+
 </template>
