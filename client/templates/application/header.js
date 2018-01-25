@@ -21,6 +21,20 @@ Template.header.helpers({
       return true
     }
   },
+  isCurrent: function(thisMenu) {
+    if (Session.get("currentMenu") === thisMenu) {
+      return true
+    } else {
+      return false
+    }
+  },
+  isCurrentMenu: function(thisMenu) {
+    if (Session.get("currentMenu") === thisMenu) {
+      return '<span class="sr-only">(current)</span>'
+    } else {
+      return ''
+    }
+  },
   isActions: function() {
     if (Session.get("currentMenu") === "ACTIONS") {
       return true

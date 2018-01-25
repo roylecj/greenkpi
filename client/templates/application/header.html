@@ -15,22 +15,18 @@
     <div class="collapse navbar-collapse" id="navigation">
 
       <ul class="nav navbar-nav">
-        <li><a href="{{pathFor 'myActionList'}}" class="navbar-link">My Actions
-            {{#if isActions}}
-            <span class="sr-only">(current)</span>
-            {{/if}}
+        <li><a href="{{pathFor 'myActionList'}}" class="navbar-link">
+          My Actions {{{isCurrentMenu 'ACTIONS'}}}
             {{#if incompleteActions}}
               <span class="badge">
               {{actionCount}}
               </span>
-            {{/if}}</a></li>
-
-            <li><a href="{{pathFor 'actionList'}}" class="navbar-link">My Plan
-            {{#if isPlan}}
-            <span class="sr-only">(current)</span>
             {{/if}}
           </a></li>
 
+          <li><a href="{{pathFor 'actionList'}}" class="navbar-link">My Plan {{{isCurrentMenu 'PLAN'}}}</a></li>
+
+          <li><a href="{{pathFor 'sms'}}" class="navbar-link">SMS {{{isCurrentMenu 'SMS'}}}</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
