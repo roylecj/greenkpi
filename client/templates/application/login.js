@@ -25,5 +25,8 @@ Template.login.events({
         sAlert.error('Error logging in: ' + e.reason);
       }
     });
+  },
+  'click .btnSignup': function(e, t) {
+    e.preventDefault();
   }
 })

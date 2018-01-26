@@ -1,0 +1,21 @@
+<template name="billLineDetail">
+  <tr>
+    <td>{{itemDescription}}</td>
+    <td>{{itemQuantity}}</td>
+    <td>{{itemUOM}}</td>
+    <td class="pull-right">{{itemPrice}}</td>
+    <td align="center">
+      {{#if sustainFlag}}
+      <div class="label label-success"><i class="fa fa-check"></i></div>
+      {{else}}
+      <div class="label label-danger"><i class="fa fa-times"></i></div>
+      {{/if}}
+    </td>
+    <td>
+{{#if isEditing}}
+      <button class="btn btn-xs btn-primary btnBillLineEdit"><i class="fa fa-pencil"></i></button>
+            <button class="btn btn-xs btn-danger btnBillLineDelete"><i class="fa fa-trash"></i></button>
+{{/if}}
+    </td>
+  </tr>
+</template>

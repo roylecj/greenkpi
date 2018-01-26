@@ -1,14 +1,122 @@
 <template name="sms">
-  <div class="panel panel-info">
-    <div class="panel-heading">
-      Energy Bills
-      <button class="btn btn-xs btn-primary pull-right"><i class="fa fa-plus"></i> Add Bill</button>
-    </div>
-      <div class="panel-body">
-        {{#each myBills}}
-          {{> billEntry}}
-        {{/each}}
+  <div class="row">
+    <div class="{{detailShownSize}}">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        Energy Usage
+        <button class="btn btn-xs btn-primary pull-right"><i class="fa fa-plus"></i> Add Bill</button>
       </div>
-  </div>
+        <div class="panel-body">
+          {{#if hasEnergyBill}}
 
+          <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Type</th>
+              <th scope="col">Provider / Company</th>
+              <th scope="col">Bill Period</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each myEnergyBills}}
+              {{> billEntry}}
+            {{/each}}
+            </tbody>
+          </table>
+          {{else}}
+          <b>No Energy Bills</b>
+          {{/if}}
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        Water Usage
+        <button class="btn btn-xs btn-primary pull-right"><i class="fa fa-plus"></i> Add Bill</button>
+      </div>
+        <div class="panel-body">
+          {{#if hasWaterBill}}
+          <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Type</th>
+              <th scope="col">Provider / Company</th>
+              <th scope="col">Bill Period</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each myWaterBills}}
+              {{> billEntry}}
+            {{/each}}
+            </tbody>
+          </table>
+          {{else}}
+          <b>No Water Bills</b>
+          {{/if}}
+        </div>
+    </div>
+
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        Waste
+        <button class="btn btn-xs btn-primary pull-right"><i class="fa fa-plus"></i> Add Bill</button>
+      </div>
+        <div class="panel-body">
+          {{#if hasWasteBill}}
+          <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Type</th>
+              <th scope="col">Provider / Company</th>
+              <th scope="col">Bill Period</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each myWasteBills}}
+              {{> billEntry}}
+            {{/each}}
+            </tbody>
+          </table>
+          {{else}}
+          <b>No Waste Bills</b>
+          {{/if}}
+        </div>
+    </div>
+  </div>
+  {{#if detailShown}}
+  <div class="col-sm-6">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        Overview
+        {{#if isEdit}}
+        <button class="btn btn-xs btn-danger pull-right btnCancelBill">Cancel</button>
+        <button class="btn btn-xs btn-success pull-right btnSaveBill">Save</button>
+        {{else}}
+        <button class="btn btn-xs btn-primary pull-right btnEditBill">Edit</button>
+        {{/if}}
+      </div>
+        <div class="panel-body">
+          {{#each selectedBill}}
+            {{> billHeader}}
+          {{/each}}
+        </div>
+    </div>
+
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        Details
+      </div>
+        <div class="panel-body">
+          {{#each selectedBill}}
+            {{> billDetails}}
+          {{/each}}
+        </div>
+    </div>
+
+  </div>
+  {{/if}}
+</div>
 </template>

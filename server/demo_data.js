@@ -98,4 +98,35 @@
     activeFlag: true
   });
 
+  MyMetrics.insert({
+    userId: userId,
+    billDate: new Date(),
+    billCategory: 'Energy',
+    billType: 'Electricity',
+    billVendor: 'Ergon Energy',
+    billStartDate: '2017-09-01',
+    billEndDate: '2017-12-31',
+    billDetails: [
+      {
+      itemNumber: 1,
+      itemDescription: 'Tarrif 1',
+      isSustainable: true,
+      percentageSustainable: 100,
+      itemQuantity: 40,
+      itemUOM: 'KW',
+      itemPrice: "0"
+    },
+    {
+      itemNumber: 2,
+      itemDescription: 'Tarrif 31',
+      isSustainable: false,
+      percentageSustainable: 0,
+      itemQuantity: 20,
+      itemUOM: 'KW',
+      itemPrice: "200.50"
+    }
+  ],
+    createDate: new Date(),
+    activeFlag: true
+  })
 }

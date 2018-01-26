@@ -1,2 +1,8 @@
-<template name="sms_bill_entry">
+<template name="billEntry">
+<tr class="billItem {{isCurrentItem}}">
+  <td>{{date}}</td>
+  <td>{{billType}}</td>
+  <td>{{billVendor}}</td>
+  <td>{{billPeriod}}</td>
+</tr>
 </template>
