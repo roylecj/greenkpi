@@ -5,7 +5,7 @@
     <div class="form-group">
       <label for="billDate" class="col-form-label"><b>Date on Bill</b></label>
       {{#if isEditable}}
-        <input type="text" class="form-control-plaintext" id="billDate" value="{{dateOnBill}}">
+      <input type="text" class="form-control-plaintext" id="billDate" value="{{dateOnBill}}">
         {{else}}
         <input type="text" class="form-control-plaintext" id="billDateRO" value="{{dateOnBill}}" readonly="">
         {{/if}}
@@ -13,9 +13,14 @@
     <div class="form-group">
       <label for="billType"><b>Type</b></label>
       {{#if isEditable}}
-        <input type="text" class="form-control-plaintext" id="billType" value="{{billType}}">
+      <select id="category-select" class="form-control">
+          <option disabled="disabled" selected="selected">Please Select</option>
+          {{#each billType}}
+              <option value="{{code}}">{{description}}</option>
+          {{/each}}
+      </select>
         {{else}}
-        <input type="text" class="form-control-plaintext" id="billTypeRO" value="{{billType}}" readonly="">
+        <input type="text" class="form-control-plaintext" id="billTypeRO" value="{{billTypeDescription}}" readonly="">
         {{/if}}
     </div>
 

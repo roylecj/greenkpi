@@ -9,6 +9,30 @@
     profile: { name: 'Chris Royle'}
   });
 
+  ReferenceData.insert({
+    dataType: "ENERGY_BILL",
+    code: "ELECT",
+    description: "Electricity",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "ENERGY_BILL",
+    code: "GAS",
+    description: "Gas",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "UOM",
+    code: "KW",
+    description: "Kilowatts",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
   var q1;
   var q2;
   var q3;
@@ -98,12 +122,19 @@
     activeFlag: true
   });
 
+  Vendors.insert({
+    code: "ERGON",
+    description: "Ergon Energy",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
   MyMetrics.insert({
     userId: userId,
     billDate: new Date(),
     billCategory: 'Energy',
-    billType: 'Electricity',
-    billVendor: 'Ergon Energy',
+    billTypeCode: 'ELECT',
+    billVendorCode: 'ERGON',
     billStartDate: '2017-09-01',
     billEndDate: '2017-12-31',
     billDetails: [
@@ -128,5 +159,38 @@
   ],
     createDate: new Date(),
     activeFlag: true
+  });
+
+  MyMetrics.insert({
+    userId: userId,
+    billDate: new Date(),
+    billCategory: 'Energy',
+    billTypeCode: 'ELECT',
+    billVendorCode: 'ERGON',
+    billStartDate: '2017-06-01',
+    billEndDate: '2017-08-31',
+    billDetails: [
+      {
+      itemNumber: 1,
+      itemDescription: 'Tarrif 1',
+      isSustainable: true,
+      percentageSustainable: 100,
+      itemQuantity: 12,
+      itemUOM: 'KW',
+      itemPrice: "0"
+    },
+    {
+      itemNumber: 2,
+      itemDescription: 'Tarrif 31',
+      isSustainable: false,
+      percentageSustainable: 0,
+      itemQuantity: 60,
+      itemUOM: 'KW',
+      itemPrice: "200.50"
+    }
+  ],
+    createDate: new Date(),
+    activeFlag: true
   })
+
 }

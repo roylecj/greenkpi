@@ -17,6 +17,14 @@ Meteor.publish('myQuestions', function() {
     return MyQuestions.find();
 })
 
+Meteor.publish('referenceData', function() {
+    return ReferenceData.find();
+});
+
+Meteor.publish('vendor', function() {
+    return Vendors.find();
+})
+
 Meteor.publish('myActionNotes', function() {
     return MyActionNotes.find();
 });

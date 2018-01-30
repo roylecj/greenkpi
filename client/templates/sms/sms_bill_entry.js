@@ -9,6 +9,12 @@ Template.billEntry.helpers({
     if (Session.get("currentBill") === this._id) {
       return "table-active"
     }
+  },
+  billTypeDescription: function() {
+    return ReferenceData.findOne({dataType: "ENERGY_BILL", code: this.billTypeCode}).description;
+  },
+  billVendor: function() {
+    return Vendors.findOne({code: this.billVendorCode}).description
   }
 });
 
