@@ -33,6 +33,126 @@
     activeFlag: true
   });
 
+  ReferenceData.insert({
+    dataType: "EMPLOYEE_COUNT",
+    code: "1_10",
+    description: "1 - 10",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "EMPLOYEE_COUNT",
+    code: "11_50",
+    description: "11 - 50",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "EMPLOYEE_COUNT",
+    code: "51_100",
+    description: "51 - 100",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "EMPLOYEE_COUNT",
+    code: "101_200",
+    description: "101 - 200",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "EMPLOYEE_COUNT",
+    code: "201_500",
+    description: "201 - 500",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "EMPLOYEE_COUNT",
+    code: "501",
+    description: "Greater than 500",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "GRI_SECTORS",
+    code: "OTHER",
+    description: "Other",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "STATE_CODES",
+    code: "QLD",
+    description: "Queensland",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "STATE_CODES",
+    code: "NSW",
+    description: "New South Wales",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "STATE_CODES",
+    code: "ACT",
+    description: "Australian Capital Territory",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "STATE_CODES",
+    code: "VIC",
+    description: "Victoria",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "STATE_CODES",
+    code: "TAS",
+    description: "Tasmania",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "STATE_CODES",
+    code: "WA",
+    description: "Western Australia",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "STATE_CODES",
+    code: "NT",
+    description: "Northern Territory",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "STATE_CODES",
+    code: "SA",
+    description: "South Australia",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
   var q1;
   var q2;
   var q3;
