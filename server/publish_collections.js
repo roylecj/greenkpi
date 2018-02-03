@@ -36,3 +36,7 @@ Meteor.publish("userDirectory", function () {
 Meteor.publish("mySettings", function() {
   return MySettings.find();
 })
+
+Meteor.publish("myIntents", function() {
+  return MyIntents.find();
+})

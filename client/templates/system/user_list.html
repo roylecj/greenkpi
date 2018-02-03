@@ -1,0 +1,28 @@
+<template name="userList">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Users
+      <button class="btn btn-xs btn-info pull-right btnAddNew">Add</button>
+    </div>
+  <div class="panel-body">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>User Name</th>
+          <th>Name</th>
+          <th>Email Address</th>
+          <th>User Group</th>
+          <th>Active User</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+
+  {{#each allUsers}}
+    {{> userItem}}
+  {{/each}}
+</tbody>
+</table>
+</div>
+  </div>
+</template>

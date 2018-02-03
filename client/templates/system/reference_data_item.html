@@ -1,0 +1,18 @@
+<template name="referenceItem">
+  <tr>
+    <td>{{dataType}}</td>
+    <td>{{code}}</td>
+    <td>{{description}}</td>
+    <td>
+      {{#if activeFlag}}
+        <div class="label label-success"><i class="fa fa-check"></i></div>
+      {{else}}
+        <div class="label label-danger"><i class="fa fa-times"></i></div>
+      {{/if}}
+    </td>
+    <td>
+      <button class="btn btn-xs btn-primary btnEditItem"><i class="fa fa-pencil"></i></button>
+      <button class="btn btn-xs btn-danger btnDeleteItem"><i class="fa fa-times"></i></button>
+    </td>
+  </tr>
+</template>

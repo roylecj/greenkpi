@@ -13,7 +13,6 @@
 
     {{#if currentUser}}
     <div class="collapse navbar-collapse" id="navigation">
-
       <ul class="nav navbar-nav">
         <li><a href="{{pathFor 'myActionList'}}" class="navbar-link">
           My Actions {{{isCurrentMenu 'ACTIONS'}}}
@@ -29,6 +28,14 @@
           <li><a href="{{pathFor 'sms'}}" class="navbar-link">SMS {{{isCurrentMenu 'SMS'}}}</a></li>
           <li><a href="{{pathFor 'intents'}}" class="navbar-link">My Intent {{{isCurrentMenu 'INTENTS'}}}</a></li>
           <li><a href="{{pathFor 'reports'}}" class="navbar-link">Reports {{{isCurrentMenu 'REPORTS'}}}</a></li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Setup</a>
+            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
+              <li><a class="dropdown-item" href="{{pathFor 'userList'}}">Users</a></li>
+              <li><a class="dropdown-item" href="{{pathFor 'referenceDataList'}}">Reference Data</a></li>
+            </div>
+          </li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
