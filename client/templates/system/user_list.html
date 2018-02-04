@@ -13,10 +13,46 @@
           <th>Email Address</th>
           <th>User Group</th>
           <th>Active User</th>
-          <th></th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
+        {{#if newUser}}
+          <tr>
+            <td>
+              <input class="form-control" type="text" name="userName" />
+            </td>
+
+            <td>
+              <input class="form-control" type="text" name="personName" />
+            </td>
+
+            <td>
+              <input class="form-control" type="text" name="emailAddress" />
+            </td>
+
+            <td>
+              <select class="form-control" id="userGroup">
+                {{#each userGroupTypes}}
+                  <option>{{name}}</option>
+                  {{/each}}
+              </select>
+            </td>
+
+            <td>
+              {{#if newActiveUser}}
+              <button class="btn btn-xs btn-success btnActiveUser"><i class="fa fa-check"></i></button>
+              {{else}}
+              <button class="btn btn-xs btn-danger btnInactiveUser"><i class="fa fa-times"></i></button>
+              {{/if}}
+            </td>
+
+            <td>
+              <button class="btn btn-xs btn-success btnSaveAddNew"><i class="fa fa-check"></i></button>
+              <button class="btn btn-xs btn-danger btnCancelAddNew"><i class="fa fa-times"></i></button>
+            </td>
+          </tr>
+        {{/if}}
 
   {{#each allUsers}}
     {{> userItem}}

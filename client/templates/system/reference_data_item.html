@@ -1,18 +1,49 @@
 <template name="referenceItem">
   <tr>
-    <td>{{dataType}}</td>
-    <td>{{code}}</td>
-    <td>{{description}}</td>
     <td>
-      {{#if activeFlag}}
-        <div class="label label-success"><i class="fa fa-check"></i></div>
+      {{#if editThisItem}}
+        <input type="text" class="form-control" name="dataType" id="dataType" value="{{dataType}}"/>
       {{else}}
-        <div class="label label-danger"><i class="fa fa-times"></i></div>
+        {{dataType}}
       {{/if}}
     </td>
     <td>
-      <button class="btn btn-xs btn-primary btnEditItem"><i class="fa fa-pencil"></i></button>
-      <button class="btn btn-xs btn-danger btnDeleteItem"><i class="fa fa-times"></i></button>
+      {{#if editThisItem}}
+        <input type="text" class="form-control" name="code" id="code" value="{{code}}"/>
+      {{else}}
+        {{code}}
+      {{/if}}
+    </td>
+    <td>
+      {{#if editThisItem}}
+        <input type="text" class="form-control" name="description" id="description" value="{{description}}"/>
+      {{else}}
+        {{description}}
+      {{/if}}
+    </td>
+    <td>
+      {{#if editThisItem}}
+        {{#if isActive}}
+          <button class="btn btn-xs btn-success btnActive"><i class="fa fa-check"></i></button>
+        {{else}}
+          <button class="btn btn-xs btn-danger btnInactive"><i class="fa fa-times"></i></button>
+        {{/if}}
+      {{else}}
+        {{#if activeFlag}}
+          <div class="label label-success"><i class="fa fa-check"></i></div>
+        {{else}}
+          <div class="label label-danger"><i class="fa fa-times"></i></div>
+        {{/if}}
+      {{/if}}
+    </td>
+    <td>
+      {{#if editThisItem}}
+        <button class="btn btn-xs btn-success btnSaveItem"><i class="fa fa-check"></i></button>
+        <button class="btn btn-xs btn-danger btnCancelEditItem"><i class="fa fa-times"></i></button>
+      {{else}}
+        <button class="btn btn-xs btn-primary btnEditItem"><i class="fa fa-pencil"></i></button>
+        <button class="btn btn-xs btn-danger btnDeleteItem"><i class="fa fa-times"></i></button>
+      {{/if}}
     </td>
   </tr>
 </template>

@@ -40,3 +40,7 @@ Meteor.publish("mySettings", function() {
 Meteor.publish("myIntents", function() {
   return MyIntents.find();
 })
+
+Meteor.publish(null, function (){
+  return Meteor.roles.find({})
+});

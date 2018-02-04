@@ -21,6 +21,13 @@ Template.header.helpers({
       return true
     }
   },
+  isAdminRole: function() {
+    if (Roles.userIsInRole(Meteor.userId(), 'ADMIN')) {
+      return true
+    } else {
+      return false
+    }
+  },
   isCurrent: function(thisMenu) {
     if (Session.get("currentMenu") === thisMenu) {
       return true

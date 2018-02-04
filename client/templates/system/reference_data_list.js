@@ -1,6 +1,6 @@
 Template.referenceDataList.helpers({
   referenceDataItems: function() {
-    return ReferenceData.find().fetch();
+    return ReferenceData.find({}, {sort: {dataType: 1, code: 1}}).fetch();
   },
   newReferenceItem: function() {
     return Session.get("addReferenceData");
@@ -18,8 +18,14 @@ Template.referenceDataList.events({
   },
   'click .btnSaveAddNew': function(e, t) {
     e.preventDefault();
-    Session.set("addReferenceData", false);
 
+    var cat =  $(e.target.parentNode.parentNode.parentNode).find('[name=dataType]').val();
+    var description = $(e.target.parentNode.parentNode.parentNode).find('[name=description]').val();
+    var code = $(e.target.parentNode.parentNode.parentNode).find('[name=code]').val();
+    var isActive = Session.get("newActive")
+
+    Meteor.call("addReferenceItem", cat, code, description, isActive);
+    Session.set("addReferenceData", false);
     sAlert.success("Saved");
   },
   'click .btnCancelAddNew': function(e, t) {

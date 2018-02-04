@@ -9,6 +9,12 @@
     profile: { name: 'Chris Royle'}
   });
 
+  Roles.createRole('ADMIN');
+  Roles.createRole('STANDARD');
+  Roles.createRole('NO ACCESS');
+
+  Roles.addUsersToRoles(userId, 'ADMIN');
+
   ReferenceData.insert({
     dataType: "ENERGY_BILL",
     code: "ELECT",
