@@ -168,6 +168,7 @@
     greenkpiId: "3020112",
     questionText: "Has an investigation been carried out to ensure the most effective tariffs are used?",
     greenCategory: "30201",
+    categoryCode: "ENERGY",
     startDate: Date("2017-01-01"),
     createDate: new Date(),
     activeFlag: true
@@ -177,6 +178,7 @@
     greenkpiId: "3020113",
     questionText: "Has the company had an electricity audit carried out to check efficiency?",
     greenCategory: "30201",
+    categoryCode: "ENERGY",
     startDate: Date("2017-01-01"),
     createDate: new Date(),
     activeFlag: true
@@ -186,6 +188,7 @@
       greenkpiId: "3020114",
       questionText: "Does the company encourage energy efficient practises by staff?",
       greenCategory: "30201",
+      categoryCode: "ENERGY",
       startDate: Date("2017-01-01"),
       createDate: new Date(),
       activeFlag: true
@@ -195,6 +198,7 @@
       greenkpiId: "3020115",
       questionText: "Does the company have efficiency policies for non-specific appliances?",
       greenCategory: "30201",
+      categoryCode: "ENERGY",
       startDate: Date("2017-01-01"),
       createDate: new Date(),
       activeFlag: true
