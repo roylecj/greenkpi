@@ -1,12 +1,12 @@
 Template.sms.helpers({
   myEnergyBills: function() {
-    return MyMetrics.find({billCategory: 'Energy'}).fetch();
+    return MyMetrics.find({userId: Meteor.userId(), billCategory: 'Energy', activeFlag: true}).fetch();
   },
   myWaterBills: function() {
-    return MyMetrics.find({billCategory: 'Water'}).fetch();
+    return MyMetrics.find({userId: Meteor.userId(), billCategory: 'Water', activeFlag: true}).fetch();
   },
   myWasteBills: function() {
-    return MyMetrics.find({billCategory: 'Waste'}).fetch();
+    return MyMetrics.find({userId: Meteor.userId(), billCategory: 'Waste', activeFlag: true}).fetch();
   },
   detailShown: function() {
     if (Session.get("detailsShown") === true) {
