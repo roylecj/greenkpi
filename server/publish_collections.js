@@ -30,7 +30,7 @@ Meteor.publish('myActionNotes', function() {
 });
 
 Meteor.publish("userDirectory", function () {
-  return Meteor.users.find({}, {fields: {_id: 1, username: 1, emails: 1, profile: 1}});
+  return Meteor.users.find({}, {fields: {_id: 1, username: 1, emails: 1, profile: 1, roles: 1}});
 });
 
 Meteor.publish("mySettings", function() {
@@ -39,7 +39,12 @@ Meteor.publish("mySettings", function() {
 
 Meteor.publish("myIntents", function() {
   return MyIntents.find();
+});
+
+Meteor.publish("myOrganisation", function() {
+  return MyOrganisation.find();
 })
+
 
 Meteor.publish(null, function (){
   return Meteor.roles.find({})
