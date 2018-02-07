@@ -38,13 +38,13 @@ Template.sms.helpers({
     }
   },
   hasEnergyBill: function() {
-    return MyMetrics.find({billCategory: 'Energy'}).count();
+    return MyMetrics.find({userId: Meteor.userId(), billCategory: 'Energy', activeFlag: true}).count();
   },
   hasWaterBill: function() {
-    return MyMetrics.find({billCategory: 'Water'}).count();
+    return MyMetrics.find({userId: Meteor.userId(), billCategory: 'Water', activeFlag: true}).count();
   },
   hasWasteBill: function() {
-    return MyMetrics.find({billCategory: 'Waste'}).count();
+    return MyMetrics.find({userId: Meteor.userId(), billCategory: 'Waste', activeFlag: true}).count();
   }
 });
 

@@ -51,11 +51,6 @@ Template.actionItem.events({
   },
   'click .btnDoneSave': function(e, t) {
 
-    // Save this one as done.
-
-    debugger
-
-    console.log(this._id);
     // Meteor.call("saveActionCompleted", this._id);
 
     Session.set("donePressed", "");

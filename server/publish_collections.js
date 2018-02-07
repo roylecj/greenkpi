@@ -6,15 +6,15 @@ Meteor.publish('ecoActions', function() {
     return EcoActions.find();
 });
 Meteor.publish('myActions', function() {
-    return MyActions.find();
+    return MyActions.find({userId: Meteor.userId()});
 });
 
 Meteor.publish('myMetrics', function() {
-    return MyMetrics.find();
+    return MyMetrics.find({userId: Meteor.userId()});
 });
 
 Meteor.publish('myQuestions', function() {
-    return MyQuestions.find();
+    return MyQuestions.find({userId: Meteor.userId()});
 })
 
 Meteor.publish('referenceData', function() {
@@ -26,7 +26,7 @@ Meteor.publish('vendor', function() {
 })
 
 Meteor.publish('myActionNotes', function() {
-    return MyActionNotes.find();
+    return MyActionNotes.find({userId: Meteor.userId()});
 });
 
 Meteor.publish("userDirectory", function () {
@@ -34,17 +34,20 @@ Meteor.publish("userDirectory", function () {
 });
 
 Meteor.publish("mySettings", function() {
-  return MySettings.find();
+  return MySettings.find({userId: Meteor.userId()});
 })
 
 Meteor.publish("myIntents", function() {
-  return MyIntents.find();
+  return MyIntents.find({userId: Meteor.userId()});
 });
 
 Meteor.publish("myOrganisation", function() {
-  return MyOrganisation.find();
+  return MyOrganisation.find({userId: Meteor.userId()});
 })
 
+Meteor.publish("auditInfo", function() {
+  return AuditInfo.find({userId: Meteor.userId()});
+});
 
 Meteor.publish(null, function (){
   return Meteor.roles.find({})
