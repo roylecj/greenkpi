@@ -9,7 +9,7 @@
     profile: { name: 'Demo User'}
   });
 
-  var orgId = Organisations.insert({organisationName: "Test Org"});
+  var orgId = Organisation.insert({organisationName: "Test Org"});
 
   MyOrganisation.insert({organisationId: orgId, userId: userId, activeFlag: true});
 
