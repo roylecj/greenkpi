@@ -26,7 +26,10 @@ Template.myItem.helpers({
   },
 
   isActive: function() {
-    return MyQuestions.find({activeFlag: true, questionId: this.questionId, userId: Meteor.userId()}).fetch();
+
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    return MyQuestions.find({activeFlag: true, questionId: this.questionId, organisationId: orgId}).fetch();
   },
   currentStatus: function() {
     if (this.completeFlag === true) {

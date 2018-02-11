@@ -93,7 +93,7 @@
 }
 .sidebar-menu .treeview-menu > li.active > a,
 .sidebar-menu .treeview-menu > li > a:hover {
-  color: #ffffff;
+  color: var(--green-kpi-white);
 }
 .sidebar-form {
   border-radius: 3px;

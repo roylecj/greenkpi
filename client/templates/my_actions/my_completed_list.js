@@ -1,10 +1,16 @@
 Template.myCompletedList.helpers({
   completedItem: function() {
-        Session.set("currentMenu", "ACTION");
-    return MyActions.find({userId: Meteor.userId(), completeFlag: true}).fetch();
+    Session.set("currentMenu", "ACTION");
+
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    return MyActions.find({organisationId: orgId, completeFlag: true}).fetch();
   },
   noneComplete: function() {
-    var isCompleted = MyActions.find({userId: Meteor.userId(), completeFlag: true}).count();
+
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    var isCompleted = MyActions.find({organisationId: orgId, completeFlag: true}).count();
 
     if (isCompleted > 0) {
       return false

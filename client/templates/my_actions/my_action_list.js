@@ -1,11 +1,17 @@
 Template.myActionList.helpers({
   outstandingCount: function() {
-    return "0"
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    return MyActions.find({organisationId: orgId, activeFlag: true, completeFlag: false, planFlag: false}).count()
   },
   plannedCount: function() {
-    return "0"
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    return MyActions.find({organisationId: orgId, activeFlag: true, completeFlag: false, planFlag: true}).count()
   },
   completedCount: function() {
-    return "0"
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    return MyActions.find({organisationId: orgId, activeFlag: true, planFlag: false, completeFlag: true}).count()
   }
 })

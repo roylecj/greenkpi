@@ -12,7 +12,9 @@ Template.planListItems.helpers({
   isButtonYes: function() {
     var yesCount;
 
-    yesCount = MyQuestions.find({userId: Meteor.userId(), questionId: this._id, activeFlag: true}).count();
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    yesCount = MyQuestions.find({organisationId: orgId, questionId: this._id, activeFlag: true}).count();
 
     if (yesCount > 0) {
       return "btn-success"
@@ -23,7 +25,9 @@ Template.planListItems.helpers({
   isButtonNo: function() {
     var yesCount;
 
-    yesCount = MyQuestions.find({userId: Meteor.userId(), questionId: this._id, activeFlag: true}).count();
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    yesCount = MyQuestions.find({organisationId: orgId, questionId: this._id, activeFlag: true}).count();
 
     if (yesCount === 0) {
       return "btn-primary"

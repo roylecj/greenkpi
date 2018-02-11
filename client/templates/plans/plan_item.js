@@ -1,6 +1,8 @@
 Template.planItem.helpers({
   isActive: function() {
-    return MyQuestions.find({activeFlag: true, questionId: this.questionId, userId: Meteor.userId()}).fetch();
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    return MyQuestions.find({activeFlag: true, questionId: this.questionId, organisationId: orgId}).fetch();
   },
   plannedPressed: function(){
     if (Session.get("plannedPressed") === this._id) {
@@ -18,12 +20,16 @@ Template.planItem.helpers({
   },
   actionItemList: function() {
     // debugger
-    return MyActions.find({userId: Meteor.userId(), actionId: this._id}).fetch();
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    return MyActions.find({organisationId: orgId, actionId: this._id}).fetch();
   },
   isinMyAction: function() {
     var countAction;
 
-    countAction = MyActions.find({userId: Meteor.userId(), actionId: this._id}).count();
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    countAction = MyActions.find({organisationId: orgId, actionId: this._id}).count();
 
     if (countAction === 0) {
       return false

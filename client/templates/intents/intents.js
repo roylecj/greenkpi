@@ -63,8 +63,11 @@ Template.intents.helpers({
     }
   },
   energyIntent: function() {
+
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
     var intent = MyIntents.findOne({
-      userId: Meteor.userId(),
+      organisationId: orgId,
       intentType: "ENERGY",
       activeFlag: true
     });
@@ -72,8 +75,10 @@ Template.intents.helpers({
     return intent.description;
   },
   waterIntent: function() {
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
     var intent = MyIntents.findOne({
-      userId: Meteor.userId(),
+      organisationId: orgId,
       intentType: "WATER",
       activeFlag: true
     });
@@ -82,8 +87,10 @@ Template.intents.helpers({
 
   },
   wasteIntent: function() {
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
     var intent = MyIntents.findOne({
-      userId: Meteor.userId(),
+      organisationId: orgId,
       intentType: "WASTE",
       activeFlag: true
     });
@@ -91,22 +98,34 @@ Template.intents.helpers({
     return intent.description;
   },
   hasEnergyHistory: function() {
-    return MyIntents.find({userId: Meteor.userId(), intentType: "ENERGY", activeFlag: false}).count();
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    return MyIntents.find({organisationId: orgId, intentType: "ENERGY", activeFlag: false}).count();
   },
   hasWaterHistory: function() {
-    return MyIntents.find({userId: Meteor.userId(), intentType: "WATER", activeFlag: false}).count();
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    return MyIntents.find({organisationId: orgId, intentType: "WATER", activeFlag: false}).count();
   },
   hasWasteHistory: function() {
-    return MyIntents.find({userId: Meteor.userId(), intentType: "WASTE", activeFlag: false}).count();
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    return MyIntents.find({organisationId: orgId, intentType: "WASTE", activeFlag: false}).count();
   },
   energyHistoryItems: function() {
-    return MyIntents.find({userId: Meteor.userId(), intentType: "ENERGY", activeFlag: false}).fetch();
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    return MyIntents.find({organisationId: orgId, intentType: "ENERGY", activeFlag: false}).fetch();
   },
   waterHistoryItems: function() {
-    return MyIntents.find({userId: Meteor.userId(), intentType: "WATER", activeFlag: false}).fetch();
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    return MyIntents.find({organisationId: orgId, intentType: "WATER", activeFlag: false}).fetch();
   },
   wasteHistoryItems: function() {
-    return MyIntents.find({userId: Meteor.userId(), intentType: "WASTE", activeFlag: false}).fetch();
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    return MyIntents.find({organisationId: orgId, intentType: "WASTE", activeFlag: false}).fetch();
   }
 });
 
@@ -156,49 +175,84 @@ Template.intents.events({
 
   },
   'keyup #wasteIntent': function(e, t) {
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
-    var intent = MyIntents.findOne({
-      userId: Meteor.userId(),
-      intentType: "WASTE",
-      activeFlag: true
-    });
+    if (orgId) {
+      var intent = MyIntents.findOne({
+        organisationId: orgId,
+        intentType: "WASTE",
+        activeFlag: true
+      });
 
-    var myIntent = intent.description;
+      if (! intent) {
+        Session.set("btnWasteSave", true);
+      } else {
 
-    if ($(e.target).val() === myIntent) {
-      Session.set("btnWasteSave", false);
+        var myIntent = intent.description;
+
+        if ($(e.target).val() === myIntent) {
+          Session.set("btnWasteSave", false);
+        } else {
+          Session.set("btnWasteSave", true);
+        }
+      }
     } else {
       Session.set("btnWasteSave", true);
     }
   },
   'keyup #energyIntent': function(e, t) {
 
-    var intent = MyIntents.findOne({
-      userId: Meteor.userId(),
-      intentType: "ENERGY",
-      activeFlag: true
-    });
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
-    var myIntent = intent.description;
+    if (orgId) {
+      var intent = MyIntents.findOne({
+        organisationId: orgId,
+        intentType: "ENERGY",
+        activeFlag: true
+      });
 
-    if ($(e.target).val() === myIntent) {
-      Session.set("btnEnergySave", false);
+      if (! intent) {
+        Session.set("btnEnergySave", true);
+      } else {
+        var myIntent = intent.description;
+
+        if ($(e.target).val() === myIntent) {
+          Session.set("btnEnergySave", false);
+        } else {
+          Session.set("btnEnergySave", true);
+        }
+      }
+
     } else {
       Session.set("btnEnergySave", true);
+
     }
   },
   'keyup #waterIntent': function(e, t) {
 
-    var intent = MyIntents.findOne({
-      userId: Meteor.userId(),
-      intentType: "WATER",
-      activeFlag: true
-    });
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
-    var myIntent = intent.description;
+    if (orgId) {
+      var intent = MyIntents.findOne({
+        organisationId: orgId,
+        intentType: "WATER",
+        activeFlag: true
+      });
 
-    if ($(e.target).val() === myIntent) {
-      Session.set("btnWaterSave", false);
+
+      if (! intent) {
+          Session.set("btnWaterSave", true);
+      } else {
+
+        var myIntent = intent.description;
+
+        if ($(e.target).val() === myIntent) {
+          Session.set("btnWaterSave", false);
+        } else {
+          Session.set("btnWaterSave", true);
+        }
+
+      }
     } else {
       Session.set("btnWaterSave", true);
     }

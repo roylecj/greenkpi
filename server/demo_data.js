@@ -3,11 +3,15 @@
 
   var thisid;
   var userId = Accounts.createUser({
-    username: 'croyle',
-    password: '08board',
+    username: 'demouser',
+    password: 'greenkpi',
     email: 'roylecj@gmail.com',
-    profile: { name: 'Chris Royle'}
+    profile: { name: 'Demo User'}
   });
+
+  var orgId = Organisations.insert({organisationName: "Test Org"});
+
+  MyOrganisation.insert({organisationId: orgId, userId: userId, activeFlag: true});
 
   Roles.createRole('ADMIN');
   Roles.createRole('STANDARD');

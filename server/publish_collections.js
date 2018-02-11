@@ -6,15 +6,15 @@ Meteor.publish('ecoActions', function() {
     return EcoActions.find();
 });
 Meteor.publish('myActions', function() {
-    return MyActions.find({userId: Meteor.userId()});
+    return MyActions.find();
 });
 
 Meteor.publish('myMetrics', function() {
-    return MyMetrics.find({userId: Meteor.userId()});
+    return MyMetrics.find();
 });
 
 Meteor.publish('myQuestions', function() {
-    return MyQuestions.find({userId: Meteor.userId()});
+    return MyQuestions.find();
 })
 
 Meteor.publish('referenceData', function() {
@@ -26,7 +26,7 @@ Meteor.publish('vendor', function() {
 })
 
 Meteor.publish('myActionNotes', function() {
-    return MyActionNotes.find({userId: Meteor.userId()});
+    return MyActionNotes.find();
 });
 
 Meteor.publish("userDirectory", function () {
@@ -38,7 +38,7 @@ Meteor.publish("mySettings", function() {
 })
 
 Meteor.publish("myIntents", function() {
-  return MyIntents.find({userId: Meteor.userId()});
+  return MyIntents.find();
 });
 
 Meteor.publish("organisation", function() {
@@ -46,7 +46,7 @@ Meteor.publish("organisation", function() {
 });
 
 Meteor.publish("myOrganisation", function() {
-  return MyOrganisation.find({userId: Meteor.userId()});
+  return MyOrganisation.find();
 });
 
 Meteor.publish("auditInfo", function() {

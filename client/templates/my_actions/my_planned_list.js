@@ -1,10 +1,15 @@
 Template.myPlannedList.helpers({
   plannedItem: function() {
         Session.set("currentMenu", "ACTION");
-    return MyActions.find({userId: Meteor.userId(), planFlag: true}).fetch();
+
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    return MyActions.find({organisationId: orgId, planFlag: true}).fetch();
   },
   nonePlanned: function() {
-    var isPlanned = MyActions.find({userId: Meteor.userId(), planFlag: true}).count();
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    var isPlanned = MyActions.find({organisationId: orgId, planFlag: true}).count();
 
     if (isPlanned > 0) {
       return false

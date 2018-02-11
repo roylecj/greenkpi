@@ -1,10 +1,15 @@
 Template.myOutstandingList.helpers({
   outstandingItem: function() {
     Session.set("currentMenu", "ACTION");
-    return MyActions.find({userId: Meteor.userId(), completeFlag: false, planFlag: false}).fetch();
+
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    return MyActions.find({organisationId: orgId, completeFlag: false, planFlag: false}).fetch();
   },
   noneOutstanding: function() {
-    var isOutstanding = MyActions.find({userId: Meteor.userId(), completeFlag: false, planFlag: false}).count();
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    var isOutstanding = MyActions.find({organisationId: orgId, completeFlag: false, planFlag: false}).count();
 
     if (isOutstanding > 0) {
       return false
