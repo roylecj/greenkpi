@@ -1,64 +1,79 @@
 <template name="userList">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
+
+  <section class="content-header">
+    <h1>
       Users
-      <button class="btn btn-xs btn-info pull-right btnAddNew">Add</button>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="{{pathFor 'home'}}"><i class="fa fa-home"></i> Home</a></li>
+      <li>Administration</li>
+      <li class="active">Users</li>
+    </ol>
+  </section>
+
+  <section class="content">
+  <div class="box box-success">
+    <div class="box-header with-border">
+        <h3 class="box-title">Users</h3>
+        <button class="btn btn-xs btn-info pull-right btnAddNew">Add</button>
+
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th>User Name</th>
+              <th>Name</th>
+              <th>Email Address</th>
+              <th>User Group</th>
+              <th>Active User</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#if newUser}}
+              <tr>
+                <td>
+                  <input class="form-control" type="text" name="userName" />
+                </td>
+
+                <td>
+                  <input class="form-control" type="text" name="personName" />
+                </td>
+
+                <td>
+                  <input class="form-control" type="text" name="emailAddress" />
+                </td>
+
+                <td>
+                  <select class="form-control" id="userGroup" name="userGroup">
+                    {{#each userGroupTypes}}
+                      <option>{{name}}</option>
+                      {{/each}}
+                  </select>
+                </td>
+
+                <td>
+                  {{#if newActiveUser}}
+                  <button class="btn btn-xs btn-success btnActiveUser"><i class="fa fa-check"></i></button>
+                  {{else}}
+                  <button class="btn btn-xs btn-danger btnInactiveUser"><i class="fa fa-times"></i></button>
+                  {{/if}}
+                </td>
+
+                <td>
+                  <button class="btn btn-xs btn-success btnSaveAddNew"><i class="fa fa-check"></i></button>
+                  <button class="btn btn-xs btn-danger btnCancelAddNew"><i class="fa fa-times"></i></button>
+                </td>
+              </tr>
+            {{/if}}
+
+      {{#each allUsers}}
+        {{> userItem}}
+      {{/each}}
+    </tbody>
+    </table>
+
     </div>
-  <div class="panel-body">
-    <table class="table table-hover table-striped">
-      <thead>
-        <tr>
-          <th>User Name</th>
-          <th>Name</th>
-          <th>Email Address</th>
-          <th>User Group</th>
-          <th>Active User</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#if newUser}}
-          <tr>
-            <td>
-              <input class="form-control" type="text" name="userName" />
-            </td>
 
-            <td>
-              <input class="form-control" type="text" name="personName" />
-            </td>
-
-            <td>
-              <input class="form-control" type="text" name="emailAddress" />
-            </td>
-
-            <td>
-              <select class="form-control" id="userGroup" name="userGroup">
-                {{#each userGroupTypes}}
-                  <option>{{name}}</option>
-                  {{/each}}
-              </select>
-            </td>
-
-            <td>
-              {{#if newActiveUser}}
-              <button class="btn btn-xs btn-success btnActiveUser"><i class="fa fa-check"></i></button>
-              {{else}}
-              <button class="btn btn-xs btn-danger btnInactiveUser"><i class="fa fa-times"></i></button>
-              {{/if}}
-            </td>
-
-            <td>
-              <button class="btn btn-xs btn-success btnSaveAddNew"><i class="fa fa-check"></i></button>
-              <button class="btn btn-xs btn-danger btnCancelAddNew"><i class="fa fa-times"></i></button>
-            </td>
-          </tr>
-        {{/if}}
-
-  {{#each allUsers}}
-    {{> userItem}}
-  {{/each}}
-</tbody>
-</table>
 </div>
-  </div>
+</section>
 </template>

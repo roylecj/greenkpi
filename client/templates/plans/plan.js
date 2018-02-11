@@ -1,7 +1,4 @@
-Template.actionList.onRendered(function() {
-  Session.set("currentMenu", "PLAN");
-})
-Template.actionList.helpers({
+Template.plan.helpers({
   ecoEnergyQuestions: function() {
     return EcoQuestions.find({activeFlag: true, categoryCode: "ENERGY"}).fetch();
   },

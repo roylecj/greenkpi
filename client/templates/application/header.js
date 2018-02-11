@@ -1,4 +1,18 @@
 Template.header.helpers({
+  headingVisible: function() {
+    if (Session.get("headingVisible")) {
+      return true
+    } else {
+      return false
+    }
+  },
+  sidebarVisible: function() {
+    if (Session.get("sidebarVisible")) {
+      return true
+    } else {
+      return false
+    }
+  },
   currentUserName: function() {
     return Meteor.user().profile.name;
   },
@@ -61,6 +75,10 @@ Template.header.helpers({
 Template.header.events({
   'click .btnLogout': function(e) {
 
+    e.preventDefault();
+
+debugger
+
     Meteor.logout();
 
     Session.set("signedIn", false);
@@ -70,5 +88,8 @@ Template.header.events({
 
     e.preventDefault();
     Router.go("settings");
+  },
+  'click .sidebar-toggle': function(e, t) {
+    Session.set("sidebarVisible", ! Session.get("sidebarVisible"));
   }
 });

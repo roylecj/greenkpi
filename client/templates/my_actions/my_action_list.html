@@ -1,29 +1,84 @@
 <template name="myActionList">
 
-  <div class="panel panel-info">
-    <div class="panel-heading">
-      Planned
-    </div>
-      <div class="panel-body">
-        {{> myPlannedList}}
+  <section class="content-header">
+    <h1>
+      My Actions
+      <small>My current list of actions</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="{{pathFor 'home'}}"><i class="fa fa-home"></i> Home</a></li>
+      <li class="active">My Actions</li>
+    </ol>
+  </section>
+
+  <section class="content">
+  <div class="row">
+    <div class="col-md-3">
+  <!-- PLANNED ITEMS -->
+
+      <div class="small-box bg-aqua">
+        <div class="inner">
+          <h3>{{plannedCount}}</h3>
+
+          <p>Planned</p>
+        </div>
+        <div class="icon">
+          <i class="fas fa-calendar-alt"></i>
+        </div>
       </div>
+    </div>
+
+<div class="col-md-3">
+  <!-- Outstanding ITEMS -->
+
+        <div class="small-box bg-red">
+            <div class="inner">
+              <h3>{{outstandingCount}}</h3>
+
+              <p>Outstanding</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-exclamation"></i>
+            </div>
+          </div>
+</div>
+<div class="col-md-3">
+  <!-- PLANNED ITEMS -->
+
+  <div class="small-box bg-green">
+      <div class="inner">
+        <h3>{{completedCount}}</h3>
+
+        <p>Completed</p>
+      </div>
+      <div class="icon">
+        <i class="fas fa-check"></i>
+      </div>
+    </div>
+
+</div>
+</div>
+
+  <div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">Planned Items</h3>
+    </div>
+    {{> myPlannedList}}
   </div>
 
-  <div class="panel panel-warning">
-    <div class="panel-heading">
-      Outstanding
+  <div class="box box-danger">
+    <div class="box-header with-border">
+        <h3 class="box-title">Oustanding Items</h3>
     </div>
-      <div class="panel-body">
-        {{> myOutstandingList}}
-      </div>
+    {{> myOutstandingList}}
   </div>
 
-  <div class="panel panel-success">
-    <div class="panel-heading">
-      Completed
+  <div class="box box-success">
+    <div class="box-header with-border">
+        <h3 class="box-title">Completed Items</h3>
     </div>
-    <div class="panel-body">
       {{> myCompletedList}}
-    </div>
   </div>
+
+</section>
 </template>

@@ -1,0 +1,62 @@
+<template name="sideMenu">
+  <aside class="main-sidebar sidebar-wrapper">
+
+  <div class="hidden">{{loggedIn}}</div>
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel">
+      <div class="pull-left image">
+        <i class="fas fa-user fa-3x text-gray"></i>
+      </div>
+      <div class="pull-left info">
+        <p>{{currentUserName}}</p>
+        <!-- Status -->
+        <a href="#"><i class="fa fa-circle text-success"></i> ORGANISATION GOES HERE</a>
+      </div>
+    </div>
+
+    <!-- search form (Optional) -->
+    <form action="#" method="get" class="sidebar-form">
+      <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Search...">
+        <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+              </button>
+            </span>
+      </div>
+    </form>
+    <!-- /.search form -->
+
+    <!-- Sidebar Menu -->
+    <ul class="sidebar-menu" data-widget="tree">
+      <li class="header">MAIN</li>
+      <li class="{{isCurrentMenu 'HOME'}}"><a href="{{pathFor 'home'}}"><i class="fas fa-table"></i> Dashboard</a></li>
+      <li class="{{isCurrentMenu 'SMS'}}"><a href="{{pathFor 'sms'}}"><i class="fas fa-calculator"></i> My Consumption</a></li>
+      <li class="{{isCurrentMenu 'PROFILE'}}"><a href="{{pathFor 'profileItem'}}"><i class="fas fa-chart-pie"></i> My Profile</a></li>
+      <li class="{{isCurrentMenu 'INTENTS'}}"><a href="{{pathFor 'intents'}}"><i class="fas fa-arrow-circle-down"></i> My Reduction Plan</a></li>
+      <li class="{{isCurrentMenu 'ACTIONS'}}"><a href="{{pathFor 'myActionList'}}" ><i class="far fa-check-circle"></i> My Actions
+          {{#if incompleteActions}}
+            <span class="pull-right-container">
+              <small class="label pull-right bg-green">{{actionCount}}</small>
+            </span>
+          {{/if}}
+        </a></li>
+
+      <li class="{{isCurrentMenu 'PLAN'}}"><a href="{{pathFor 'plan'}}"><i class="fas fa-bullseye"></i> My Plan</a></li>
+
+      <li class="{{isCurrentMenu 'REPORTS'}}"><a href="{{pathFor 'reports'}}"><i class="far fa-chart-bar"></i> Reports</a></li>
+
+      {{#if isAdminRole}}
+      <li class="header">ADMINISTRATION</li>
+      <li class="{{isCurrentMenu 'USERS'}}"><a href="{{pathFor 'userList'}}"><i class="fas fa-users"></i> Users</a></li>
+      <li class="{{isCurrentMenu 'REFDATA'}}"><a href="{{pathFor 'referenceDataList'}}"><i class="fas fa-bars"></i> Reference Data</a></li>
+      {{/if}}
+
+    </ul>
+    <!-- /.sidebar-menu -->
+  </section>
+  <!-- /.sidebar -->
+</aside>
+</template>

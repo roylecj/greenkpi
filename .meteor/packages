@@ -32,4 +32,5 @@ http@1.4.0
 twbs:bootstrap
 alanning:roles
 email
-cunneen:mailgun
+random
+redaty:admin-lte

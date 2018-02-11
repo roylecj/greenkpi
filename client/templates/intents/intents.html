@@ -1,106 +1,118 @@
 <template name="intents">
-  <div class="panel panel-success">
-    <div class="panel-heading">
-      Energy
-      {{#if saveEnergy}}
-      <button class="btn btn-xs btn-info pull-right btnSaveEnergy">Save</button>
-      {{/if}}
-    </div>
-    <div class="panel-body">
-      <div class="form-group">
-         <label for="energyIntent">Energy Usage Intent</label>
-         <textarea class="form-control" id="energyIntent" name="energyIntent" rows="3"  value="{{energyIntent}}"></textarea>
-         <small id="energyIntentHelp" class="form-text text-muted">What is your overall intent with energy saving initiatives?</small>
-         {{#if hasEnergyHistory}}
-           <p></p>
-           <button class="btn btn-xs {{btnIntentEnergy}} btnShowEnergyHistory">
-             {{#if showEnergyHistory}}
-             Hide History
-             {{else}}
-             Show History
-             {{/if}}
-           </button>
 
-           {{#if showEnergyHistory}}
-            <p></p>
+  <section class="content-header">
+    <h1>
+      My Reduction Plan
+      <small>Our strategy intent to reduce our impact</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="{{pathFor 'home'}}"><i class="fa fa-home"></i> Home</a></li>
+      <li class="active">My Reduction Plan</li>
+    </ol>
+  </section>
 
-             {{#each energyHistoryItems}}
-              {{> intentHistories}}
-             {{/each}}
-           {{/if}}
-         {{/if}}
-       </div>
-    </div>
-  </div>
-
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      Water
-      {{#if saveWater}}
-      <button class="btn btn-xs btn-info pull-right btnSaveWater">Save</button>
-      {{/if}}
-    </div>
-    <div class="panel-body">
-      <div class="form-group">
-         <label for="waterIntent">Water Usage Intent</label>
-         <textarea class="form-control" id="waterIntent" name="waterIntent" rows="3" value="{{waterIntent}}"></textarea>
-         <small id="waterIntentHelp" class="form-text text-muted">What is your overall intent with water usage initiatives?</small>
-
-         {{#if hasWaterHistory}}
-              <p></p>
-              <button class="btn btn-xs {{btnIntentWater}} btnShowWaterHistory">
-                {{#if showWaterHistory}}
-                Hide History
-                {{else}}
-                Show History
-                {{/if}}
-
-              </button>
-
-              {{#if showWaterHistory}}
-                {{#each waterHistoryItems}}
-<!--                  {{description}} -->
-                  {{> intentHistories}}
-                {{/each}}
-              {{/if}}
+  <section class="content">
+  <div class="box box-success">
+    <div class="box-header with-border">
+        <h3 class="box-title">Energy</h3>
+        {{#if saveEnergy}}
+        <button class="btn btn-xs btn-info pull-right btnSaveEnergy">Save</button>
         {{/if}}
-       </div>
-    </div>
-  </div>
 
-  <div class="panel panel-danger">
-    <div class="panel-heading">
-      Waste
-      {{#if saveWaste}}
-      <button class="btn btn-xs btn-info pull-right btnSaveWaste">Save</button>
-      {{/if}}
-    </div>
-    <div class="panel-body">
-      <div class="form-group">
-         <label for="wasteIntent">Waste Reduction Intent</label>
-         <textarea class="form-control" id="wasteIntent" name="wasteIntent" rows="3" value="{{wasteIntent}}"></textarea>
-         <small id="wasteIntentHelp" class="form-text text-muted">What is your overall intent with waste reduction initiatives?</small>
-
-         {{#if hasWasteHistory}}
+        <div class="form-group">
+           <label for="energyIntent">Energy Reduction Plan</label>
+           <textarea class="form-control" id="energyIntent" name="energyIntent" rows="3"  value="{{energyIntent}}"></textarea>
+           <small id="energyIntentHelp" class="form-text text-muted">What is your overall intent with energy saving initiatives?</small>
+           {{#if hasEnergyHistory}}
              <p></p>
-             <button class="btn btn-xs {{btnIntentWaste}} btnShowWasteHistory">
-               {{#if showWasteHistory}}
+             <button class="btn btn-xs {{btnIntentEnergy}} btnShowEnergyHistory">
+               {{#if showEnergyHistory}}
                Hide History
                {{else}}
                Show History
                {{/if}}
              </button>
 
-            {{#if showWasteHistory}}
-              {{#each wasteHistoryItems}}
-<!--                {{description}} -->
+             {{#if showEnergyHistory}}
+              <p></p>
+
+               {{#each energyHistoryItems}}
                 {{> intentHistories}}
-              {{/each}}
-            {{/if}}
-
-        {{/if}}
-       </div>
+               {{/each}}
+             {{/if}}
+           {{/if}}
+         </div>
     </div>
-  </div>
+    </div>
 
+    <div class="box box-primary">
+      <div class="box-header with-border">
+          <h3 class="box-title">Water</h3>
+          {{#if saveWater}}
+          <button class="btn btn-xs btn-info pull-right btnSaveWater">Save</button>
+          {{/if}}
+
+          <div class="form-group">
+             <label for="waterIntent">Water Reduction Plan</label>
+             <textarea class="form-control" id="waterIntent" name="waterIntent" rows="3" value="{{waterIntent}}"></textarea>
+             <small id="waterIntentHelp" class="form-text text-muted">What is your overall intent with water usage initiatives?</small>
+
+             {{#if hasWaterHistory}}
+                  <p></p>
+                  <button class="btn btn-xs {{btnIntentWater}} btnShowWaterHistory">
+                    {{#if showWaterHistory}}
+                    Hide History
+                    {{else}}
+                    Show History
+                    {{/if}}
+
+                  </button>
+
+                  {{#if showWaterHistory}}
+                    {{#each waterHistoryItems}}
+                      {{> intentHistories}}
+                    {{/each}}
+                  {{/if}}
+            {{/if}}
+           </div>
+        </div>
+
+    </div>
+
+    <div class="box box-danger">
+      <div class="box-header with-border">
+          <h3 class="box-title">Waste</h3>
+          {{#if saveWaste}}
+          <button class="btn btn-xs btn-info pull-right btnSaveWaste">Save</button>
+          {{/if}}
+
+          <div class="form-group">
+             <label for="wasteIntent">Waste Reduction Plan</label>
+             <textarea class="form-control" id="wasteIntent" name="wasteIntent" rows="3" value="{{wasteIntent}}"></textarea>
+             <small id="wasteIntentHelp" class="form-text text-muted">What is your overall intent with waste reduction initiatives?</small>
+
+             {{#if hasWasteHistory}}
+                 <p></p>
+                 <button class="btn btn-xs {{btnIntentWaste}} btnShowWasteHistory">
+                   {{#if showWasteHistory}}
+                   Hide History
+                   {{else}}
+                   Show History
+                   {{/if}}
+                 </button>
+
+                {{#if showWasteHistory}}
+                  {{#each wasteHistoryItems}}
+                    {{> intentHistories}}
+                  {{/each}}
+                {{/if}}
+
+            {{/if}}
+           </div>
+      </div>
+
+
+    </div>
+
+  </section>
 </template>

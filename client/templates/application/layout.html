@@ -1,15 +1,25 @@
 <template name="layout">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
-  <div class="container">
 
-    {{> header}}
-    {{> sAlert}}
+    <div class="wrapper fixed {{sidebarVisible}}">
 
-    <div id="main">
-      {{> yield}}
-    </div>
+      {{#AdminLTE skin="green" sidebarMini="true" fixed="true"}}
 
+      {{> header}}
+      {{> sAlert}}
+
+      {{> sideMenu}}
+
+      <div id="main" class="content-wrapper">
+        <div class="content">
+        {{> yield}}
+      </div>
+      </div>
+
+      <!-- your html here -->
+    {{/AdminLTE}}
   </div>
 </template>

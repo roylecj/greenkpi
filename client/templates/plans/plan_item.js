@@ -1,7 +1,4 @@
-Template.actionItem.onRendered(function() {
-    Session.set("currentMenu", "PLAN");
-});
-Template.actionItem.helpers({
+Template.planItem.helpers({
   isActive: function() {
     return MyQuestions.find({activeFlag: true, questionId: this.questionId, userId: Meteor.userId()}).fetch();
   },
@@ -36,7 +33,7 @@ Template.actionItem.helpers({
   }
 });
 
-Template.actionItem.events({
+Template.planItem.events({
   'click .btnPlan': function(e, t) {
     Session.set("plannedPressed", this._id);
     Session.set("donePressed", "");

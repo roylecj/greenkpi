@@ -1,5 +1,4 @@
-
-Template.settings.helpers({
+Template.organisationItem.helpers({
   employeeCountTypes: function() {
     return ReferenceData.find({dataType: "EMPLOYEE_COUNT", activeFlag: true}).fetch();
   },
@@ -45,18 +44,27 @@ Template.settings.helpers({
 
     return org.address.postcode;
   }
+
 });
 
-Template.settings.events({
-  'click .btnSaveGeneral': function(e, t) {
+Template.organisationItem.events({
+  'click .btnSaveAccount': function(e, t) {
 
-    // Check that person name, email address and password are valid
-    var personName =  $(e.target.parentNode.parentNode.parentNode).find('[name=myName]').val();
-    var emailAddress = $(e.target.parentNode.parentNode.parentNode).find('[name=myEmail]').val();
-    var password = $(e.target.parentNode.parentNode.parentNode).find('[name=myPasswd]').val();
+    var userId = Meteor.userId();
+    var orgName = $(e.target.parentNode.parentNode.parentNode).find('[name=companyName]').val();
+    var orgDescription = $(e.target.parentNode.parentNode.parentNode).find('[name=companyBrief]').val();
+    var orgSector = $(e.target.parentNode.parentNode.parentNode).find('[name=companySector]').val();
+    var orgEmployees = $(e.target.parentNode.parentNode.parentNode).find('[name=companyEmployees]').val();
+    var orgLogoPath = "";
+    var orgAddr1 = $(e.target.parentNode.parentNode.parentNode).find('[name=companyAddr1]').val();
+    var orgAddr2 = $(e.target.parentNode.parentNode.parentNode).find('[name=companyAddr2]').val();
+    var orgSuburb = $(e.target.parentNode.parentNode.parentNode).find('[name=companyAddrSuburb]').val();
+    var orgState = $(e.target.parentNode.parentNode.parentNode).find('[name=companyAddrState]').val();
+    var orgPostcode = $(e.target.parentNode.parentNode.parentNode).find('[name=companyAddrPCODE]').val();
 
-    Meteor.call('updateAccount', personName, emailAddress, password);
+    Meteor.call('saveOrganisation', userId, orgName, orgDescription, orgSector, orgEmployees, orgLogoPath, orgAddr1, orgAddr2, orgSuburb, orgState, orgPostcode);
 
     sAlert.success("Saved");
-  },
+  }
+
 })

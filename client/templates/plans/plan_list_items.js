@@ -1,4 +1,4 @@
-Template.actionListItems.helpers({
+Template.planListItems.helpers({
   actionCount: function() {
     return EcoActions.find({activeFlag: true, questionId: this._id}).count();
   },
@@ -34,7 +34,7 @@ Template.actionListItems.helpers({
   }
 });
 
-Template.actionListItems.events({
+Template.planListItems.events({
   'click .liItem': function(e, t) {
 
     if (Session.get("expanded_" + this._id)) {

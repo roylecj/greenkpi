@@ -41,9 +41,13 @@ Meteor.publish("myIntents", function() {
   return MyIntents.find({userId: Meteor.userId()});
 });
 
+Meteor.publish("organisation", function() {
+  return Organisation.find({});
+});
+
 Meteor.publish("myOrganisation", function() {
   return MyOrganisation.find({userId: Meteor.userId()});
-})
+});
 
 Meteor.publish("auditInfo", function() {
   return AuditInfo.find({userId: Meteor.userId()});
