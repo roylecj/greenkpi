@@ -1,54 +1,67 @@
 <template name="referenceDataList">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
+
+  <section class="content-header">
+    <h1>
       Reference Data
-      <button class="btn btn-xs btn-info pull-right btnAddNew">Add</button>
-    </div>
-  <div class="panel-body">
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th>Category</th>
-          <th>Code</th>
-          <th>Description</th>
-          <th>Active</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#if newReferenceItem}}
-          <tr>
-            <td>
-              <input class="form-control" type="text" name="dataType" />
-            </td>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="{{pathFor 'home'}}"><i class="fa fa-home"></i> Home</a></li>
+      <li>Administration</li>
+      <li class="active">Reference Data</li>
+    </ol>
+  </section>
 
-            <td>
-              <input class="form-control" type="text" name="code" />
-            </td>
+  <section class="content">
+  <div class="box box-success">
+    <div class="box-header with-border">
+        <button class="btn btn-xs btn-info pull-right btnAddNew">Add</button>
 
-            <td>
-              <input class="form-control" type="text" name="description" />
-            </td>
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Code</th>
+              <th>Description</th>
+              <th>Active</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#if newReferenceItem}}
+              <tr>
+                <td>
+                  <input class="form-control" type="text" name="dataType" />
+                </td>
 
-            <td>
-              {{#if newActive}}
-              <button class="btn btn-xs btn-success btnInactive"><i class="fa fa-check"></i></button>
-              {{else}}
-              <button class="btn btn-xs btn-danger btnActive"><i class="fa fa-times"></i></button>
-              {{/if}}
-            </td>
+                <td>
+                  <input class="form-control" type="text" name="code" />
+                </td>
 
-            <td>
-              <button class="btn btn-xs btn-success btnSaveAddNew"><i class="fa fa-check"></i></button>
-              <button class="btn btn-xs btn-danger btnCancelAddNew"><i class="fa fa-times"></i></button>
-            </td>
-          </tr>
-        {{/if}}
-      {{#each referenceDataItems}}
-        {{> referenceItem}}
-      {{/each}}
-      </tbody>
-    </table>
+                <td>
+                  <input class="form-control" type="text" name="description" />
+                </td>
+
+                <td>
+                  {{#if newActive}}
+                  <button class="btn btn-xs btn-success btnInactive"><i class="fa fa-check"></i></button>
+                  {{else}}
+                  <button class="btn btn-xs btn-danger btnActive"><i class="fa fa-times"></i></button>
+                  {{/if}}
+                </td>
+
+                <td>
+                  <button class="btn btn-xs btn-success btnSaveAddNew"><i class="fa fa-check"></i></button>
+                  <button class="btn btn-xs btn-danger btnCancelAddNew"><i class="fa fa-times"></i></button>
+                </td>
+              </tr>
+            {{/if}}
+          {{#each referenceDataItems}}
+            {{> referenceItem}}
+          {{/each}}
+          </tbody>
+        </table>
+
     </div>
   </div>
+</section>
 </template>
