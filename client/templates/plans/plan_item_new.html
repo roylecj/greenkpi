@@ -20,15 +20,31 @@
       {{/if}}
     -->
     <td>
-      <button class="btn btn-xs btn-primary btnPlan"><i class="far fa-clock"></i></button>
-      <button class="btn btn-xs btn-success btnComplete"><i class="fas fa-check"></i></button>
-      {{#if showNotes}}
-      <button class="btn btn-xs btn-warning btnNote"><i class="far fa-sticky-note"></i></button>
-      {{/if}}
+      <div class="label {{currentStatusColour}}">{{currentStatus}}</div>
     </td>
     <td>
-      {{#if isPlannedChecked}}
+
+      {{#if hideActions}}
+      <button class="btn btn-xs btn-primary btnPlan"><i class="far fa-clock"></i></button>
+      <button class="btn btn-xs btn-success btnDone"><i class="fas fa-check"></i></button>
+      <button class="btn btn-xs btn-warning btnNote"><i class="far fa-sticky-note"></i></button>
+      {{/if}}
+
+
+      {{#if plannedPressed}}
       <input type="date" name="planDate" />
+      {{/if}}
+
+      {{#if donePressed}}
+      <button class="btn btn-xs btn-warning btnDoneNote"><i class="far fa-sticky-note"></i></button>
+      <button class="btn btn-xs btn-danger btnDoneCancel"><i class="fas fa-times"></i></button>
+      <button class="btn btn-xs btn-success btnDoneSave"><i class="fas fa-check"></i></button>
+      {{/if}}
+
+      {{#if plannedPressed}}
+      <button class="btn btn-xs btn-warning btnPlannedNote"><i class="far fa-sticky-note"></i></button>
+      <button class="btn btn-xs btn-danger btnPlanCancel"><i class="fas fa-times"></i></button>
+      <button class="btn btn-xs btn-success btnPlanSave"><i class="fas fa-check"></i></button>
       {{/if}}
     </td>
   </tr>
