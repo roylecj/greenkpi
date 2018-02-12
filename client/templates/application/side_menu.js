@@ -44,3 +44,8 @@ Template.sideMenu.helpers({
   },
 
 });
+Template.sideMenu.events({
+  'click .btnOpenAdmin': function(e, t) {
+    Session.set("openAdminMenu", ! Session.get("openAdminMenu"));
+  }
+})

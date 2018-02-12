@@ -1,4 +1,4 @@
-Template.organisationItem.helpers({
+Template.organisation.helpers({
   employeeCountTypes: function() {
     return ReferenceData.find({dataType: "EMPLOYEE_COUNT", activeFlag: true}).fetch();
   },
@@ -47,7 +47,7 @@ Template.organisationItem.helpers({
 
 });
 
-Template.organisationItem.events({
+Template.organisation.events({
   'click .btnSaveAccount': function(e, t) {
 
     var userId = Meteor.userId();

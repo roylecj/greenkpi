@@ -32,7 +32,7 @@ Template.login.events({
 
             if (!e) {
             Session.set('signedIn', true);
-            Router.go('home');
+            Router.go('dashboard');
           } else {
         sAlert.error('Error logging in: ' + e.reason);
 

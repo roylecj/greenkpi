@@ -1,0 +1,30 @@
+<template name="adminSettings">
+  <section class="content-header">
+    <h1>
+      Administrative Settings
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="{{pathFor 'dashboard'}}"><i class="fa fa-home"></i> Home</a></li>
+      <li>Administration</li>
+      <li class="active">Administrative Settings</li>
+    </ol>
+  </section>
+  <section class="content">
+    <div class="box box-success">
+      <div class="box-header with-border">
+        Global Settings
+        <button class="btn btn-xs btn-primary btnSaveSettings pull-right">Save</button>
+      </div>
+      <form class="form page">
+      <div class="form-group">
+        <label for="passwordLockoutCount" class="col-sm-5 control-label">Number of incorrect passwords before lockout</label>
+
+        <div class="col-sm-1">
+          <input type="text" class="form-control" name="passwordLockoutCount" placeholder="" value="{{passwordLockout}}">
+        </div>
+      </div>
+    </form>
+    </div>
+  </section>
+
+</template>

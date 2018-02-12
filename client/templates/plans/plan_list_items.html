@@ -1,9 +1,17 @@
 <template name="planListItems">
   <li class="liItem list-group-item">
-    <button class="btn btn-xs {{isButtonYes}} btnYes">Yes</button>
-    <button class="btn btn-xs {{isButtonNo}} btnNo">No</button>
-    <div class="pull-left">{{questionText}}</div>
-    <span class="badge badge-primary badge-pill pull-right">{{actionCount}}</span>
+    <div class="row">
+      <div class="col-sm-10">
+        <div class="pull-left">{{questionText}}</div>
+      </div>
+      <div class="col-sm-1">
+        <button class="btn btn-xs {{isButtonYes}} btnYes">Yes</button>
+        <button class="btn btn-xs {{isButtonNo}} btnNo">No</button>
+      </div>
+      <div class="col-sm-1">
+        <span class="badge badge-primary badge-pill pull-right">{{actionCount}}</span>
+      </div>
+    </div>
   </li>
   {{#if isExpanded}}
     {{> planItems}}

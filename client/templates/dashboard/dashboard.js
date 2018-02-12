@@ -15,8 +15,6 @@ Template.dashboard.rendered = function() {
      ],
      options: {
        'title':'How Much Pizza I Ate Last Night',
-       'width':700,
-       'height':500
      }
    };
 
@@ -38,8 +36,6 @@ Template.dashboard.rendered = function() {
     ],
     options: {
       'title':'How Much Pizza I Ate Last Night',
-      'width':700,
-      'height':500
     }
   };
 
