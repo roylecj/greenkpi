@@ -77,8 +77,6 @@ Template.header.events({
 
     e.preventDefault();
 
-debugger
-
     Meteor.logout();
 
     Session.set("signedIn", false);

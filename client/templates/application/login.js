@@ -21,14 +21,23 @@ Template.login.events({
     Meteor.loginWithPassword(userId, password, function(e) {
         console.log("logging in with " + userId);
 
-        console.log(e);
+        if (Roles.userIsInRole(Meteor.userId(), 'DISABLED')) {
 
-        if (!e) {
-        Session.set('signedIn', true);
-        Router.go('home');
-      } else {
+          sAlert.error("This user is currently locked out");
+
+          Session.set('signedIn', false);
+          Router.go('login');
+        } else {
+          console.log(e);
+
+            if (!e) {
+            Session.set('signedIn', true);
+            Router.go('home');
+          } else {
         sAlert.error('Error logging in: ' + e.reason);
-      }
+
+        Meteor.call('incorrectPassword', userId);
+      }}
     });
   },
   'click .btnSignup': function(e, t) {

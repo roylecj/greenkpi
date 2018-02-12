@@ -6,7 +6,7 @@
       <small>Information about our consumption of resources</small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="{{pathFor 'home'}}"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="{{pathFor 'dashboard'}}"><i class="fa fa-home"></i> Home</a></li>
       <li class="active">My Consumption</li>
     </ol>
   </section>
@@ -18,7 +18,7 @@
     <div class="box box-success">
       <div class="box-header with-border">
           <h3 class="box-title">Energy Usage</h3>
-          <button class="btn btn-xs btn-primary pull-right"><i class="fa fa-plus"></i> Add Bill</button>
+          <button class="btn btn-xs btn-info pull-right"><i class="fa fa-plus"></i> Add Bill</button>
       </div>
 
       {{#if hasEnergyBill}}
@@ -48,7 +48,7 @@
     <div class="box box-primary">
       <div class="box-header with-border">
           <h3 class="box-title">Water Usage</h3>
-          <button class="btn btn-xs btn-primary pull-right"><i class="fa fa-plus"></i> Add Bill</button>
+          <button class="btn btn-xs btn-info pull-right"><i class="fa fa-plus"></i> Add Bill</button>
 
           {{#if hasWaterBill}}
           <table class="table table-hover">
@@ -77,7 +77,7 @@
         <div class="box box-danger">
           <div class="box-header with-border">
             <h3 class="box-title">Waste</h3>
-            <button class="btn btn-xs btn-primary pull-right"><i class="fa fa-plus"></i> Add Bill</button>
+            <button class="btn btn-xs btn-info pull-right"><i class="fa fa-plus"></i> Add Bill</button>
 
             {{#if hasWasteBill}}
             <table class="table table-hover">

@@ -6,7 +6,7 @@
       <small>My current list of actions</small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="{{pathFor 'home'}}"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="{{pathFor 'dashboard'}}"><i class="fa fa-home"></i> Home</a></li>
       <li class="active">My Actions</li>
     </ol>
   </section>
@@ -21,13 +21,10 @@
           <h3>{{plannedCount}}</h3>
 
           <p>Planned</p>
-        </div>
-        <div class="icon">
-          <i class="fas fa-calendar-alt"></i>
-        </div>
-      </div>
-    </div>
 
+         </div>
+    </div>
+</div>
 <div class="col-md-3">
   <!-- Outstanding ITEMS -->
 
@@ -62,6 +59,10 @@
   <div class="box box-info">
     <div class="box-header with-border">
         <h3 class="box-title">Planned Items</h3>
+        <div class="box-tools pull-right">
+         <button type="button" class="btn btn-box-tool btnMinimisePlanned"><i class="fa fa-minus"></i>
+         </button>
+       </div>
     </div>
     {{> myPlannedList}}
   </div>
@@ -69,6 +70,10 @@
   <div class="box box-danger">
     <div class="box-header with-border">
         <h3 class="box-title">Oustanding Items</h3>
+        <div class="box-tools pull-right">
+         <button type="button" class="btn btn-box-tool btnMinimiseOutstanding"><i class="fa fa-minus"></i>
+         </button>
+       </div>
     </div>
     {{> myOutstandingList}}
   </div>
@@ -76,6 +81,10 @@
   <div class="box box-success">
     <div class="box-header with-border">
         <h3 class="box-title">Completed Items</h3>
+        <div class="box-tools pull-right">
+         <button type="button" class="btn btn-box-tool btnMinimiseCompleted" ><i class="fa fa-minus"></i>
+         </button>
+       </div>
     </div>
       {{> myCompletedList}}
   </div>

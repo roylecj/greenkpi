@@ -22,14 +22,14 @@ Template.planItem.helpers({
     // debugger
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
-    return MyActions.find({organisationId: orgId, actionId: this._id}).fetch();
+    return MyActions.find({organisationId: orgId, actionId: this._id, activeFlag: true}).fetch();
   },
   isinMyAction: function() {
     var countAction;
 
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
-    countAction = MyActions.find({organisationId: orgId, actionId: this._id}).count();
+    countAction = MyActions.find({organisationId: orgId, actionId: this._id, activeFlag: true}).count();
 
     if (countAction === 0) {
       return false

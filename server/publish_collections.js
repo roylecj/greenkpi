@@ -29,6 +29,10 @@ Meteor.publish('myActionNotes', function() {
     return MyActionNotes.find();
 });
 
+Meteor.publish('userAudit', function() {
+    return UserAudit.find();
+});
+
 Meteor.publish("userDirectory", function () {
   return Meteor.users.find({}, {fields: {_id: 1, username: 1, emails: 1, profile: 1, roles: 1}});
 });
