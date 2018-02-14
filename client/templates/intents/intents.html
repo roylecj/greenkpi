@@ -12,6 +12,8 @@
   </section>
 
   <section class="content">
+
+  {{#if showEnergy}}
   <div class="box box-success">
     <div class="box-header with-border">
         <h3 class="box-title">Energy</h3>
@@ -35,16 +37,46 @@
 
              {{#if showEnergyHistory}}
               <p></p>
-
                {{#each energyHistoryItems}}
                 {{> intentHistories}}
                {{/each}}
              {{/if}}
            {{/if}}
          </div>
-    </div>
-    </div>
 
+         <div class="form-group">
+           <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Energy Reduction Targets and Use</h3>
+            </div>
+            <div class="box-body">
+              <table class="table table-bordered table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th>Energy Category</th>
+                    <th>Sub Category</th>
+                    <th>In Use</th>
+                    <th>Target Reduction %</th>
+                    <th>Target Renewables %</th>
+                    <th>Target By</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  {{#each energyCategoryUse}}
+                     {{> categoryUseItem}}
+                  {{/each}}
+
+              </tbody></table>
+            </div>
+          </div>
+         </div>
+    </div>
+    </div>
+    {{/if}}
+
+    {{#if showWater}}
     <div class="box box-primary">
       <div class="box-header with-border">
           <h3 class="box-title">Water</h3>
@@ -69,16 +101,27 @@
                   </button>
 
                   {{#if showWaterHistory}}
+                    <p></p>
                     {{#each waterHistoryItems}}
                       {{> intentHistories}}
                     {{/each}}
                   {{/if}}
             {{/if}}
            </div>
+
+           <div class="form-group">
+             <label for="waterUse">Water Use</label>
+             <p></p>
+             {{#each waterCategoryUse}}
+                {{> categoryUseItem}}
+             {{/each}}
+           </div>
         </div>
 
     </div>
+    {{/if}}
 
+    {{#if showWaste}}
     <div class="box box-danger">
       <div class="box-header with-border">
           <h3 class="box-title">Waste</h3>
@@ -102,6 +145,7 @@
                  </button>
 
                 {{#if showWasteHistory}}
+                  <p></p>
                   {{#each wasteHistoryItems}}
                     {{> intentHistories}}
                   {{/each}}
@@ -109,10 +153,20 @@
 
             {{/if}}
            </div>
+
+           <div class="form-group">
+             <label for="waterUse">Waste Use</label>
+             <p></p>
+             {{#each wasteCategoryUse}}
+                {{> categoryUseItem}}
+             {{/each}}
+           </div>
+
       </div>
 
+          </div>
+      {{/if}}
 
-    </div>
 
   </section>
 </template>

@@ -6,6 +6,32 @@ Template.sideMenu.helpers({
       Session.set("sidebarVisible", false)
     }
   },
+  imageProfile: function() {
+
+    if (Session.get("companyChange")) {
+      debugger
+      
+      Session.set("companyChange", false);
+      return false
+    } else {
+      if (! Meteor.user().profile.image) {
+        return false
+      } else {
+        return true
+      }
+    }
+  },
+  profileImage: function() {
+    if (Session.get("companyImage")) {
+      // do stuff
+    }
+    return Meteor.user().profile.image
+  },
+  organisationName: function() {
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    return Organisation.findOne({_id: orgId}).organisationName
+  },
   currentUserName: function() {
     return Meteor.user().profile.name;
   },

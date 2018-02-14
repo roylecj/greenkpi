@@ -571,6 +571,89 @@ EcoActions.insert({'questionId': q3020129, 'jkId': '302012906', 'actionText' : '
   ],
     createDate: new Date(),
     activeFlag: true
-  })
+  });
+
+  CategoryUse.insert({
+    rootcategory: "Energy",
+    category: "Electricity",
+    subcategory: "Heating",
+    activeFlag: true
+  });
+
+  CategoryUse.insert({
+    rootcategory: "Energy",
+    category: "Electricity",
+    subcategory: "Lighting",
+    activeFlag: true
+  });
+
+  CategoryUse.insert({
+    rootcategory: "Energy",
+    category: "Electricity",
+    subcategory: "Office Equipment",
+    activeFlag: true
+  });
+
+  CategoryUse.insert({
+    rootcategory: "Energy",
+    category: "Electricity",
+    subcategory: "Refrigeration",
+    activeFlag: true
+  });
+
+  CategoryUse.insert({
+    rootcategory: "Energy",
+    category: "Electricity",
+    subcategory: "HVAC",
+    activeFlag: true
+  });
+
+  CategoryUse.insert({
+    rootcategory: "Energy",
+    category: "Electricity",
+    subcategory: "IT Systems",
+    activeFlag: true
+  });
+
+  CategoryUse.insert({
+    rootcategory: "Energy",
+    category: "Electricity",
+    subcategory: "Air compressors",
+    activeFlag: true
+  });
+
+  CategoryUse.insert({
+    rootcategory: "Energy",
+    category: "Electricity",
+    subcategory: "Hot Water",
+    activeFlag: true
+  });
+
+  CategoryUse.insert({
+    rootcategory: "Energy",
+    category: "Electricity",
+    subcategory: "Pool",
+    activeFlag: true
+  });
+
+  CategoryUse.insert({
+    rootcategory: "Energy",
+    category: "Electricity",
+    subcategory: "Appliances",
+    activeFlag: true
+  });
+
+  CategoryUse.insert({
+    rootcategory: "Energy",
+    category: "Fuel",
+    subcategory: "Production Motors",
+    activeFlag: true
+  });
+  CategoryUse.insert({
+    rootcategory: "Energy",
+    category: "Fuel",
+    subcategory: "Motor Vehicle",
+    activeFlag: true
+  });
 
 }

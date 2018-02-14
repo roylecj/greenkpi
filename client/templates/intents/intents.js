@@ -1,4 +1,34 @@
 Template.intents.helpers({
+  energyCategoryUse: function() {
+    return CategoryUse.find({rootcategory: "Energy", activeFlag: true}).fetch();
+  },
+  waterCategoryUse: function() {
+    return CategoryUse.find({rootcategory: "Water", activeFlag: true}).fetch();
+  },
+  wasteCategoryUse: function() {
+    return CategoryUse.find({rootcategory: "Waste", activeFlag: true}).fetch();
+  },
+  showEnergy: function() {
+    if (Session.get("showFilter") === "ENERGY" || Session.get("showFilter") === "") {
+      return true
+    } else {
+      return false
+    }
+  },
+  showWater: function() {
+    if (Session.get("showFilter") === "WATER" || Session.get("showFilter") === "") {
+      return true
+    } else {
+      return false
+    }
+  },
+  showWaste: function() {
+    if (Session.get("showFilter") === "WASTE" || Session.get("showFilter") === "") {
+      return true
+    } else {
+      return false
+    }
+  },
   showEnergyHistory: function() {
     if (Session.get("ShowEnergyHistory") === true) {
       return true

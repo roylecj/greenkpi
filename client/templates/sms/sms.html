@@ -15,10 +15,11 @@
   <div class="row">
     <div class="{{detailShownSize}}">
 
+      {{#if showEnergy}}
     <div class="box box-success">
       <div class="box-header with-border">
           <h3 class="box-title">Energy Usage</h3>
-          <button class="btn btn-xs btn-info pull-right"><i class="fa fa-plus"></i> Add Bill</button>
+          <button class="btn btn-xs btn-info pull-right"><i class="fa fa-plus"></i> Add Usage</button>
       </div>
 
       {{#if hasEnergyBill}}
@@ -29,7 +30,7 @@
           <th scope="col">Date</th>
           <th scope="col">Type</th>
           <th scope="col">Provider / Company</th>
-          <th scope="col">Bill Period</th>
+          <th scope="col">Usage Period</th>
         </tr>
       </thead>
       <tbody>
@@ -40,15 +41,17 @@
       </table>
       {{else}}
       <p></p>
-      <b>No Energy Bills</b>
+      <b>No Energy Usage recorded</b>
       {{/if}}
 
     </div>
+{{/if}}
 
+  {{#if showWater}}
     <div class="box box-primary">
       <div class="box-header with-border">
           <h3 class="box-title">Water Usage</h3>
-          <button class="btn btn-xs btn-info pull-right"><i class="fa fa-plus"></i> Add Bill</button>
+          <button class="btn btn-xs btn-info pull-right"><i class="fa fa-plus"></i> Add Usage</button>
 
           {{#if hasWaterBill}}
           <table class="table table-hover">
@@ -57,7 +60,7 @@
               <th scope="col">Date</th>
               <th scope="col">Type</th>
               <th scope="col">Provider / Company</th>
-              <th scope="col">Bill Period</th>
+              <th scope="col">Usage Period</th>
             </tr>
           </thead>
           <tbody>
@@ -68,16 +71,18 @@
           </table>
           {{else}}
           <p></p>
-          <b>No Water Bills</b>
+          <b>No Water Usage recorded</b>
           {{/if}}
 
       </div>
         </div>
+        {{/if}}
 
+        {{#if showWaste}}
         <div class="box box-danger">
           <div class="box-header with-border">
             <h3 class="box-title">Waste</h3>
-            <button class="btn btn-xs btn-info pull-right"><i class="fa fa-plus"></i> Add Bill</button>
+            <button class="btn btn-xs btn-info pull-right"><i class="fa fa-plus"></i> Add Usage</button>
 
             {{#if hasWasteBill}}
             <table class="table table-hover">
@@ -86,7 +91,7 @@
                 <th scope="col">Date</th>
                 <th scope="col">Type</th>
                 <th scope="col">Provider / Company</th>
-                <th scope="col">Bill Period</th>
+                <th scope="col">Usage Period</th>
               </tr>
             </thead>
             <tbody>
@@ -97,11 +102,13 @@
             </table>
             {{else}}
             <p></p>
-            <b>No Waste Bills</b>
+            <b>No Waste recorded</b>
             {{/if}}
 
           </div>
         </div>
+
+        {{/if}}
 </div>
 
   {{#if detailShown}}

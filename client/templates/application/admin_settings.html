@@ -16,13 +16,19 @@
         <button class="btn btn-xs btn-primary btnSaveSettings pull-right">Save</button>
       </div>
       <form class="form page">
+      <fieldset>
       <div class="form-group">
-        <label for="passwordLockoutCount" class="col-sm-5 control-label">Number of incorrect passwords before lockout</label>
+        <label for="passwordLockoutCount" class="control-label">Number of incorrect passwords before lockout</label>
 
-        <div class="col-sm-1">
           <input type="text" class="form-control" name="passwordLockoutCount" placeholder="" value="{{passwordLockout}}">
-        </div>
       </div>
+
+      <div class="form-group">
+        <label for="numberOfMonths" class="control-label">Number of months for planning default date</label>
+
+          <input type="text" class="form-control" name="numberOfMonths" placeholder="" value="{{numberOfMonths}}">
+      </div>
+</fieldset>
     </form>
     </div>
   </section>

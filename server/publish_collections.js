@@ -29,6 +29,10 @@ Meteor.publish('myActionNotes', function() {
     return MyActionNotes.find();
 });
 
+Meteor.publish("categoryUse", function() {
+    return CategoryUse.find();
+});
+
 Meteor.publish('userAudit', function() {
     return UserAudit.find();
 });
@@ -56,6 +60,16 @@ Meteor.publish("myOrganisation", function() {
 Meteor.publish("auditInfo", function() {
   return AuditInfo.find({userId: Meteor.userId()});
 });
+
+Meteor.publish("myCategoryUse", function() {
+  return MyCategoryUse.find();
+});
+
+Meteor.publish("myTargets", function() {
+  return MyTargets.find();
+});
+
+Meteor.publish("images", function(){ return Images.find(); });
 
 Meteor.publish(null, function (){
   return Meteor.roles.find({})

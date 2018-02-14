@@ -1,50 +1,70 @@
 <template name="planItemNew">
   <tr>
     <td>
-      {{#if plannedPressed}}<b>{{actionText}}</b>
+      {{#if plannedPressed}}
+        <b>{{actionText}}</b>
       {{else}}
-        {{#if donePressed}}<b>{{actionText}}</b>
+        {{#if donePressed}}
+          <b>{{actionText}}</b>
         {{else}}
-      {{actionText}}
+          {{actionText}}
+        {{/if}}
       {{/if}}
+
+      {{#if hasNotes}}
+      <div class="label label-warning lblShowNotes">Note Recorded</div>
+      {{/if}}
+
+      {{#if noteRecording}}
+        <p></p>
+        <label for="noteText" class="col-sm-1 control-label">Note:</label><input type="text" name="noteText" />
+        <button class="btn btn-xs btn-danger btnCancelSaveNote"><i class="fas fa-times"></i></button>
+        <button class="btn btn-xs btn-success btnSaveNote"><i class="fas fa-check"></i></button>
+        {{#if hasNotes}}
+        <p class="mb-1"><div class="label label-primary">Previous Notes</div></p>
+        {{#each actionNotes}}
+          {{> myActionNotes}}
+        {{/each}}
+        {{/if}}
+
       {{/if}}
     </td>
-<!--
-      {{#if isinMyAction}}
-      <br/>
-      <div class="list-group">
-        {{#each actionItemList}}
-          {{> myItem}}
-        {{/each}}
-      </div>
-      {{/if}}
-    -->
     <td>
       <div class="label {{currentStatusColour}}">{{currentStatus}}</div>
     </td>
     <td>
 
-      {{#if hideActions}}
-      <button class="btn btn-xs btn-primary btnPlan"><i class="far fa-clock"></i></button>
-      <button class="btn btn-xs btn-success btnDone"><i class="fas fa-check"></i></button>
-      <button class="btn btn-xs btn-warning btnNote"><i class="far fa-sticky-note"></i></button>
-      {{/if}}
+      {{#if isQuestionInMyList}}
+        {{#if hideActions}}
+        <button class="btn btn-xs btn-primary btnPlan"><i class="far fa-clock"></i></button>
+        <button class="btn btn-xs btn-success btnDone"><i class="fas fa-check"></i></button>
+        <button class="btn btn-xs btn-warning btnNote"><i class="far fa-sticky-note"></i></button>
+        {{/if}}
 
 
-      {{#if plannedPressed}}
-      <input type="date" name="planDate" />
-      {{/if}}
+        {{#if plannedPressed}}
+          <div class="form-group {{isDateValid}}">
+            <input type="date" name="planDate" class="form-control planDate" value="{{defaultDate}}" />
+          </div>
+        {{/if}}
 
-      {{#if donePressed}}
-      <button class="btn btn-xs btn-warning btnDoneNote"><i class="far fa-sticky-note"></i></button>
-      <button class="btn btn-xs btn-danger btnDoneCancel"><i class="fas fa-times"></i></button>
-      <button class="btn btn-xs btn-success btnDoneSave"><i class="fas fa-check"></i></button>
-      {{/if}}
+        {{#if donePressed}}
+          <div class="form-group {{isDateValid}}">
+            <input type="date" name="doneDate" class="form-control doneDate" value="{{defaultDoneDate}}" />
+          </div>
+        {{/if}}
 
-      {{#if plannedPressed}}
-      <button class="btn btn-xs btn-warning btnPlannedNote"><i class="far fa-sticky-note"></i></button>
-      <button class="btn btn-xs btn-danger btnPlanCancel"><i class="fas fa-times"></i></button>
-      <button class="btn btn-xs btn-success btnPlanSave"><i class="fas fa-check"></i></button>
+        {{#if donePressed}}
+        <button class="btn btn-xs btn-warning btnDoneNote"><i class="far fa-sticky-note"></i></button>
+        <button class="btn btn-xs btn-danger btnDoneCancel"><i class="fas fa-times"></i></button>
+        <button class="btn btn-xs btn-success btnDoneSave"><i class="fas fa-check"></i></button>
+        {{/if}}
+
+        {{#if plannedPressed}}
+        <button class="btn btn-xs btn-warning btnPlannedNote"><i class="far fa-sticky-note"></i></button>
+        <button class="btn btn-xs btn-danger btnPlanCancel"><i class="fas fa-times"></i></button>
+        <button class="btn btn-xs btn-success btnPlanSave"><i class="fas fa-check"></i></button>
+        {{/if}}
       {{/if}}
     </td>
   </tr>

@@ -1,4 +1,29 @@
+Template.header.onCreated(function() {
+  Session.setDefault("showFilter", "");
+});
+
 Template.header.helpers({
+  energyButtonState: function() {
+    if (Session.get("showFilter") === "ENERGY" || Session.get("showFilter") === "") {
+      return "btn-success"
+    } else {
+      return "btn-default"
+    }
+  },
+  waterButtonState: function() {
+    if (Session.get("showFilter") === "WATER" || Session.get("showFilter") === "") {
+      return "btn-info"
+    } else {
+      return "btn-default"
+    }
+  },
+  wasteButtonState: function() {
+    if (Session.get("showFilter") === "WASTE" || Session.get("showFilter") === "") {
+      return "btn-danger"
+    } else {
+      return "btn-default"
+    }
+  },
   headingVisible: function() {
     if (Session.get("headingVisible")) {
       return true
@@ -89,5 +114,36 @@ Template.header.events({
   },
   'click .sidebar-toggle': function(e, t) {
     Session.set("sidebarVisible", ! Session.get("sidebarVisible"));
+  },
+  'click .btnEnergy': function(e, t) {
+
+    e.preventDefault();
+
+    if (Session.get("showFilter") === "ENERGY") {
+      Session.set("showFilter", "");
+    } else {
+      Session.set("showFilter", "ENERGY");
+    }
+  },
+  'click .btnWater': function(e, t) {
+
+    e.preventDefault();
+
+    if (Session.get("showFilter") === "WATER") {
+      Session.set("showFilter", "");
+    } else {
+      Session.set("showFilter", "WATER");
+    }
+
+  },
+  'click .btnWaste': function(e, t) {
+    e.preventDefault();
+
+    if (Session.get("showFilter") === "WASTE") {
+      Session.set("showFilter", "");
+    } else {
+      Session.set("showFilter", "WASTE");
+    }
+
   }
 });

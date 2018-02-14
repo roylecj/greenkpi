@@ -1,4 +1,25 @@
 Template.plan.helpers({
+  showEnergy: function() {
+    if (Session.get("showFilter") === "ENERGY" || Session.get("showFilter") === "") {
+      return true
+    } else {
+      return false
+    }
+  },
+  showWater: function() {
+    if (Session.get("showFilter") === "WATER" || Session.get("showFilter") === "") {
+      return true
+    } else {
+      return false
+    }
+  },
+  showWaste: function() {
+    if (Session.get("showFilter") === "WASTE" || Session.get("showFilter") === "") {
+      return true
+    } else {
+      return false
+    }
+  },
   ecoEnergyQuestions: function() {
     return EcoQuestions.find({activeFlag: true, categoryCode: "ENERGY"}).fetch();
   },

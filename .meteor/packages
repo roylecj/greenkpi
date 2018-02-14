@@ -33,3 +33,6 @@ twbs:bootstrap
 alanning:roles
 email
 random
+themeteorchef:jquery-validation
+cfs:standard-packages
+cfs:gridfs

@@ -24,7 +24,6 @@ Template.myItem.helpers({
       return false
     }
   },
-
   isActive: function() {
 
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;

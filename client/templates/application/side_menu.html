@@ -7,13 +7,17 @@
 
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel">
-      <div class="pull-left image">
-        <i class="fas fa-user fa-3x text-gray"></i>
+      <div class="pull-left">
+        {{#if imageProfile}}
+          <img src="{{profileImage}}" class="img-logo-tiny" />
+        {{else}}
+<!--          <i class="fas fa-user fa-3x text-gray"></i> -->
+        {{/if}}
       </div>
       <div class="pull-left info">
         <p>{{currentUserName}}</p>
         <!-- Status -->
-        <a href="#"><i class="fa fa-circle text-success"></i> ORGANISATION GOES HERE</a>
+        <a href="#"><i class="fa fa-circle text-success"></i> {{organisationName}}</a>
       </div>
     </div>
 
@@ -33,9 +37,12 @@
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MAIN</li>
       <li class="{{isCurrentMenu 'HOME'}}"><a href="{{pathFor 'dashboard'}}"><i class="fas fa-table"></i> Dashboard</a></li>
-      <li class="{{isCurrentMenu 'SMS'}}"><a href="{{pathFor 'sms'}}"><i class="fas fa-calculator"></i> My Consumption</a></li>
-      <li class="{{isCurrentMenu 'PROFILE'}}"><a href="{{pathFor 'profileItem'}}"><i class="fas fa-chart-pie"></i> My Profile</a></li>
-      <li class="{{isCurrentMenu 'INTENTS'}}"><a href="{{pathFor 'intents'}}"><i class="fas fa-arrow-circle-down"></i> My Reduction Plan</a></li>
+      <li class="{{isCurrentMenu 'SMS'}}"><a href="{{pathFor 'sms'}}"><i class="fas fa-calculator"></i> Measure</a></li>
+<!--      <li class="{{isCurrentMenu 'PROFILE'}}"><a href="{{pathFor 'profileItem'}}"><i class="fas fa-chart-pie"></i> My Profile</a></li> -->
+      <li class="{{isCurrentMenu 'INTENTS'}}"><a href="{{pathFor 'intents'}}"><i class="fas fa-arrow-circle-down"></i> Manage</a></li>
+      <li class="{{isCurrentMenu 'REPORTS'}}"><a href="{{pathFor 'reports'}}"><i class="far fa-chart-bar"></i> Report</a></li>
+
+<!--
       <li class="{{isCurrentMenu 'ACTIONS'}}"><a href="{{pathFor 'myActionList'}}" ><i class="far fa-check-circle"></i> My Actions
           {{#if incompleteActions}}
             <span class="pull-right-container">
@@ -43,31 +50,17 @@
             </span>
           {{/if}}
         </a></li>
-
+-->
       <li class="{{isCurrentMenu 'PLAN'}}"><a href="{{pathFor 'plan'}}"><i class="fas fa-bullseye"></i> My Plan</a></li>
 
-      <li class="{{isCurrentMenu 'REPORTS'}}"><a href="{{pathFor 'reports'}}"><i class="far fa-chart-bar"></i> Reports</a></li>
       <li class="{{isCurrentMenu 'ORGANISATION'}}"><a href="{{pathFor 'organisation'}}"><i class="far fa-chart-bar"></i> Organisation Details</a></li>
 
       {{#if isAdminRole}}
-      <li class="treeview menu-open">
-          <a href="#" class="btnOpenAdmin">
-            <i class="fa fa-share"></i> <span>Administration</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu" style="{{displayAdminMenu}}">
-            <li class="{{isCurrentMenu 'USERS'}}"><a href="{{pathFor 'userList'}}"><i class="fas fa-users"></i> Users</a></li>
-            <li class="{{isCurrentMenu 'REFDATA'}}"><a href="{{pathFor 'referenceDataList'}}"><i class="fas fa-bars"></i> Reference Data</a></li>
-            <li class="{{isCurrentMenu 'ADMINSETTINGS'}}"><a href="{{pathFor 'adminSettings'}}"><i class="fa fa-cog"></i> Administrative Settings</a></li>
-          </ul>
-        </li>
+      <li class="header">ADMINISTRATION</li>
+      <li class="{{isCurrentMenu 'USERS'}}"><a href="{{pathFor 'userList'}}"><i class="fas fa-users"></i> Users</a></li>
+      <li class="{{isCurrentMenu 'REFDATA'}}"><a href="{{pathFor 'referenceDataList'}}"><i class="fas fa-bars"></i> Reference Data</a></li>
+      <li class="{{isCurrentMenu 'ADMINSETTINGS'}}"><a href="{{pathFor 'adminSettings'}}"><i class="fa fa-cog"></i> Administrative Settings</a></li>
       {{/if}}
-
-
-
-
 
     </ul>
     <!-- /.sidebar-menu -->
