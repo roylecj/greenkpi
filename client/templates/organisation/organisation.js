@@ -1,4 +1,11 @@
+Template.organisation.onCreated(function () {
+  this.currentUpload = new ReactiveVar(false);
+});
+
 Template.organisation.helpers({
+  currentUpload() {
+    return Template.instance().currentUpload.get();
+  },
   isConnecting: function() {
     return Session.get("connectingToOtherOrg")
   },
@@ -78,28 +85,36 @@ Template.organisation.events({
 
     sAlert.success("Saved");
   },
-  'change .myFileInput': function(event, template) {
+  'change #fileInput'(e, template) {
+     if (e.currentTarget.files && e.currentTarget.files[0]) {
+       // We upload only one file, in case
+       // multiple files were selected
+       const upload = Images.insert({
+         file: e.currentTarget.files[0],
+         streams: 'dynamic',
+         chunkSize: 'dynamic'
+       }, false);
 
-      FS.Utility.eachFile(event, function(file) {
-        Images.insert(file, function (err, fileObj) {
-          if (err){
-             // handle error
-          } else {
-             // handle success depending what you need to do
-            var userId = Meteor.userId();
-            var imagesURL = {
-              "profile.image": "/cfs/files/images/" + fileObj._id
-            };
-            Meteor.users.update(userId, {$set: imagesURL});
-            Session.set("companyImage", "/cfs/files/images/" + fileObj._id);
+       upload.on('start', function () {
+         template.currentUpload.set(this);
+       });
 
-          }
-        });
+       upload.on('end', function (error, fileObj) {
+         if (error) {
+           sAlert.error('Error during upload: ' + error);
+         } else {
+           sAlert.success('File "' + fileObj.name + '" successfully uploaded');
+         }
+         template.currentUpload.set(false);
 
-     });
+         var logoPath = 'cdn/server/' + fileObj._id + '.' + fileObj.extension;
+         
+         Meteor.user().profile.image = logoPath;
 
-      Session.set("companyChange", true);
-      
-     Router.go("organisation");
-   },
+         Meteor.call('saveOrganisationLogo', logoPath )
+       });
+
+       upload.start();
+     }
+   }
 })

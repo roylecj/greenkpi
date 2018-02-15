@@ -21,7 +21,12 @@ Template.sms.helpers({
     }
   },
   myEnergyBills: function() {
-    return MyMetrics.find({userId: Meteor.userId(), billCategory: 'Energy', activeFlag: true}).fetch();
+
+debugger
+
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    return MyMetrics.find({organisationId: orgId, entryType: 'Energy', activeFlag: true}).fetch();
   },
   myWaterBills: function() {
     return MyMetrics.find({userId: Meteor.userId(), billCategory: 'Water', activeFlag: true}).fetch();
@@ -59,7 +64,10 @@ Template.sms.helpers({
     }
   },
   hasEnergyBill: function() {
-    return MyMetrics.find({userId: Meteor.userId(), billCategory: 'Energy', activeFlag: true}).count();
+
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    return MyMetrics.find({organisationId: orgId, entryType: 'Energy', activeFlag: true}).count();
   },
   hasWaterBill: function() {
     return MyMetrics.find({userId: Meteor.userId(), billCategory: 'Water', activeFlag: true}).count();

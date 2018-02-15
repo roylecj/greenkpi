@@ -9,12 +9,16 @@ Template.sideMenu.helpers({
   imageProfile: function() {
 
     if (Session.get("companyChange")) {
-      debugger
-      
+
       Session.set("companyChange", false);
       return false
     } else {
-      if (! Meteor.user().profile.image) {
+
+      var org = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true});
+
+      var orgPath = Organisation.findOne({_id: org.organisationId}).logoPath;
+
+      if (! orgPath) {
         return false
       } else {
         return true
@@ -25,7 +29,12 @@ Template.sideMenu.helpers({
     if (Session.get("companyImage")) {
       // do stuff
     }
-    return Meteor.user().profile.image
+
+    var org = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true});
+
+    var orgPath = Organisation.findOne({_id: org.organisationId}).logoPath;
+
+    return orgPath;
   },
   organisationName: function() {
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;

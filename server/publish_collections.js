@@ -69,7 +69,12 @@ Meteor.publish("myTargets", function() {
   return MyTargets.find();
 });
 
-Meteor.publish("images", function(){ return Images.find(); });
+Meteor.publish("myLocations", function() {
+  return MyLocations.find();
+});
+Meteor.publish('files.images.all', function () {
+   return Images.find().cursor;
+ });
 
 Meteor.publish(null, function (){
   return Meteor.roles.find({})

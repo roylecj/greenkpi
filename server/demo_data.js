@@ -165,6 +165,153 @@
     activeFlag: true
   });
 
+  ReferenceData.insert({
+    dataType: "ENERGY_TYPE",
+    code: "ER",
+    description: "Electricity - Renewable",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "ENERGY_TYPE",
+    code: "ENR",
+    description: "Electricity - Non-renewable",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "ENERGY_TYPE",
+    code: "GAS",
+    description: "Natural Gas",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "ENERGY_TYPE",
+    code: "DIESEL",
+    description: "Diesel",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "ENERGY_TYPE",
+    code: "ULP",
+    description: "Unleaded Petrol",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "USAGE_TYPE",
+    code: "KWH",
+    description: "KW/h",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "USAGE_TYPE",
+    code: "GJ",
+    description: "Gigajoules",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "USAGE_TYPE",
+    code: "CUBM",
+    description: "Cubic Metres",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "USAGE_TYPE",
+    code: "L",
+    description: "Litres",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "USAGE_TYPE",
+    code: "KL",
+    description: "Kilolitres",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "USAGE_TYPE",
+    code: "ML",
+    description: "Megalitres",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "USAGE_TYPE",
+    code: "GL",
+    description: "Gigalitres",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "TARIFF_TYPE",
+    code: "P",
+    description: "Peak",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "TARIFF_TYPE",
+    code: "OP",
+    description: "Off-peak",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "VENDOR",
+    code: "ENERGEX",
+    description: "Energex",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  ReferenceData.insert({
+    dataType: "VENDOR",
+    code: "ERGON",
+    description: "Ergon",
+    createdAt: new Date(),
+    activeFlag: true
+  });
+
+  MyLocations.insert({
+    description: "1 Sheridan Street, Cairns",
+    organisationId: orgId,
+    activeFlag: true,
+    createdAt: new Date()
+  });
+
+  MyLocations.insert({
+    description: "Truck 11A",
+    organisationId: orgId,
+    activeFlag: true,
+    createdAt: new Date()
+  });
+  MyLocations.insert({
+    description: "Truck 32B",
+    organisationId: orgId,
+    activeFlag: true,
+    createdAt: new Date()
+  });
 /*
   var q1;
   var q2;

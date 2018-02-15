@@ -62,9 +62,19 @@
             <label for="companyLogo" class="col-sm-3 col-form-label">Logo</label>
             <div class="col-sm-9">
               <img src="{{companyLogoPath}}" name="companyName" class="img-logo" />
+
+              {{#with currentUpload}}
+                Uploading <b>{{file.name}}</b>:
+                <span id="progress">{{progress.get}}%</span>
+              {{else}}
+                <label class="btn btn-primary">
+                  Change Logo <input type="file" id="fileInput" style="display: none;">
+                </label>
+              {{/with}}
+<!--
               <label class="btn btn-primary myFileInput">
                 Change Logo <input type="file" style="display: none;">
-              </label>
+              </label> -->
             </div>
           </div>
 

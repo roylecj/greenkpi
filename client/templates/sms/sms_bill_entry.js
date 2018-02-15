@@ -1,9 +1,9 @@
 Template.billEntry.helpers({
-  date: function() {
-    return moment(this.billDate).format("DD MMM YYYY")
+  createdDate: function() {
+    return moment(this.createdAt).format("DD MMM YYYY")
   },
   billPeriod: function() {
-    return moment(this.billStartDate).format("DD MMM YYYY") + ' - ' + moment(this.billEndDate).format("DD MMM YYYY")
+    return moment(this.startDate).format("DD MMM YYYY") + ' - ' + moment(this.endDate).format("DD MMM YYYY")
   },
   isCurrentItem: function() {
     if (Session.get("currentBill") === this._id) {
