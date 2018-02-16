@@ -1,3 +1,8 @@
+Template.plan.onCreated(function() {
+  // Check if there are core actions to add
+  Meteor.call('addCoreActions');
+});
+
 Template.plan.helpers({
   showEnergy: function() {
     if (Session.get("showFilter") === "ENERGY" || Session.get("showFilter") === "") {
@@ -20,6 +25,11 @@ Template.plan.helpers({
       return false
     }
   },
+  categoryUse: function() {
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    return MyCategoryUse.find({activeFlag: true, organisationId: orgId}, {sort: {"categoryDetails.sortOrder": 1, "categoryDetails.categoryCode": 1, "categoryDetails.subCategoryCode": 1}}).fetch();
+  },
   ecoEnergyQuestions: function() {
     return EcoQuestions.find({activeFlag: true, categoryCode: "ENERGY"}).fetch();
   },
@@ -39,7 +49,7 @@ Template.plan.helpers({
     }
   },
   noEnergyQuestions: function() {
-    var cnt = EcoQuestions.find({activeFlag: true, categoryCode: "ENERGY"}).count();
+    var cnt = MyActions.find({activeFlag: true, rootCategoryCode: "ENERGY"}).count();
 
     if (cnt === 0) {
       return true

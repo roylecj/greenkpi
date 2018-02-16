@@ -19,15 +19,20 @@
           <h3 class="box-title">Energy</h3>
       </div>
 
+<!--
       {{#if noEnergyQuestions }}
         <b>No active questions on Energy Usage</b>
-      {{else}}
+      {{else}} -->
         <ul class="list-group">
-            {{#each ecoEnergyQuestions}}
+<!--            {{#each ecoEnergyQuestions}}
               {{> planListItems}}
+            {{/each}} -->
+
+            {{#each categoryUse}}
+              {{> planCategories}}
             {{/each}}
         </ul>
-      {{/if}}
+<!--      {{/if}} -->
 
     </div>
   {{/if}}

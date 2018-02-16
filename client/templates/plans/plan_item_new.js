@@ -27,16 +27,6 @@ Template.planItemNew.helpers({
       return false
     }
   },
-  isQuestionInMyList: function() {
-    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
-    var cntItems = MyActions.find({activeFlag: true, actionId: this._id, organisationId: orgId}).count();
-
-    if (cntItems > 0) {
-      return true
-    } else {
-      return false
-    }
-  },
   defaultDoneDate: function() {
     // Default to today
     return moment().format("YYYY-MM-DD");
@@ -69,46 +59,29 @@ Template.planItemNew.helpers({
 
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
-    var qStatus = MyActions.findOne({activeFlag: true, actionId: this._id, organisationId: orgId});
-
-    if (!qStatus) {
-      return ""
+    if (this.completeFlag) {
+      return "Complete"
     } else {
-      if (qStatus.completeFlag) {
-        return "Complete"
+      if (this.planFlag) {
+        return "Planned"
       } else {
-        if (qStatus.planFlag) {
-          return "Planned"
-        } else {
-          return "Outstanding"
-        }
+        return "Outstanding"
       }
     }
   },
   currentStatusColour: function() {
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
-    var qStatus = MyActions.findOne({activeFlag: true, actionId: this._id, organisationId: orgId});
-
-    if (!qStatus) {
-      return ""
+    if (this.completeFlag) {
+      return "label-success"
     } else {
-      if (qStatus.completeFlag) {
-        return "label-success"
+      if (this.planFlag) {
+        return "label-primary"
       } else {
-        if (qStatus.planFlag) {
-          return "label-primary"
-        } else {
-          return "label-danger"
-        }
+        return "label-danger"
       }
     }
 
-  },
-  isActive: function() {
-    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
-
-    return MyQuestions.find({activeFlag: true, questionId: this.questionId, organisationId: orgId}).fetch();
   },
   plannedPressed: function(){
     if (Session.get("plannedPressed") === this._id) {
@@ -129,19 +102,6 @@ Template.planItemNew.helpers({
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
     return MyActions.find({organisationId: orgId, actionId: this._id, activeFlag: true}).fetch();
-  },
-  isinMyAction: function() {
-    var countAction;
-
-    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
-
-    countAction = MyActions.find({organisationId: orgId, actionId: this._id, activeFlag: true}).count();
-
-    if (countAction === 0) {
-      return false
-    } else {
-      return true
-    }
   },
   isCompleteChecked: function() {
     if (Session.get("donePressed") === this._id) {
@@ -167,8 +127,7 @@ Template.planItemNew.helpers({
   hasNotes: function() {
     var noteCount;
 
-    var thisAction = MyActions.findOne({actionId: this._id, activeFlag: true});
-    noteCount = MyActionNotes.find({actionId: thisAction._id, activeFlag: true}).count();
+    noteCount = MyActionNotes.find({actionId: this._id, activeFlag: true}).count();
 
     if (noteCount > 0) {
       return true
@@ -176,11 +135,19 @@ Template.planItemNew.helpers({
       return false
     }
   },
+  hasNote: function() {
+    var noteCount;
+
+    noteCount = MyActionNotes.find({actionId: this._id, activeFlag: true}).count();
+
+    if (noteCount > 0) {
+      return "btn-warning"
+    } else {
+      return "btn-default"
+    }
+  },
   actionNotes: function() {
-
-    var thisAction = MyActions.findOne({actionId: this._id, activeFlag: true});
-
-    return MyActionNotes.find({actionId: thisAction._id, activeFlag: true},  {sort: {noteDate: -1}}).fetch();
+    return MyActionNotes.find({actionId: this._id, activeFlag: true},  {sort: {noteDate: -1}}).fetch();
   },
   isDateValid: function() {
     if (Session.get("dateValid") === false) {
@@ -213,43 +180,37 @@ Template.planItemNew.events({
   'click .btnDoneSave': function(e, t) {
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
-    var action = MyActions.findOne({organisationId: orgId, actionId: this._id, activeFlag: true})
+    var completeDate = $(e.target.parentNode.parentNode.parentNode).find('[name=doneDate]').val();
 
-    if (action) {
-      var completeDate = $(e.target.parentNode.parentNode.parentNode).find('[name=doneDate]').val();
+    var mDate = moment(completeDate);
+    var dateValid = true;
 
-      var mDate = moment(completeDate);
-      var dateValid = true;
-
-      if (mDate.isValid()) {
-        if (mDate.isAfter(moment())) {
-          dateValid = false
-        } else {
-          dateValid = true
-        }
-      } else {
+    if (mDate.isValid()) {
+      if (mDate.isAfter(moment())) {
         dateValid = false
-      }
-
-      if (dateValid === true) {
-        Meteor.call("saveActionCompleted", action._id, completeDate);
-
-        var doneDate = moment(completeDate).format("DD MMM YYYY");
-        var noteText = "Completed on " + doneDate;
-
-        Meteor.call('addActionNote', action._id, noteText);
-
-        sAlert.success('Saved');
-
-        Session.set("donePressed", "");
-        Session.set("plannedPressed", "");
-        Session.set("noteRecording", "");
-
       } else {
-        sAlert.error("Invalid date - date must not be in the future");
+        dateValid = true
       }
     } else {
-      sAlert.error("Problem saving action");
+      dateValid = false
+    }
+
+    if (dateValid === true) {
+      Meteor.call("saveActionCompleted", this._id, completeDate);
+
+      var doneDate = moment(completeDate).format("DD MMM YYYY");
+      var noteText = "Completed on " + doneDate;
+
+      Meteor.call('addActionNote', this._id, noteText);
+
+      sAlert.success('Saved');
+
+      Session.set("donePressed", "");
+      Session.set("plannedPressed", "");
+      Session.set("noteRecording", "");
+
+    } else {
+      sAlert.error("Invalid date - date must not be in the future");
     }
   },
   'click .btnPlanCancel': function(e, t) {
@@ -258,8 +219,6 @@ Template.planItemNew.events({
   },
   'click .btnPlanSave': function(e, t) {
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
-
-    var action = MyActions.findOne({organisationId: orgId, actionId: this._id, activeFlag: true})
 
     var planDate =  $(e.target.parentNode.parentNode.parentNode).find('[name=planDate]').val();
 
@@ -277,12 +236,12 @@ Template.planItemNew.events({
     }
 
     if (dateValid === true ) {
-      Meteor.call("saveActionPlanned", action._id, planDate);
+      Meteor.call("saveActionPlanned", this._id, planDate);
 
       var planDateFormat = moment(planDate).format("DD MMM YYYY");
       var noteText = "Planned for completion on " + planDateFormat;
 
-      Meteor.call('addActionNote', action._id, noteText);
+      Meteor.call('addActionNote', this._id, noteText);
 
       sAlert.success('Saved');
 
@@ -318,12 +277,9 @@ Template.planItemNew.events({
   'click .btnSaveNote': function(e, t) {
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
-    var action = MyActions.findOne({organisationId: orgId, actionId: this._id, activeFlag: true})
-
-    var actionId = action._id;
     var noteText =  $(e.target.parentNode.parentNode).find('[name=noteText]').val();
 
-    Meteor.call('addActionNote', actionId, noteText);
+    Meteor.call('addActionNote', this._id, noteText);
 
     Session.set("noteRecording", "");
   },

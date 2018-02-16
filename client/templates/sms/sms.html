@@ -19,7 +19,7 @@
     <div class="box box-success">
       <div class="box-header with-border">
           <h3 class="box-title">Energy Usage</h3>
-          <button class="btn btn-xs btn-info pull-right"><i class="fa fa-plus"></i> Add Usage</button>
+          <button class="btn btn-xs btn-info pull-right btnAddUsage"><i class="fa fa-plus"></i> Add Usage</button>
       </div>
 
       {{#if hasEnergyBill}}
@@ -112,38 +112,6 @@
         {{/if}}
 </div>
 
-  {{#if detailShown}}
-  <div class="col-sm-6">
-    <div class="panel panel-success">
-      <div class="panel-heading">
-        Overview
-        {{#if isEdit}}
-        <button class="btn btn-xs btn-danger pull-right btnCancelBill">Cancel</button>
-        <button class="btn btn-xs btn-success pull-right btnSaveBill">Save</button>
-        {{else}}
-        <button class="btn btn-xs btn-primary pull-right btnEditBill">Edit</button>
-        {{/if}}
-      </div>
-        <div class="panel-body">
-          {{#each selectedBill}}
-            {{> billHeader}}
-          {{/each}}
-        </div>
-    </div>
-
-    <div class="panel panel-success">
-      <div class="panel-heading">
-        Details
-      </div>
-        <div class="panel-body">
-          {{#each selectedBill}}
-            {{> billDetails}}
-          {{/each}}
-        </div>
-    </div>
-
-  </div>
-  {{/if}}
 </div>
 </section>
 </template>

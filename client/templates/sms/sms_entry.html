@@ -13,6 +13,11 @@
     <div class="box box-success">
       <div class="box-header with-border">
         <button class="btn btn-sm btn-primary pull-right btnSaveEntry">Save</button>
+        <button class="btn btn-sm btn-danger pull-right btnSaveCancel">Cancel</button>
+
+        {{#if isEditing}}
+          <button class="btn btn-sm btn-danger pull-right btnDeleteEntry">Delete</button>
+        {{/if}}
       </div>
           <div class="form-group">
             <label>Location Name / Vehicle Identity</label>

@@ -1,6 +1,6 @@
 <template name="planItemNew">
   <tr>
-    <td>
+    <td class="col-sm-9">
       {{#if plannedPressed}}
         <b>{{actionText}}</b>
       {{else}}
@@ -11,9 +11,11 @@
         {{/if}}
       {{/if}}
 
+<!--
       {{#if hasNotes}}
       <div class="label label-warning lblShowNotes">Note Recorded</div>
       {{/if}}
+-->
 
       {{#if noteRecording}}
         <p></p>
@@ -29,16 +31,15 @@
 
       {{/if}}
     </td>
-    <td>
+    <td class="col-sm-1">
       <div class="label {{currentStatusColour}}">{{currentStatus}}</div>
     </td>
-    <td>
+    <td class="col-sm-2">
 
-      {{#if isQuestionInMyList}}
         {{#if hideActions}}
         <button class="btn btn-xs btn-primary btnPlan"><i class="far fa-clock"></i></button>
         <button class="btn btn-xs btn-success btnDone"><i class="fas fa-check"></i></button>
-        <button class="btn btn-xs btn-warning btnNote"><i class="far fa-sticky-note"></i></button>
+        <button class="btn btn-xs {{hasNote}} btnNote"><i class="far fa-sticky-note"></i></button>
         {{/if}}
 
 
@@ -65,7 +66,6 @@
         <button class="btn btn-xs btn-danger btnPlanCancel"><i class="fas fa-times"></i></button>
         <button class="btn btn-xs btn-success btnPlanSave"><i class="fas fa-check"></i></button>
         {{/if}}
-      {{/if}}
     </td>
   </tr>
 </template>

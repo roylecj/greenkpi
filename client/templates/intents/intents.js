@@ -1,12 +1,16 @@
 Template.intents.helpers({
   energyCategoryUse: function() {
-    return CategoryUse.find({rootcategory: "Energy", activeFlag: true}).fetch();
+
+    // If it is a "CoreCategory" then it is required anyway, we don't need to show it here
+    // it is like ERP.
+
+    return CategoryUse.find({rootCategoryCode: "ENERGY", coreCategory: false, activeFlag: true}).fetch();
   },
   waterCategoryUse: function() {
-    return CategoryUse.find({rootcategory: "Water", activeFlag: true}).fetch();
+    return CategoryUse.find({rootcategory: "Water", coreCategory: false, activeFlag: true}).fetch();
   },
   wasteCategoryUse: function() {
-    return CategoryUse.find({rootcategory: "Waste", activeFlag: true}).fetch();
+    return CategoryUse.find({rootcategory: "Waste", coreCategory: false, activeFlag: true}).fetch();
   },
   showEnergy: function() {
     if (Session.get("showFilter") === "ENERGY" || Session.get("showFilter") === "") {

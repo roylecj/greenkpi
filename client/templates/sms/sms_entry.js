@@ -93,5 +93,8 @@ Template.smsEntry.events({
 
     Router.go("sms");
 
+  },
+  'click .btnSaveCancel': function(e, t) {
+    Router.go("sms");
   }
 })
