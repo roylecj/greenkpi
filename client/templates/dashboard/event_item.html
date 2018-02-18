@@ -1,4 +1,5 @@
 <template name="eventItem">
+<!--
   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">{{userName}}</h5>
@@ -6,5 +7,19 @@
     </div>
     <p class="mb-1">{{eventText}}</p>
   </a>
+-->
+
+  <div class="item">
+    <img src="{{imagePath}}" alt="user image">
+
+    <p class="message">
+      <a href="#" class="name">
+        <small class="text-muted pull-right"><i class="far fa-clock"></i> {{eventDateTime}}</small>
+        {{userName}}
+      </a>
+      {{eventText}}
+    </p>
+  </div>
+
 
 </template>

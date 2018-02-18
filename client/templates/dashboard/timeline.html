@@ -1,9 +1,15 @@
 <template name="timeline">
 
-  <div class="list-group">
+<!--  <div class="list-group">
     {{#each eventItems}}
       {{> eventItem}}
     {{/each}}
   </div>
+-->
 
+<div class="box-body chat" id="chat-box">
+  {{#each eventItems}}
+    {{> eventItem}}
+  {{/each}}
+</div>
 </template>

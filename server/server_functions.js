@@ -56,9 +56,18 @@ Meteor.methods({
 
     // and updtae their name, and email address.
 
-    Meteor.users.update({userId}, {$set: {profile: {name: userName}, emailAddress: emailAddress}});
+    Meteor.users.update({_id: userId}, {$set: {profile: {name: userName}, emailAddress: emailAddress}});
 
-    Accounts.setPassword(userId, password, false);
+    if (! password) {
+      // do nothing
+    } else {
+
+      if (password !== '') {
+        Accounts.setPassword(userId, password, false);
+        console.log("password updated");
+      }
+
+    }
 
   },
 })

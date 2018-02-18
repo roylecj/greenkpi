@@ -9,13 +9,17 @@
   </section>
   <section class="content">
     <div class="row">
+              
       <div class="col-xs-7">
         <div class="box box-success">
           <div class="box-header">
             <div class="box-title">Actions by Status</div>
+            <button class="btn btn-xs btn-primary btnBarActions pull-right"><i class="far fa-chart-bar" data-fa-transform="rotate-90"></i></button>
+            <button class="btn btn-xs btn-primary btnColumnActions pull-right"><i class="far fa-chart-bar"></i></button>
+            <button class="btn btn-xs btn-primary btnPieActions pull-right"><i class="fas fa-chart-pie"></i></button>
           </div>
           <div class="box-body">
-            <canvas id="actionStatusChart" width="400" height="400"></canvas>
+            {{> chartByStatus}}
           </div>
         </div>
       </div>
@@ -25,7 +29,9 @@
             <div class="box-title">Recent Activity</div>
           </div>
           <div class="box-body">
+            <div class="well pre-scrollable">
             {{> timeline}}
+          </div>
           </div>
         </div>
       </div>

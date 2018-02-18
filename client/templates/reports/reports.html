@@ -11,44 +11,57 @@
 
   <section class="content">
   <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-4 col-sm-4">
-      <div class="card text-white bg-primary mb-3">
-<!--        <img class="card-img-top" src="measure.jpg" alt="Card image cap"> -->
-        <div class="card-body">
-          <h5 class="card-title text-white">GRI Reporting</h5>
-          <p class="card-text">Generate your GRI report</p>
-          <div align="center"><a href="{{pathFor 'griReports'}}" class="btn btn-primary"><i class="fa fa-sign-in fa-2x"></i></a></div>
+
+    <div class="col-md-4">
+      <div class="small-box bg-green">
+        <div class="inner">
+          <h4>GRI Reporting</h4>
+
+          <p>Generate your GRI Report</p>
         </div>
+        <div class="icon">
+
+          <i class="fas fa-print"></i>
+        </div>
+        <a href="{{pathFor 'griReports'}}" class="small-box-footer">
+          Enter <i class="fa fa-arrow-circle-right"></i>
+        </a>
       </div>
     </div>
 
-    <div class="col-md-2"></div>
+    <div class="col-md-4">
+      <div class="small-box bg-green">
+        <div class="inner">
+          <h4>View GRI Reports</h4>
 
-    <div class="col-md-4 col-sm-4">
-      <div class="card text-white bg-primary mb-3">
-<!--        <img class="card-img-top" src="measure.jpg" alt="Card image cap"> -->
-        <div class="card-body">
-          <h5 class="card-title text-white">View GRI Reports</h5>
-          <p class="card-text">View previous GRI reports</p>
-          <div align="center"><a href="{{pathFor 'griReports'}}" class="btn btn-primary"><i class="fa fa-sign-in fa-2x"></i></a></div>
+          <p>View previous GRI reports</p>
         </div>
+        <div class="icon">
+          <i class="far fa-file-alt"></i>
+        </div>
+        <a href="{{pathFor 'griReports'}}" class="small-box-footer">
+          Enter <i class="fa fa-arrow-circle-right"></i>
+        </a>
       </div>
     </div>
-    <div class="col-md-2"></div>
-    <div class="col-md-4 col-sm-4">
-      <div class="card text-white bg-primary mb-3">
-<!--        <img class="card-img-top" src="save_energy.jpg" alt="Card image cap"> -->
-        <div class="card-body">
-          <h5 class="card-title text-white">Operational Reporting</h5>
-          <p class="card-text">View operational reports on energy usage and action plans</p>
-          <div align="center"><a href="{{pathFor 'operationalReports'}}" class="btn btn-primary"><i class="fa fa-sign-in fa-2x"></i></a></div>
+
+    <div class="col-md-4">
+      <div class="small-box bg-green">
+        <div class="inner">
+          <h4>Operational Reporting</h4>
+
+          <p>View operational reports</p>
         </div>
+        <div class="icon">
+          <i class="fas fa-chart-pie"></i>
+        </div>
+        <a href="{{pathFor 'operationalReports'}}" class="small-box-footer">
+          Enter <i class="fa fa-arrow-circle-right"></i>
+        </a>
       </div>
     </div>
-    <div class="col-md-1"></div>
 
-  </div>
+</div>
 
 </section>
 </template>
