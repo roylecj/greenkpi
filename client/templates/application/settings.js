@@ -58,5 +58,6 @@ Template.settings.events({
     Meteor.call('updateAccount', personName, emailAddress, password);
 
     sAlert.success("Saved");
+
   },
 })

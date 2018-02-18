@@ -2,7 +2,29 @@ Template.smsEntry.onCreated(function() {
   lineItems = new Mongo.Collection(null);
 });
 
+Template.smsEntry.onRendered(function() {
+
+  // Set the value of the vendor
+  document.getElementById("vendor").value = this.data.provider;
+  document.getElementById("location").value = this.data.location;
+
+  // This is the array of items, which we need to add to the collection
+  li = this.data.items;
+
+  // We work trhough the array and insert them.
+  for(var i=0; i<li.length;i++) {
+     lineItems.insert(li[i]);
+  }
+});
+
 Template.smsEntry.helpers({
+  isEditing: function() {
+    if (! this._id) {
+      return false
+    } else {
+      return true
+    }
+  },
   settings: function() {
 
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
@@ -81,13 +103,21 @@ Template.smsEntry.events({
 
   },
   'click .btnSaveEntry': function(e, t) {
+
     var vendor = $(e.target.parentNode.parentNode.parentNode).find('[name=vendor]').val();
     var location = $(e.target.parentNode.parentNode.parentNode).find('[name=location]').val();
     var startDate = $(e.target.parentNode.parentNode.parentNode).find('[name=startDate]').val();
     var endDate = $(e.target.parentNode.parentNode.parentNode).find('[name=endDate]').val();
 
     var li = lineItems.find().fetch();
-    Meteor.call('saveSMSEntry', 'Energy', location, vendor, startDate, endDate, li);
+
+    if (! this._id) {
+      // This is a new entry - so we need to insert it
+      Meteor.call('saveSMSEntry', 'Energy', location, vendor, startDate, endDate, li);
+    } else {
+      // This is an update to an existing entry, so let's update it
+      Meteor.call('updateSMSEntry', this._id, 'Energy', location, vendor, startDate, endDate, li);
+    }
 
     sAlert.success("Saved");
 
@@ -95,6 +125,12 @@ Template.smsEntry.events({
 
   },
   'click .btnSaveCancel': function(e, t) {
+    Router.go("sms");
+  },
+  'click .btnDeleteEntry': function(e, t) {
+    // Are you sure?
+    sAlert.error("Usage deleted");
+    Meteor.call("deleteSMSEntry", this._id);
     Router.go("sms");
   }
 })

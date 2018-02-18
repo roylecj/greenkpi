@@ -31,8 +31,18 @@
         </li>
       </div>
       <!-- Navbar Right Menu -->
+
+
+
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+          <li>
+            <a href="#" class="btn btn-warning btn-sm btnFeedback" data-toggle="modal" data-target="#feedbackModel"><i class="fas fa-comments"></i></a>
+          </li>
+          <li>
+            <a href="#" class="btn btn-primary btn-sm btnSettings"><i class="fas fa-cog"></i> Settings</a>
+          </li>
+
           <li>
             <a href="#" class="btn btn-danger btn-sm btnLogout"><i class="fas fa-sign-out-alt"></i> Logout</a>
           </li>
@@ -42,59 +52,28 @@
   </header>
 
   {{/if}}
-  <!--
-  <nav class="navbar navbar-default navbar-expand" role="navigation">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <img src="logo.png" class="navbar-brand"/>
-      <a class="navbar-brand" href="{{pathFor 'home'}}">Green KPI</a>
+
+<div class="modal" tabindex="-1" role="dialog" id="feedbackModel" name="feedbackModel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Feedback</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Your feedback is important, as it helps us improve</p>
+        <label for="feedbackEmail">Email</label>
+        <input type="email" class="form-control" name="feedbackEmail" />
+        <label for="feedbackText">Feedback</label>
+        <textarea class="form-control" name="feedbackText" id="feedbackText"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btnSaveFeedback" data-dismiss="modal">Save</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+      </div>
     </div>
-
-    {{#if currentUser}}
-    <div class="collapse navbar-collapse" id="navigation">
-      <ul class="nav navbar-nav">
-        <li><a href="{{pathFor 'myActionList'}}" class="navbar-link">
-          My Actions {{{isCurrentMenu 'ACTIONS'}}}
-            {{#if incompleteActions}}
-              <span class="badge">
-              {{actionCount}}
-              </span>
-            {{/if}}
-          </a></li>
-
-          <li><a href="{{pathFor 'actionList'}}" class="navbar-link">My Plan {{{isCurrentMenu 'PLAN'}}}</a></li>
-
-          <li><a href="{{pathFor 'sms'}}" class="navbar-link">SMS {{{isCurrentMenu 'SMS'}}}</a></li>
-          <li><a href="{{pathFor 'intents'}}" class="navbar-link">My Intent {{{isCurrentMenu 'INTENTS'}}}</a></li>
-          <li><a href="{{pathFor 'reports'}}" class="navbar-link">Reports {{{isCurrentMenu 'REPORTS'}}}</a></li>
-
-          {{#if isAdminRole}}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Setup</a>
-            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
-              <li><a class="dropdown-item" href="{{pathFor 'userList'}}">Users</a></li>
-              <li><a class="dropdown-item" href="{{pathFor 'referenceDataList'}}">Reference Data</a></li>
-            </div>
-          </li>
-          {{/if}}
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <div class="btn-toolbar">
-          <button type="button" class="btn btn-primary btnSettings"><i class="fa fa-cog"></i></button>
-
-          <button type="button" class="btn btn-info">Change Password</button>
-          <button type="button" class="btn btn-danger btnLogout">Logout {{currentUserName}}</button>
-        </div>
-      </ul>
-    </div>
-    {{/if}}
-  </nav>
--->
-
+  </div>
+</div>
 </template>

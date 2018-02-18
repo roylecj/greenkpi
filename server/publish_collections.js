@@ -37,6 +37,10 @@ Meteor.publish('userAudit', function() {
     return UserAudit.find();
 });
 
+Meteor.publish('feedback', function() {
+    return Feedback.find();
+});
+
 Meteor.publish("userDirectory", function () {
   return Meteor.users.find({}, {fields: {_id: 1, username: 1, emails: 1, profile: 1, roles: 1}});
 });
@@ -72,6 +76,11 @@ Meteor.publish("myTargets", function() {
 Meteor.publish("myLocations", function() {
   return MyLocations.find();
 });
+
+Meteor.publish("myEvents", function() {
+  return MyEvents.find();
+});
+
 Meteor.publish('files.images.all', function () {
    return Images.find().cursor;
  });

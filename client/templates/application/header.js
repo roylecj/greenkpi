@@ -145,5 +145,13 @@ Template.header.events({
       Session.set("showFilter", "WASTE");
     }
 
+  },
+  'click .btnSaveFeedback': function(e, t) {
+    e.preventDefault();
+
+    var feedbackEmail = $(document).find('[name=feedbackEmail]').val();
+    var feedbackText = $(document).find('[name=feedbackText]').val();
+
+    Meteor.call('saveFeedback', feedbackEmail, feedbackText);
   }
 });

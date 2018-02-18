@@ -29,5 +29,8 @@ Template.billEntry.events({
       Session.set("currentBill", this._id);
       Session.set("detailsShown", true);
     }
+  },
+  'click .btnEditItem': function(e, t) {
+    Router.go('smsEntry', {_id: this._id});
   }
 })

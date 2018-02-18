@@ -24,6 +24,9 @@ Template.adminSettings.helpers({
 });
 
 Template.adminSettings.events({
+  'click .btnTestEmail': function(e, t) {
+    Meteor.call('sendEmail');
+  },
   'click .btnSaveSettings': function(e, t) {
 
       e.preventDefault();

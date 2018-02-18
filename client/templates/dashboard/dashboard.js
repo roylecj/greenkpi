@@ -1,43 +1,53 @@
-Template.dashboard.rendered = function() {
-    chart = {
-     target: 'chart1',
-     type: 'PieChart',
-     columns: [
-       ['string', 'Topping'],
-       ['number', 'Slices']
-     ],
-     rows: [
-       ['Mushrooms', 3],
-       ['Onions', 1],
-       ['Olives', 1],
-       ['Zucchini', 1],
-       ['Pepperoni', 2]
-     ],
-     options: {
-       'title':'How Much Pizza I Ate Last Night',
-     }
-   };
+Template.dashboard.onRendered(function() {
 
-   drawChart(chart);
+  var ctx  = document.getElementById("actionStatusChart").getContext("2d");
 
-   chart2 = {
-    target: 'chart2',
-    type: 'ColumnChart',
-    columns: [
-      ['string', 'Topping'],
-      ['number', 'Slices']
-    ],
-    rows: [
-      ['Mushrooms', 3],
-      ['Onions', 1],
-      ['Olives', 1],
-      ['Zucchini', 1],
-      ['Pepperoni', 2]
-    ],
-    options: {
-      'title':'How Much Pizza I Ate Last Night',
-    }
+  var options = {
+      scaleShowGridLines: true,
+      scaleGridLineColor: "rgba(0,0,0,.05)",
+      scaleGridLineWidth: 1,
+      scaleShowHorizontalLines: true,
+      scaleShowVerticalLines: true,
+      bezierCurve: true,
+      bezierCurveTension: 0.4,
+      pointDot: true,
+      pointDotRadius: 4,
+      pointDotStrokeWidth: 1,
+      pointHitDetectionRadius: 20,
+      datasetStroke: true,
+      datasetStrokeWidth: 2,
+      datasetFill: true
   };
 
-  drawChart(chart2);
-}
+  var dataItems = [];
+
+debugger
+
+  var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+  var myOutCount = MyActions.find({organisationId: orgId, activeFlag: true, completeFlag: false, planFlag: false}).count();
+  var myPlanCount = MyActions.find({organisationId: orgId, activeFlag: true, planFlag: true}).count();
+  var myCompleteCount = MyActions.find({organisationId: orgId, activeFlag: true, completeFlag: true}).count();
+
+  var data = {
+      datasets: [{
+          data: [10, 20, 30]
+      }],
+
+      // These labels appear in the legend and in the tooltips when hovering different arcs
+      labels: [
+          'Outstanding',
+          'Planned',
+          'Complete'
+      ]
+  };
+
+    var options = {};
+
+  var myPieChart = new Chart(ctx, {
+      type: 'pie',
+      data: data,
+      options: options
+  });
+
+});

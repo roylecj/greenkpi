@@ -47,6 +47,6 @@ Template.sms.helpers({
 
 Template.sms.events({
   'click .btnAddUsage': function(e, t) {
-    Router.go("smsEntry");
+    Router.go("smsEntry", {_id: -1});
   }
 })
