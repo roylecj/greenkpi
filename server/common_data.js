@@ -3,14 +3,6 @@
 
    console.log("Loading reference data");
 
-/*
-  Roles.createRole('ADMIN');
-  Roles.createRole('STANDARD');
-  Roles.createRole('DISABLED');
-  Roles.createRole('READ_ONLY');
-  Roles.createRole('NO ACCESS');
-*/
-
   ReferenceData.insert({
     dataType: "ENERGY_BILL",
     code: "ELECT",

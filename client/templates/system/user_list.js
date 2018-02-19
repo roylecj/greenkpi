@@ -28,6 +28,8 @@ Template.userList.events({
     var userGroup = $(e.target.parentNode.parentNode.parentNode).find('[name=userGroup]').val();
     var isActive = Session.get("newActive")
 
+debugger
+
     Meteor.call('addUser', userId, userName, emailAddress, userGroup, isActive, function(e, result) {
       if (! e) {
         sAlert.error(e);
