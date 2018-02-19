@@ -25,7 +25,7 @@ Template.adminSettings.helpers({
 
 Template.adminSettings.events({
   'click .btnTestEmail': function(e, t) {
-    Meteor.call('sendEmail');
+    Meteor.call('sendEmail', 'roylecj@gmail.com', 'chris@greenkpi.com.au', 'Test', 'This is a test message');
   },
   'click .btnSaveSettings': function(e, t) {
 
