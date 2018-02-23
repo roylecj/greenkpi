@@ -77,7 +77,27 @@ Template.sideMenu.helpers({
       return ''
     }
   },
-
+  sidebarState: function() {
+    if (Session.get("sidebarMini") === true) {
+      return "main-sidebar-mini"
+    } else {
+      return "main-sidebar"
+    }
+  },
+  isSidebarFull: function() {
+    if (Session.get("sidebarMini") === false) {
+      return true
+    } else {
+      return false
+    }
+  },
+  iconSize: function() {    
+    if (Session.get("sidebarMini") === true) {
+      return "fa-2x"
+    } else {
+      return "fa-1x"
+    }
+  }
 });
 Template.sideMenu.events({
   'click .btnOpenAdmin': function(e, t) {

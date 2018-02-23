@@ -53,6 +53,10 @@ Meteor.publish("myIntents", function() {
   return MyIntents.find();
 });
 
+Meteor.publish("myStaff", function() {
+  return MyStaff.find();
+});
+
 Meteor.publish("organisation", function() {
   return Organisation.find({});
 });

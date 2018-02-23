@@ -83,6 +83,11 @@ Template.organisation.events({
 
     Meteor.call('saveOrganisation', userId, orgName, orgDescription, orgSector, orgEmployees, orgLogoPath, orgAddr1, orgAddr2, orgSuburb, orgState, orgPostcode);
 
+debugger
+
+    // Now that we have a user id, and an org, we can link the two, and add them as staff members.
+    Meteor.call('addUserStaff', userId);
+
     sAlert.success("Saved");
   },
   'change #fileInput'(e, template) {
@@ -108,7 +113,7 @@ Template.organisation.events({
          template.currentUpload.set(false);
 
          var logoPath = 'cdn/server/' + fileObj._id + '.' + fileObj.extension;
-         
+
          Meteor.user().profile.image = logoPath;
 
          Meteor.call('saveOrganisationLogo', logoPath )

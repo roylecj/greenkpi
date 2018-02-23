@@ -3,6 +3,23 @@ Template.header.onCreated(function() {
 });
 
 Template.header.helpers({
+  headerStyle: function()  {
+    if (Session.get("sidebarMini")) {
+      return "main-header-mini"
+    } else {
+      return "main-header"
+    }
+  },
+  logoStyle: function() {
+      if (Session.get("sidebarMini")) {
+        return "logomini"
+      } else {
+        return "logo"
+      }
+  },
+  isSidebarFull: function() {
+    return ! Session.get("sidebarMini");
+  },
   energyButtonState: function() {
     if (Session.get("showFilter") === "ENERGY" || Session.get("showFilter") === "") {
       return "btn-success"
@@ -113,7 +130,7 @@ Template.header.events({
     Router.go("settings");
   },
   'click .sidebar-toggle': function(e, t) {
-    Session.set("sidebarVisible", ! Session.get("sidebarVisible"));
+    Session.set("sidebarMini", ! Session.get("sidebarMini"));
   },
   'click .btnEnergy': function(e, t) {
 

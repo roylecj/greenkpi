@@ -3,11 +3,14 @@
   <!-- Main Header -->
 
   {{#if headingVisible}}
-  <header class="main-header">
+  <header class="{{headerStyle}}">
 
-    <a href="#" class="logo">
-      <span class="logo-mini"><b>G</b>KPI</span>
-      <span class="logo-lg"><b>Green</b>KPI</span>
+    <a href="#" class="{{logoStyle}}">
+      {{#if isSidebarFull}}
+        <span class="logo-lg"><b>Green</b>KPI</span>
+      {{else}}
+        <img src="logo.png" class="img-logo-tiny-header" />
+      {{/if}}
     </a>
 
   <!--  <a href="" class="logo"></a> -->

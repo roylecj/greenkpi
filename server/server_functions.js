@@ -1,64 +1,7 @@
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 Meteor.methods({
-  sendEmail(to, from, subject, text) {
-    // Make sure that all arguments are strings.
-//    check([to, from, subject, text], [String]);
-
-    // Let other method calls from the same client start running, without
-    // waiting for the email sending to complete.
-    this.unblock();
-
-    Email.send({ to, from, subject, text });
-  },
-  updateAccount: function(userName, emailAddress, password) {
-
-    // update the account with the new password
-
-    var userId = Meteor.userId();
-
-    // and updtae their name, and email address.
-
-    Meteor.users.update({_id: userId}, {$set: {profile: {name: userName}, emailAddress: emailAddress}});
-
-    if (! password) {
-      // do nothing
-    } else {
-
-      if (password !== '') {
-        Accounts.setPassword(userId, password, false);
-        console.log("password updated");
-      }
-
-    }
-
-  },
-  saveActionCompleted: function(actionId, completeDate) {
-
-    if (! Meteor.userId()) {
-      throw new Meteor.Error('saveActionCompleted.unauthorised');
-    } else {
-      if (Roles.userIsInRole(Meteor.userId(), 'READ_ONLY')) {
-        sAlert.error("Unable to set action");
-      } else {
-        MyActions.update({_id: actionId}, {$set: {
-          completeFlag: true,
-          planFlag: false,
-          completeDate: completeDate,
-          modifiedAt: new Date(),
-          modifiedBy: Meteor.userId()
-        }});
-      }
-
-      var actionText = MyActions.findOne({_id: actionId}).actionText;
-      var eventText = "Completed action - " + actionText;
-      var eventDate = completeDate;
-
-      Meteor.call('addToMyEvents', 'COMPLETED_ACTION', actionId, eventText, eventDate);
-    }
-
-  },
-  addToMyEvents(eventType, eventId, eventText, eventDate) {
+  addToMyEvents(eventType, eventId, eventText, eventDate, staffId) {
 
     if (! Meteor.userId()) {
       throw new Meteor.Error('addToMyEvents.unauthorised');
@@ -70,252 +13,13 @@ Meteor.methods({
         eventText: eventText,
         eventDate: eventDate,
         eventId: eventId,
+        staffId: staffId,
         createdAt: new Date(),
         modifiedAt: new Date(),
         createdBy: Meteor.userId(),
         modifiedBy: Meteor.userId(),
         activeFlag: true
       })
-    }
-  },
-  saveActionPlanned: function(actionId, datePlanned) {
-
-    if (! Meteor.userId()) {
-      throw new Meteor.Error('saveActionPlanned.unauthorised');
-    } else {
-      if (Roles.userIsInRole(Meteor.userId(), 'READ_ONLY')) {
-        sAlert.error("Unable to set action");
-      } else {
-        MyActions.update({_id: actionId}, {$set: {
-          completeFlag: false,
-          planFlag: true,
-          planDate: datePlanned,
-          modifiedAt: new Date(),
-          modifiedBy: Meteor.userId()
-        }});
-      }
-
-      var actionText = MyActions.findOne({_id: actionId}).actionText;
-      var eventText = "Planned action - " + actionText;
-      var eventDate = datePlanned;
-
-      Meteor.call('addToMyEvents', 'PLANNED_ACTION', actionId, eventText, eventDate);
-    }
-  },
-  addActionNote: function(actionId, noteText) {
-
-    if (! Meteor.userId()) {
-        throw new Meteor.Error('addActionNote.unauthorised');
-    } else {
-      var myId;
-
-      if (Roles.userIsInRole(Meteor.userId(), 'READ_ONLY')) {
-          sAlert.error("Unable to add note");
-      } else {
-        var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
-
-        myId = MyActionNotes.insert({
-          actionId: actionId,
-          organisationId: orgId,
-          noteText: noteText,
-          noteDate: new Date(),
-          createdBy: Meteor.userId(),
-          createdAt: new Date(),
-          modifiedBy: Meteor.userId(),
-          modifiedAt: new Date(),
-          activeFlag: true
-        });
-
-      }
-
-      var actionText = MyActions.findOne({_id: actionId}).actionText;
-      var eventText = "Note added to action " + actionText;
-      var eventDate = new Date();
-
-      Meteor.call('addToMyEvents', 'ACTION_NOTE', myId, eventText, eventDate);
-
-
-    }
-  },
-  addToMyActions: function(userId, ecoQuestionId) {
-
-    if (! Meteor.userId()) {
-        throw new Meteor.Error('addToMyActions.unauthorised');
-    } else {
-      if (Roles.userIsInRole(Meteor.userId(), "READ_ONLY")) {
-          sAlert.error("Unable to add to my actions");
-      } else {
-        var inMyQuestions;
-        var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
-
-        inAction = MyQuestions.find({organisationId: orgId, questionId: ecoQuestionId, activeFlag: true}).count();
-
-          var questionText;
-
-        var q = EcoQuestions.findOne({_id: ecoQuestionId});
-
-        questionText = q.questionText;
-
-        if (inAction === 0) {
-
-          MyQuestions.insert({
-            organisationId: orgId,
-            questionId: ecoQuestionId,
-            questionText: questionText,
-            activeFlag: true,
-            createdBy: Meteor.userId(),
-            createdAt: new Date(),
-            modifiedBy: Meteor.userId(),
-            modifiedAt: new Date()
-          });
-
-          var qList;
-          var itmCount;
-
-          qList = EcoActions.find({questionId: ecoQuestionId, activeFlag: true}).fetch();
-
-          itmCount = EcoActions.find({questionId: ecoQuestionId, activeFlag: true}).count();
-
-          for (var qItem = 0; qItem < itmCount; qItem++) {
-
-              MyActions.insert({
-                organisationId: orgId,
-                questionId: ecoQuestionId,
-                actionId: qList[qItem]._id,
-                actionText: qList[qItem].actionText,
-                completeFlag: false,
-                planFlag: false,
-                createdAt: new Date(),
-                createdBy: Meteor.userId(),
-                modifiedAt: new Date(),
-                modifiedBy: Meteor.userId(),
-                activeFlag: true
-              });
-          }
-        }
-      }
-    }
-  },
-  removeFromMyActions: function(userId, ecoQuestionId) {
-
-    if (! Meteor.userId()) {
-      throw new Meteor.Error('removeFromMyActions.unauthorised');
-    } else {
-      if (Roles.userIsInRole(Meteor.userId(), "READ_ONLY")) {
-          sAlert.error("Unable to remove from my actions");
-      } else {
-        var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
-        MyActions.update({organisationId: orgId, questionId: ecoQuestionId, activeFlag: true}, {$set: {activeFlag: false, modifiedAt: new Date(), modifiedBy: Meteor.userId()}}, {multi: true});
-        MyQuestions.update({organisationId: orgId, questionId: ecoQuestionId, activeFlag: true}, {$set: {activeFlag: false, modifiedAt: new Date(), modifiedBy: Meteor.userId()}});
-      }
-    }
-  },
-  addCoreActions: function() {
-
-    if (! Meteor.userId()) {
-      throw new Meteor.Error('addCoreActions.unauthorised');
-    } else {
-      var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
-
-      //
-
-      if (MyCategoryUse.find({"categoryDetails.coreCategory": true, organisationId: orgId, activeFlag: true }).count() === 0) {
-        var coreCatList = CategoryUse.find({coreCategory: true, activeFlag: true}).fetch();
-        var itmCount = CategoryUse.find({coreCategory: true, activeFlag: true}).count();
-
-        for (var coreCatItem = 0; coreCatItem < itmCount; coreCatItem++) {
-          if (MyCategoryUse.find({categoryId : coreCatList[coreCatItem]._id, organisationId: orgId, activeFlag: true}).count() === 0) {
-            // Insert it as it is missing
-
-              MyCategoryUse.insert({
-                categoryId: coreCatList[coreCatItem]._id,
-                categoryDetails: coreCatList[coreCatItem],
-                organisationId: orgId,
-                createdAt: new Date(),
-                createdBy: Meteor.userId(),
-                modifiedAt: new Date(),
-                modifiedBy: Meteor.userId(),
-                activeFlag: true
-              });
-
-              Meteor.call('addMyCategoryUse', coreCatList[coreCatItem]._id);
-          }
-        }
-      }
-    }
-
-  },
-  addMyCategoryUse: function(categoryId) {
-
-    if (! Meteor.userId()) {
-        throw new Meteor.Error('addMyCategoryUse.unauthorised');
-    } else {
-      // Check to see if the myCategory is added already
-      var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
-
-      var cnt = MyCategoryUse.find({categoryId: categoryId, activeFlag: true, organisationId: orgId}).count();
-
-      var catInfo = CategoryUse.findOne({_id: categoryId});
-
-      if (cnt === 0) {
-        // Only add it if there isn't one...
-
-        MyCategoryUse.insert({
-          categoryId: categoryId,
-          categoryDetails: catInfo,
-          organisationId: orgId,
-          createdAt: new Date(),
-          createdBy: Meteor.userId(),
-          modifiedAt: new Date(),
-          modifiedBy: Meteor.userId(),
-          activeFlag: true
-        });
-      };
-
-      // Now we can assign Actions for these categories...
-
-      var qList;
-      var itmCount;
-
-      qList = EcoActions.find({categoryId: categoryId, activeFlag: true}).fetch();
-
-      itmCount = EcoActions.find({categoryId: categoryId, activeFlag: true}).count();
-
-      for (var qItem = 0; qItem < itmCount; qItem++) {
-
-          MyActions.insert({
-            organisationId: orgId,
-            categoryId: categoryId,
-            actionId: qList[qItem]._id,
-            actionText: qList[qItem].actionText,
-            completeFlag: false,
-            planFlag: false,
-            createdAt: new Date(),
-            createdBy: Meteor.userId(),
-            modifiedAt: new Date(),
-            modifiedBy: Meteor.userId(),
-            activeFlag: true
-          });
-      }
-
-    }
-  },
-  removeMyCategoryUse: function(categoryId) {
-
-    if (! Meteor.userId()) {
-        throw new Meteor.Error('removeMyCategoryUse.unauthorised');
-    } else {
-
-          var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
-
-          var cnt = MyCategoryUse.find({categoryId: categoryId, activeFlag: true, organisationId: orgId}).count();
-
-          if (cnt > 0) {
-            MyCategoryUse.update({organisationId: orgId, activeFlag: true, categoryId: categoryId}, {$set: {activeFlag: false, modifiedAt: new Date(), modifiedBy: Meteor.userId()}});
-
-            MyActions.update({organisationId: orgId, categoryId: categoryId, activeFlag: true}, {$set: {activeFlag: false, modifiedAt: new Date(), modifiedBy: Meteor.userId()}}, {multi: true});
-          }
-
     }
   },
   updateReferenceItem: function(id, category, code, description, activeFlag) {
@@ -363,93 +67,6 @@ Meteor.methods({
         sAlert.error("Only administrators can delete reference data");
       }
     }
-  },
-  addUser: function(userCode, userName, emailAddress, userGroup, activeFlag) {
-
-    if (! Meteor.userId()) {
-      throw new Meteor.Error('addUser.unauthorised');
-    } else {
-      if (Roles.userIsInRole(Meteor.userId(), "ADMIN")) {
-        password = "password";
-        Accounts.createUser({
-                               username: userCode,
-                               email : emailAddress,
-                               password : password,
-                               roles: [],
-                               profile  : {
-                                   name: userName
-                               }
-                             });
-
-        // Add them to MailChimp so that they can get started
-
-//        Meteor.call('addUserToMailChimp', emailAddress);
-
-      } else {
-          sAlert.error("Only administrators can create users");
-      }
-    }
-  },
-  addUserRole: function(userId, userGroup) {
-
-    if (! Meteor.userId()) {
-      throw new Meteor.Error('addUserRole.unauthorised');
-    } else {
-      if (userGroup === "DISABLED") {
-        Roles.setUserRoles(userId, userGroup);
-      } else {
-        if (Roles.userIsInRole(Meteor.userId(), "ADMIN")) {
-          Roles.setUserRoles(userId, userGroup);
-        } else {
-          sAlert.error("Only administrators can assign roles");
-        }
-      }
-    }
-  },
-  removeUser: function(userId) {
-
-    if (! Meteor.userId()) {
-      throw new Meteor.Error('removeUser.unauthorised');
-    } else {
-      if (Roles.userIsInRole(Meteor.userId(), "ADMIN")) {
-        Roles.setUserRoles(userId, 'NO ACCESS')
-        // Meteor.users.remove({_id: userId});
-      } else {
-        sAlert.error("Only administrators can remove access");
-      }
-    }
-  },
-
-  saveIntent: function(intentType, intentContent) {
-
-    if (! Meteor.userId()) {
-        throw new Meteor.Error('saveIntent.unauthorised');
-    } else {
-      if (Roles.userIsInRole(Meteor.userId(), "READ_ONLY")) {
-        sAlert.error("Unable to save reduction plan");
-      } else {
-        var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
-
-        // Update the previously active intent to inactive
-
-        MyIntents.update({organisationId: orgId, intentType: intentType, activeFlag: true}, {$set: {activeFlag: false, modifiedAt: new Date(), modifiedBy: Meteor.userId()}});
-
-        // Now add a new one.
-
-        MyIntents.insert(
-          {
-            organisationId: orgId,
-            intentType: intentType,
-            description: intentContent,
-            createdAt: new Date(),
-            createdBy: Meteor.userId(),
-            activeFlag: true
-          }
-        )
-      }
-
-    }
-
   },
   saveOrganisation: function(userId, orgName, orgDescription, orgSector, orgEmployees, orgLogoPath, orgAddr1, orgAddr2, orgSuburb, orgState, orgPostcode) {
 
@@ -519,10 +136,11 @@ Meteor.methods({
           })
         }
 
+// Check to see if our user is a staff member, if not, we can add them now, because there is an org attached
 
-      }
-
+      Meteor.call("addUserStaff", Meteor.userId());
     }
+  }
   },
   saveOrganisationLogo(logoPath) {
 
@@ -544,67 +162,6 @@ Meteor.methods({
       auditDescription: description,
       createdAt: new Date()
     });
-  },
-  saveSMSEntry(entryType, location, provider, startDate, endDate, li) {
-
-    if (! Meteor.userId()) {
-      throw new Meteor.Error('saveSMSEntry.unauthorised');
-    } else {
-      var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
-
-      MyMetrics.insert({
-          entryType: entryType,
-          organisationId: orgId,
-          location: location,
-          provider: provider,
-          startDate: startDate,
-          endDate: endDate,
-          items: li,
-          createdAt: new Date(),
-          modifiedAt: new Date(),
-          createdBy: Meteor.userId(),
-          modifiedBy: Meteor.userId(),
-          activeFlag: true
-      });
-    }
-  },
-  updateSMSEntry(id, entryType, location, provider, startDate, endDate, li) {
-
-    if (! Meteor.userId()) {
-        throw new Meteor.Error('updateSMSEntry.unauthorised');
-    } else {
-      var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
-
-      MyMetrics.update({_id: id}, {$set: {
-        entryType: entryType,
-        organisationId: orgId,
-        location: location,
-        provider: provider,
-        startDate: startDate,
-        endDate: endDate,
-        items: li,
-        modifiedAt: new Date(),
-        modifiedBy: Meteor.userId(),
-        activeFlag: true
-
-      } });
-
-    }
-  },
-  deleteSMSEntry(id) {
-
-    if (! Meteor.userId()) {
-      throw new Meteor.Error('deleteSMSEntry.unauthorised');
-    } else {
-      var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
-
-      MyMetrics.update({_id: id}, {$set: {
-        modifiedAt: new Date(),
-        modifiedBy: Meteor.userId(),
-        activeFlag: false
-      }
-      });
-    }
   },
   saveFeedback(feedbackEmail, feedbackText) {
 
@@ -689,32 +246,4 @@ Meteor.methods({
       MySettings.insert({scope: scope, key: key, value: value, activeFlag: true, createdAt: new Date(), createdBy: Meteor.userId(), modifiedAt: new Date(), modifiedBy: Meteor.userId()});
     }
   },
-  addTargetDetails (categoryId, targetDate, targetReduction, targetRenewables) {
-
-    if (! Meteor.userId()) {
-        throw new Meteor.Error('addTargetDetails.unauthorised');
-    } else {
-      var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
-
-      var cnt = MyTargets.find({organisationId: orgId, activeFlag: true, categoryId: categoryId}).count();
-
-      if (cnt > 0) {
-        MyTargets.update({organisationId: orgId, activeFlag: true, categoryId: categoryId}, {$set: {activeFlag: false, modifiedBy: Meteor.userId(), modifiedAt: new Date()}});
-      }
-
-      MyTargets.insert({
-        organisationId: orgId,
-        categoryId: categoryId,
-        targetDate: targetDate,
-        targetReduction: targetReduction,
-        targetRenewables: targetRenewables,
-        createdAt: new Date(),
-        modifiedAt: new Date(),
-        createdBy: Meteor.userId(),
-        modifiedBy: Meteor.userId(),
-        activeFlag: true
-      });
-
-    }
-  }
 })

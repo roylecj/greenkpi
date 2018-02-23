@@ -1,0 +1,24 @@
+<template name="staffItem">
+  {{#if isEditingStaff}}
+    <tr>
+      <td><input class="form-control" name="firstName" id="firstName" value= "{{firstName}}" /></td>
+      <td><input class="form-control" name="lastName" id="lastName" value= "{{lastName}}" /></td>
+      <td><input class="form-control" type="email" name="emailAddress" id="emailAddress" value= "{{emailAddress}}" /></td>
+      <td>
+        <button class="btn btn-xs btn-success btnSaveStaff"><i class="fas fa-check"></i></button>
+        <button class="btn btn-xs btn-danger btnCancelSave"><i class="fas fa-times"></i></button>
+      </td>
+    </tr>
+
+  {{else}}
+  <tr>
+    <td>{{firstName}}</td>
+    <td>{{lastName}}</td>
+    <td>{{emailAddress}}</td>
+    <td>
+      <button class="btn btn-xs btn-primary btnEditStaff"><i class="fas fa-pencil-alt"></i></button>
+      <button class="btn btn-xs btn-danger btnDeleteStaff"><i class="fas fa-times"></i></button>
+    </td>
+  </tr>
+  {{/if}}
+</template>

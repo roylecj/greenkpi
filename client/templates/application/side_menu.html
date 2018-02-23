@@ -1,10 +1,10 @@
 <template name="sideMenu">
-  <aside class="main-sidebar sidebar-wrapper">
-
+<aside class="{{sidebarState}} fixed">
   <div class="hidden">{{loggedIn}}</div>
   <!-- sidebar: style can be found in sidebar.less -->
   <section class="sidebar">
 
+    {{#if isSidebarFull}}
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel">
       <div class="pull-left">
@@ -17,10 +17,11 @@
       <div class="pull-left info">
         <p>{{currentUserName}}</p>
         <!-- Status -->
-        <a href="#"><i class="fa fa-circle text-success"></i> {{organisationName}}</a>
+        <a href="#">{{organisationName}}</a>
       </div>
     </div>
-
+    {{/if}}
+    {{#if isSidebarFull}}
     <!-- search form (Optional) -->
     <form action="#" method="get" class="sidebar-form">
       <div class="input-group">
@@ -31,36 +32,96 @@
             </span>
       </div>
     </form>
+    {{/if}}
     <!-- /.search form -->
 
     <!-- Sidebar Menu -->
     <ul class="sidebar-menu" data-widget="tree">
+
+      {{#if isSidebarFull}}
       <li class="header">MAIN</li>
-      <li class="{{isCurrentMenu 'HOME'}}"><a href="{{pathFor 'dashboard'}}"><i class="fas fa-table"></i> Dashboard</a></li>
-      <li class="{{isCurrentMenu 'SMS'}}"><a href="{{pathFor 'sms'}}"><i class="fas fa-calculator"></i> Measure</a></li>
+      {{/if}}
+      <li class="{{isCurrentMenu 'HOME'}}">
+        {{#if isSidebarFull}}
+        <a href="{{pathFor 'dashboard'}}"><i class="fas fa-table"></i> Dashboard</a>
+        {{else}}
+        <a href="{{pathFor 'dashboard'}}"><i class="fas fa-table fa-2x"></i></a>
+        {{/if}}
+      </li>
+      <li class="{{isCurrentMenu 'SMS'}}">
+        {{#if isSidebarFull}}<a href="{{pathFor 'sms'}}"><i class="fas fa-calculator"></i> Measure</a>
+        {{else}}
+        <a href="{{pathFor 'sms'}}"><i class="fas fa-calculator fa-2x"></i></a>
+        {{/if}}
+      </li>
 <!--      <li class="{{isCurrentMenu 'PROFILE'}}"><a href="{{pathFor 'profileItem'}}"><i class="fas fa-chart-pie"></i> My Profile</a></li> -->
-      <li class="{{isCurrentMenu 'INTENTS'}}"><a href="{{pathFor 'intents'}}"><i class="fas fa-arrow-circle-down"></i> Manage</a></li>
-      <li class="{{isCurrentMenu 'REPORTS'}}"><a href="{{pathFor 'reports'}}"><i class="far fa-chart-bar"></i> Report</a></li>
+      <li class="{{isCurrentMenu 'INTENTS'}}">
+        {{#if isSidebarFull}}<a href="{{pathFor 'intents'}}"><i class="fas fa-arrow-circle-down"></i> Manage</a>
+        {{else}}
+        <a href="{{pathFor 'intents'}}"><i class="fas fa-arrow-circle-down fa-2x"></i></a>
+        {{/if}}
+      </li>
+      <li class="{{isCurrentMenu 'PLAN'}}">
+        {{#if isSidebarFull}}
+        <a href="{{pathFor 'plan'}}"><i class="fas fa-bullseye"></i> Plan</a>
+        {{else}}
+        <a href="{{pathFor 'plan'}}"><i class="fas fa-bullseye fa-2x"></i></a>
+        {{/if}}
+      </li>
+      <li class="{{isCurrentMenu 'REPORTS'}}">{{#if isSidebarFull}}<a href="{{pathFor 'reports'}}"><i class="far fa-chart-bar"></i> Report</a>{{else}}<a href="{{pathFor 'reports'}}"><i class="far fa-chart-bar fa-2x"></i></a>{{/if}}</li>
+
+      {{#if isSidebarFull}}
+      <li class="header">SETTINGS</li>
+      {{/if}}
+      <li class="{{isCurrentMenu 'ORGANISATION'}}">
+        {{#if isSidebarFull}}
+        <a href="{{pathFor 'organisation'}}"><i class="far fa-building"></i> My Organisation</a>
+        {{else}}
+        <a href="{{pathFor 'organisation'}}"><i class="far fa-building fa-2x"></i></a>
+        {{/if}}
+      </li>
 
 <!--
-      <li class="{{isCurrentMenu 'ACTIONS'}}"><a href="{{pathFor 'myActionList'}}" ><i class="far fa-check-circle"></i> My Actions
-          {{#if incompleteActions}}
-            <span class="pull-right-container">
-              <small class="label pull-right bg-green">{{actionCount}}</small>
-            </span>
-          {{/if}}
-        </a></li>
+      <li class="{{isCurrentMenu 'STAFF'}}">
+        {{#if isSidebarFull}}
+        <a href="{{pathFor 'staffList'}}"><i class="fas fa-user"></i> Staff Details</a>
+        {{else}}
+        <a href="{{pathFor 'staffList'}}"><i class="fas fa-user fa-2x"></i></a>
+        {{/if}}
+      </li>
 -->
-      <li class="{{isCurrentMenu 'PLAN'}}"><a href="{{pathFor 'plan'}}"><i class="fas fa-bullseye"></i> My Plan</a></li>
-
-      <li class="{{isCurrentMenu 'ORGANISATION'}}"><a href="{{pathFor 'organisation'}}"><i class="far fa-chart-bar"></i> Organisation Details</a></li>
 
       {{#if isAdminRole}}
+
+      {{#if isSidebarFull}}
       <li class="header">ADMINISTRATION</li>
-      <li class="{{isCurrentMenu 'USERS'}}"><a href="{{pathFor 'userList'}}"><i class="fas fa-users"></i> Users</a></li>
-      <li class="{{isCurrentMenu 'REFDATA'}}"><a href="{{pathFor 'referenceDataList'}}"><i class="fas fa-bars"></i> Reference Data</a></li>
-      <li class="{{isCurrentMenu 'FEEDBACK'}}"><a href="{{pathFor 'feedbackList'}}"><i class="fas fa-comments"></i> Feedback</a></li>
-      <li class="{{isCurrentMenu 'ADMINSETTINGS'}}"><a href="{{pathFor 'adminSettings'}}"><i class="fa fa-cog"></i> Administrative Settings</a></li>
+      {{/if}}
+      <li class="{{isCurrentMenu 'USERS'}}">
+        {{#if isSidebarFull}}<a href="{{pathFor 'userList'}}"><i class="fas fa-users"></i> Users</a>
+        {{else}}<a href="{{pathFor 'userList'}}"><i class="fas fa-users fa-2x"></i></a>
+        {{/if}}
+      </li>
+      <li class="{{isCurrentMenu 'REFDATA'}}">
+        {{#if isSidebarFull}}
+        <a href="{{pathFor 'referenceDataList'}}"><i class="fas fa-bars"></i> Reference Data</a>
+        {{else}}
+        <a href="{{pathFor 'referenceDataList'}}"><i class="fas fa-bars fa-2x"></i></a>
+        {{/if}}
+      </li>
+      <li class="{{isCurrentMenu 'FEEDBACK'}}">
+        {{#if isSidebarFull}}
+        <a href="{{pathFor 'feedbackList'}}"><i class="fas fa-comments"></i> Feedback</a>
+        {{else}}
+        <a href="{{pathFor 'feedbackList'}}"><i class="fas fa-comments fa-2x"></i></a>
+        {{/if}}
+      </li>
+      <li class="{{isCurrentMenu 'ADMINSETTINGS'}}">
+        {{#if isSidebarFull}}
+        <a href="{{pathFor 'adminSettings'}}"><i class="fa fa-cog"></i> Administrative Settings</a>
+        {{else}}
+        <a href="{{pathFor 'adminSettings'}}"><i class="fa fa-cog fa-2x"></i></a>
+        {{/if}}
+      </li>
       {{/if}}
 
     </ul>

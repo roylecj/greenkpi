@@ -4,14 +4,20 @@ Accounts.ui.config({
 
 Template.login.onCreated(function() {
     Session.set('signedIn', false);
-    });
+});
 
 Template.login.onRendered(function() {
     Session.set('headingVisible', false);
     Session.set('sidebarVisible', false);
 });
 
+
 Template.login.events({
+  'click .btnSigningup': function(e, t) {
+    e.preventDefault();
+
+    Router.go("pricing");
+  },
   'submit form': function(e) {
     e.preventDefault();
 
@@ -40,7 +46,4 @@ Template.login.events({
       }}
     });
   },
-  'click .btnSignup': function(e, t) {
-    e.preventDefault();
-  }
 })

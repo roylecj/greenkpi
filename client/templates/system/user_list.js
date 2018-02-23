@@ -23,14 +23,13 @@ Template.userList.events({
 
     e.preventDefault();
     var userId =  $(e.target.parentNode.parentNode.parentNode).find('[name=userName]').val();
-    var userName = $(e.target.parentNode.parentNode.parentNode).find('[name=personName]').val();
+    var userFirstName = $(e.target.parentNode.parentNode.parentNode).find('[name=firstName]').val();
+    var userLastName = $(e.target.parentNode.parentNode.parentNode).find('[name=lastName]').val();
     var emailAddress = $(e.target.parentNode.parentNode.parentNode).find('[name=emailAddress]').val();
     var userGroup = $(e.target.parentNode.parentNode.parentNode).find('[name=userGroup]').val();
     var isActive = Session.get("newActive")
 
-debugger
-
-    Meteor.call('addUser', userId, userName, emailAddress, userGroup, isActive, function(e, result) {
+    Meteor.call('addUser', userId, userFirstName, userLastName, emailAddress, userGroup, isActive, function(e, result) {
       if (! e) {
         sAlert.error(e);
       }
@@ -38,6 +37,7 @@ debugger
 
       uId = Meteor.users.findOne({username: userId})._id;
       Meteor.call('addUserRole', uId, userGroup);
+      Meteor.call('addUserStaff', uId);
     });
 
     Session.set("newUser", false);

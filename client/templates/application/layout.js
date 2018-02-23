@@ -12,5 +12,14 @@ Template.layout.helpers({
     } else {
       return "sidebar-collapse"
     }
+  },
+  contentStyle: function() {
+    debugger
+    
+    if (Session.get("sidebarMini")) {
+      return "content-wrapper-mini"
+    } else {
+      return "content-wrapper"
+    }
   }
 })

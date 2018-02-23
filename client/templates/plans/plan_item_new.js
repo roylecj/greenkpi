@@ -1,9 +1,6 @@
 Template.planItemNew.onRendered(function() {
-  console.log("render -" + this._id);
     if (Session.get("plannedPressed") === this._id) {
       var planDate =  $(e.target.parentNode.parentNode).find('[name=planDate]').val();
-
-      debugger
 
       var mDate = moment(planDate);
 
@@ -26,6 +23,11 @@ Template.planItemNew.helpers({
     } else {
       return false
     }
+  },
+  staffList: function() {
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+
+    return MyStaff.find({organisationId: orgId, activeFlag: true}).fetch();
   },
   defaultDoneDate: function() {
     // Default to today
@@ -181,6 +183,7 @@ Template.planItemNew.events({
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
     var completeDate = $(e.target.parentNode.parentNode.parentNode).find('[name=doneDate]').val();
+    var completedBy = $(e.target.parentNode.parentNode.parentNode).find('[name=doneByUser]').val();
 
     var mDate = moment(completeDate);
     var dateValid = true;
@@ -196,10 +199,11 @@ Template.planItemNew.events({
     }
 
     if (dateValid === true) {
-      Meteor.call("saveActionCompleted", this._id, completeDate);
+      Meteor.call("saveActionCompleted", this._id, completeDate, completedBy);
 
+      var completedByRec = MyStaff.findOne({_id: completedBy})
       var doneDate = moment(completeDate).format("DD MMM YYYY");
-      var noteText = "Completed on " + doneDate;
+      var noteText = "Completed By " + completedByRec.firstName + ' ' + completedByRec.lastName + " on " + doneDate;
 
       Meteor.call('addActionNote', this._id, noteText);
 
@@ -221,6 +225,8 @@ Template.planItemNew.events({
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
     var planDate =  $(e.target.parentNode.parentNode.parentNode).find('[name=planDate]').val();
+    var plannedBy =  $(e.target.parentNode.parentNode.parentNode).find('[name=plannedByUser]').val();
+
 
     var mDate = moment(planDate);
     var dateValid = true;
@@ -236,10 +242,13 @@ Template.planItemNew.events({
     }
 
     if (dateValid === true ) {
-      Meteor.call("saveActionPlanned", this._id, planDate);
+      Meteor.call("saveActionPlanned", this._id, planDate, plannedBy);
 
       var planDateFormat = moment(planDate).format("DD MMM YYYY");
-      var noteText = "Planned for completion on " + planDateFormat;
+//      var noteText = "Planned for completion on " + planDateFormat;
+
+      var plannedByRec = MyStaff.findOne({_id: plannedBy})
+      var noteText = "Planned for completion By " + plannedByRec.firstName + ' ' + plannedByRec.lastName + " on " + planDateFormat;
 
       Meteor.call('addActionNote', this._id, noteText);
 

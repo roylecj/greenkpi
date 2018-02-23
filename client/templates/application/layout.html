@@ -4,8 +4,8 @@
   <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
 
-    <div class="wrapper fixed {{sidebarVisible}}">
-<!--  <div class="wrapper fixed"> -->
+<!--    <div class="wrapper fixed {{sidebarVisible}}"> -->
+  <div class="wrapper fixed">
 
 <!--      {{#AdminLTE skin="green" sidebarMini="true" fixed="true"}} -->
 
@@ -14,7 +14,7 @@
 
       {{> sideMenu}}
 
-      <div id="main" class="content-wrapper">
+      <div id="main" class="{{contentStyle}}">
         <div class="content">
         {{> yield}}
       </div>

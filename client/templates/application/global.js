@@ -5,7 +5,7 @@ Meteor.startup(function () {
         position: 'bottom-right',
         timeout: 5000,
         html: false,
-        onRouteClose: true,
+        onRouteClose: false,
         stack: true,
         offset: 0
     });

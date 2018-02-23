@@ -10,7 +10,11 @@
 -->
 
   <div class="item">
+    {{#if isStaffOnly}}
+    <i class="fas fa-user fa-2x"></i>
+    {{else}}
     <img src="{{imagePath}}" alt="user image">
+    {{/if}}
 
     <p class="message">
       <a href="#" class="name">

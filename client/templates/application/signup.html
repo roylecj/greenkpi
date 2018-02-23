@@ -1,0 +1,47 @@
+<template name="signup">
+  <div class="login-box">
+    <div class="login-logo">
+      <img src="logo.png" width="50px" height="50px" class="register-logo"/>
+      <a href="#"><b>Green</b>KPI</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+      <p class="login-box-msg">Sign up</p>
+
+      <form>
+        <div class="form-group has-feedback">
+          <input type="text" class="form-control" name="emailAdddress" id="emailAdddress" placeholder="jane.smith@greensystems.com.au">
+          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+          <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First Name eg. Jane">
+          <span class="form-control-feedback"><i class="fas fa-user"></i></span>
+        </div>
+
+        <div class="form-group has-feedback">
+          <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last Name eg. Smith">
+          <span class="form-control-feedback"><i class="fas fa-user"></i></span>
+        </div>
+
+        <div class="form-group has-feedback">
+          <input type="text" id="companyName" name="companyName" class="form-control" placeholder="Enter your organisation name">
+          <span class="form-control-feedback"><i class="far fa-building"></i></span>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-4">
+            <button class="btn btn-success btn-block btn-flat btnSaveSignup">Save</button>
+          </div>
+          <div class="col-xs-4">
+          </div>
+          <!-- /.col -->
+          <div class="col-xs-4">
+            <button class="btn btn-danger btn-block btn-flat btnCancelSignup">Cancel</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+      </div>
+  </div>
+
+</template>

@@ -11,17 +11,18 @@
         {{/if}}
       {{/if}}
 
-<!--
-      {{#if hasNotes}}
-      <div class="label label-warning lblShowNotes">Note Recorded</div>
-      {{/if}}
--->
-
       {{#if noteRecording}}
         <p></p>
-        <label for="noteText" class="col-sm-1 control-label">Note:</label><input type="text" name="noteText" />
-        <button class="btn btn-xs btn-danger btnCancelSaveNote"><i class="fas fa-times"></i></button>
-        <button class="btn btn-xs btn-success btnSaveNote"><i class="fas fa-check"></i></button>
+        <div class="col-sm-1">
+          <label for="noteText" class="control-label">Note:</label>
+        </div>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="noteText" name="noteText" />
+        </div>
+        <div class="col-sm-2">
+          <button class="btn btn-xs btn-danger btnCancelSaveNote"><i class="fas fa-times"></i></button>
+          <button class="btn btn-xs btn-success btnSaveNote"><i class="fas fa-check"></i></button>
+        </div>
         {{#if hasNotes}}
         <p class="mb-1"><div class="label label-primary">Previous Notes</div></p>
         {{#each actionNotes}}
@@ -33,6 +34,9 @@
     </td>
     <td class="col-sm-1">
       <div class="label {{currentStatusColour}}">{{currentStatus}}</div>
+      {{#if isCompleteChecked}}
+
+      {{/if}}
     </td>
     <td class="col-sm-2">
 
@@ -46,12 +50,22 @@
         {{#if plannedPressed}}
           <div class="form-group {{isDateValid}}">
             <input type="date" name="planDate" class="form-control planDate" value="{{defaultDate}}" />
+            <select id="plannedByUser" name="plannedByUser" class="form-control">
+                {{#each staffList}}
+                    <option value="{{_id}}">{{firstName}} {{lastName}}</option>
+                {{/each}}
+            </select>
           </div>
         {{/if}}
 
         {{#if donePressed}}
           <div class="form-group {{isDateValid}}">
             <input type="date" name="doneDate" class="form-control doneDate" value="{{defaultDoneDate}}" />
+            <select id="doneByUser" name="doneByUser" class="form-control">
+                {{#each staffList}}
+                    <option value="{{_id}}">{{firstName}} {{lastName}}</option>
+                {{/each}}
+            </select>
           </div>
         {{/if}}
 
