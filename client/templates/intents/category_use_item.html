@@ -9,29 +9,5 @@
         <button class="btn btn-xs btnAddToUse btn-danger"><i class="fas fa-times"></i></button>
       {{/if}}
     </td>
-    <td>
-      {{#if isInUse}}
-      <input type="text" class="form-control" name="targetReduction" id="targetReduction" value="{{targetReduction}}" />
-      {{else}}
-      {{/if}}
-    </td>
-    <td>
-      {{#if isInUse}}
-      <input type="text" class="form-control" name="targetRenewables" id="targetRenewables" value="{{targetRenewables}}" />
-      {{else}}
-      {{/if}}
-    </td>
-    <td>
-      {{#if isInUse}}
-      <input type="date" class="form-control" name="targetDate" id="targetDate" value="{{targetDate}}" />
-      {{else}}
-      {{/if}}
-    </td>
-    <td>
-      {{#if isInUse}}
-      <button class="btn btn-xs btn-success btnSaveTarget"><i class="fas fa-check"></i></button>
-      <button class="btn btn-xs btn-danger btnCancelTarget"><i class="fas fa-times"></i></button>
-      {{/if}}
-    </td>
   </tr>
 </template>

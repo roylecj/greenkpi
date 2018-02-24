@@ -25,6 +25,12 @@ Meteor.methods({
         activeFlag: true
       });
 
+      var categoryCode = CategoryUse.findOne({_id: categoryId}).categoryCode;
+      var eventText = "Added target reduction for " + categoryCode;
+      var eventDate = new Date();
+
+      Meteor.call('addToMyEvents', 'ADDED_TARGET', actionId, eventText, eventDate, completedBy);
+
     }
   },
   removeMyCategoryUse: function(categoryId) {

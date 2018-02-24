@@ -47,7 +47,7 @@
          <div class="form-group">
            <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Energy Reduction Targets and Use</h3>
+              <h3 class="box-title">Energy Use</h3>
             </div>
             <div class="box-body">
               <table class="table table-bordered table-striped table-hover">
@@ -56,6 +56,29 @@
                     <th>Energy Category</th>
                     <th>Sub Category</th>
                     <th>In Use</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  {{#each energyCategoryUse}}
+                     {{> categoryUseItem}}
+                  {{/each}}
+
+              </tbody></table>
+            </div>
+          </div>
+         </div>
+
+         <div class="form-group">
+           <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Energy Reduction Targets</h3>
+            </div>
+            <div class="box-body">
+              <table class="table table-bordered table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th>Energy Category</th>
                     <th>Target Reduction %</th>
                     <th>Target Renewables %</th>
                     <th>Target By</th>
@@ -64,8 +87,8 @@
                 </thead>
                 <tbody>
 
-                  {{#each energyCategoryUse}}
-                     {{> categoryUseItem}}
+                  {{#each energyCategories}}
+                     {{> categoryUseReduction}}
                   {{/each}}
 
               </tbody></table>

@@ -14,8 +14,6 @@ Template.layout.helpers({
     }
   },
   contentStyle: function() {
-    debugger
-    
     if (Session.get("sidebarMini")) {
       return "content-wrapper-mini"
     } else {

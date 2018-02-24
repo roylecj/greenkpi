@@ -1,0 +1,25 @@
+<template name="reportActionItem">
+  <tr>
+    <td>
+      {{category}}
+    </td>
+    <td>
+      {{actionText}}
+
+      {{#if hasNotes}}
+        <br/>
+        <div class="small-text">
+        <b>Notes:</b>
+        {{#each noteItems}}
+          {{> reportItemNote}}
+        {{/each}}
+      </div>
+      {{/if}}
+
+    </td>
+    <td>
+      {{dateActioned}}
+    </td>
+  </tr>
+
+</template>

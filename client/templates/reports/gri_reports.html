@@ -1,90 +1,188 @@
 <template name="griReports">
-  <h3>Organisation Details</h3>
+  <button class="btn btn-success btnSaveReport pull-right">Save</button>
+  <a href="#" class="btn btn-primary btnExportReport pull-right">Export</a>
 
-  <table class="table table-striped">
-    <tbody>
-      <tr>
-        <td>
-          Name
-        </td>
-        <td>
+  <h1><img src="{{companyLogo}}" class="img-logo-tiny" />
+ Sustainability Report</h1>
+  <p>
+    This sustainability report has been prepared by the organisation using GreenKPI Sustainability software to disclose its impact and contribution to sustainable development.
+  </p>
+<!--  <img src="{{companyLogo}}" class="img-logo" /> -->
 
-        </td>
-      </tr>
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Organisation Details</h3>
+    </div>
+    <div class="box-body">
+      <div class="col-sm-6">
+      <table class="table">
+      <tbody>
+        <tr>
+          <td>
+            <b>Name</b>
+          </td>
+          <td>
+            {{companyName}}
+          </td>
+        </tr>
 
-      <tr>
-        <td>
-          Brief Description
-        </td>
-        <td>
+        <tr>
+          <td>
+            <b>Brief Description</b>
+          </td>
+          <td>
+            {{companyDescription}}
+          </td>
+        </tr>
 
-        </td>
-      </tr>
+        <tr>
+          <td>
+            <b>Address</b>
+          </td>
+          <td>
+            {{{companyAddress}}}
+          </td>
+        </tr>
 
-      <tr>
-        <td>
-          Address
-        </td>
-        <td>
+        <tr>
+          <td>
+            <b>Sector</b>
+          </td>
+          <td>
+            {{companySector}}
+          </td>
+        </tr>
 
-        </td>
-      </tr>
+        <tr>
+          <td>
+            <b>Number of Employees</b>
+          </td>
+          <td>
+            {{companyEmployees}}
+          </td>
+        </tr>
 
-      <tr>
-        <td>
-          Sector
-        </td>
-        <td>
-
-        </td>
-      </tr>
-
-      <tr>
-        <td>
-          Number of Employees
-        </td>
-        <td>
-
-        </td>
-      </tr>
-
-    </tbody>
-  </table>
-
-  <h3>Report Period</h3>
-  <table class="table table-striped">
-    <tbody>
-      <tr>
-        <td>
-          From
-        </td>
-        <td>
-          To
-        </td>
-      </tr>
-
-      <tr>
-        <td>
-        </td>
-        <td>
-
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-
-  <h3>Energy Objective / Statement / Commitment</h3>
-  <div>
-    Process efficiency and alternative energy solutions
+      </tbody>
+      </table>
+    </div>
+    <div class="col-sm-6"></div>
+    </div>
   </div>
 
-  <h3>Usage Data</h3>
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Report Period</h3>
+    </div>
+    <div class="box-body">
+      <div class="col-sm-6">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          <b>From</b>
+        </th>
+        <th>
+          <b>To</b>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          {{startDate}}
+        </td>
+        <td>
+          {{endDate}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="col-sm-6">
+</div>
+</div>
+</div>
 
-  <h3>Actions Completed</h3>
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">Energy Management Approach Commitment</h3>
+  </div>
+  <div class="box-body">
+  <div>
+    {{energyIntent}}
+  </div>
+</div>
+</div>
 
-  <h3>Actions Planned</h3>
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">Usage Data</h3>
+  </div>
+  <div class="box-body">
+  <div>
+    {{#each energyType}}
+    {{> energyUsageChart}}
+    {{/each}}
+  </div>
+</div>
+</div>
 
-  <h3>Data Source and Basis</h3>
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">Actions Completed</h3>
+  </div>
+  <div class="box-body">
+    In this period, {{companyName}} has completed the following actions.
+
+    <table>
+      <thead>
+        <tr>
+          <th class="col-sm-3">Category</th>
+          <th class="col-sm-8">Action</th>
+          <th class="col-sm-1">Date Completed</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each completedAction}}
+          {{> reportActionItem}}
+        {{/each}}
+      </tbody>
+      </table>
+  </div>
+</div>
+
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">Actions Planned</h3>
+  </div>
+  <div class="box-body">
+  In this period, {{companyName}} has planned to complete the following actions.
+<p></p>
+    <table>
+      <thead>
+        <tr>
+          <th class="col-sm-3">Category</th>
+          <th class="col-sm-8">Action</th>
+          <th class="col-sm-1">Date Planned</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each plannedAction}}
+          {{> reportActionItem}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">Data Source and Basis</h3>
+  </div>
+  <div class="box-body">
+  </div>
+</div>
+
+  <p class="tiny-text">Produced by GreenKPI, 2018</p>
 
 </template>

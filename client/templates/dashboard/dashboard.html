@@ -9,7 +9,7 @@
   </section>
   <section class="content">
     <div class="row">
-              
+
       <div class="col-xs-7">
         <div class="box box-success">
           <div class="box-header">
@@ -32,6 +32,22 @@
             <div class="well pre-scrollable">
             {{> timeline}}
           </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-xs-7">
+        <div class="box box-success">
+          <div class="box-header">
+            <div class="box-title">Energy Usage</div>
+          </div>
+          <div class="box-body">
+            {{#each energyType}}
+            {{> energyUsageChart}}
+            {{/each}}
           </div>
         </div>
       </div>

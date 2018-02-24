@@ -1,5 +1,5 @@
 Meteor.methods({
-  updateSMSEntry(id, entryType, location, provider, startDate, endDate, li) {
+  updateSMSEntry(id, entryType, usageType, location, provider, startDate, endDate, li) {
 
     if (! Meteor.userId()) {
         throw new Meteor.Error('updateSMSEntry.unauthorised');
@@ -8,6 +8,7 @@ Meteor.methods({
 
       MyMetrics.update({_id: id}, {$set: {
         entryType: entryType,
+        usageType: usageType,
         organisationId: orgId,
         location: location,
         provider: provider,
@@ -37,7 +38,7 @@ Meteor.methods({
       });
     }
   },
-  saveSMSEntry(entryType, location, provider, startDate, endDate, li) {
+  saveSMSEntry(entryType, usageType, location, provider, startDate, endDate, li) {
 
     if (! Meteor.userId()) {
       throw new Meteor.Error('saveSMSEntry.unauthorised');
@@ -46,6 +47,7 @@ Meteor.methods({
 
       MyMetrics.insert({
           entryType: entryType,
+          usageType: usageType,
           organisationId: orgId,
           location: location,
           provider: provider,

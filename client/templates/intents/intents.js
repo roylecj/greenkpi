@@ -6,6 +6,13 @@ Template.intents.helpers({
 
     return CategoryUse.find({rootCategoryCode: "ENERGY", coreCategory: false, activeFlag: true}).fetch();
   },
+  energyCategories: function() {
+    var catList = CategoryUse.find({rootCategoryCode: "ENERGY", coreCategory: false, activeFlag: true}).fetch();
+
+    var distinctArray = _.uniq(catList, false, function(d) {return d.categoryCode});
+
+    return distinctArray
+  },
   waterCategoryUse: function() {
     return CategoryUse.find({rootcategory: "Water", coreCategory: false, activeFlag: true}).fetch();
   },

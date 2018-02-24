@@ -4,11 +4,12 @@ Accounts.ui.config({
 
 Template.login.onCreated(function() {
     Session.set('signedIn', false);
+    Session.setDefault('sidebarMini', false);
 });
 
 Template.login.onRendered(function() {
-    Session.set('headingVisible', false);
-    Session.set('sidebarVisible', false);
+//    Session.set('headingVisible', false);
+//    Session.set('sidebarVisible', false);
 });
 
 

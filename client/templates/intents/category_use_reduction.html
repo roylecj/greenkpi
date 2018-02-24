@@ -1,0 +1,18 @@
+<template name="categoryUseReduction">
+  <tr>
+    <td>{{categoryCode}}</td>
+    <td>
+      <input type="text" class="form-control" name="targetReduction" id="targetReduction" value="{{targetReduction}}" />
+    </td>
+    <td>
+      <input type="text" class="form-control" name="targetRenewables" id="targetRenewables" value="{{targetRenewables}}" />
+    </td>
+    <td>
+      <input type="date" class="form-control" name="targetDate" id="targetDate" value="{{targetDate}}" />
+    </td>
+    <td>
+      <button class="btn btn-xs btn-success btnSaveTarget"><i class="fas fa-check"></i></button>
+      <button class="btn btn-xs btn-danger btnCancelTarget"><i class="fas fa-times"></i></button>
+    </td>
+  </tr>
+</template>

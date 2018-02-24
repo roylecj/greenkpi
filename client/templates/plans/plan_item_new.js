@@ -26,6 +26,7 @@ Template.planItemNew.helpers({
   },
   staffList: function() {
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+debugger
 
     return MyStaff.find({organisationId: orgId, activeFlag: true}).fetch();
   },
@@ -204,7 +205,6 @@ Template.planItemNew.events({
       var completedByRec = MyStaff.findOne({_id: completedBy})
       var doneDate = moment(completeDate).format("DD MMM YYYY");
       var noteText = "Completed By " + completedByRec.firstName + ' ' + completedByRec.lastName + " on " + doneDate;
-
       Meteor.call('addActionNote', this._id, noteText);
 
       sAlert.success('Saved');

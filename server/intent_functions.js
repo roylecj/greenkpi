@@ -25,6 +25,13 @@ Meteor.methods({
             activeFlag: true
           }
         )
+
+        var actionText = intentContent;
+        var eventText = "Added reduction plan for " + intentType;
+        var eventDate = new Date();
+
+        Meteor.call('addToMyEvents', 'ADDED_INTENT', actionId, eventText, eventDate, completedBy);
+
       }
 
     }

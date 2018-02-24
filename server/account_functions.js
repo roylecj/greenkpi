@@ -108,5 +108,16 @@ Meteor.methods({
           sAlert.error("Only administrators can create users");
       }
     }
+  },
+  resetUserPassword: function(userId, userEmail, tempPassword, newPassword) {
+    // Check that this user id, has this email, otherwise error back
+
+    var userRec = Meteor.users.findOne({_id: userId});
+
+    if (userRec.emails[0].address === userEmail) {
+      Accounts.changePassword(tempPassword, newPassword)
+    } else {
+      throw new Meteor.Error('invalid user');
+    }
   }
 })

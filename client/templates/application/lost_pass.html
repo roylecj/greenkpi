@@ -1,0 +1,43 @@
+<template name="lostPass">
+  <div class="login-box">
+    <div class="login-logo">
+      <img src="logo.png" width="50px" height="50px" class="register-logo"/>
+      <a href="#"><b>Green</b>KPI</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+      <p class="login-box-msg">Lost Password</p>
+
+      <form>
+        <div class="form-group has-feedback">
+          <input type="email" class="form-control" name="emailAddress" id="emailAddress" placeholder="email@email.com">
+          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        </div>
+
+        <div class="row">
+          <!-- /.col -->
+
+          <div class="col-xs-2"></div>
+          <div class="col-xs-8">
+            {{#if isResetClicked}}
+            <a href="#" class="btn btn-default btn-block btn-flat">Sent</a>
+            {{else}}
+            <button type="submit" class="btn btn-success btn-block btn-flat btnSendReset">Send Password Reset</button>
+            {{/if}}
+          </div>
+          <div class="col-xs-2"></div>
+        </div>
+
+        {{#if isResetClicked}}
+        <p></p>
+        <div class="row">
+          If this email is a valid user, then you will receive an email to reset your password.
+          <a href="{{pathFor 'login'}}" class="btn btn-default btn-block btn-flat">Login</a>
+        </div>
+        {{/if}}
+      </form>
+
+    <!-- /.login-box-body -->
+  </div>
+</div>
+</template>

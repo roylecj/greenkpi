@@ -7,7 +7,8 @@ Template.smsEntry.onRendered(function() {
   // Set the value of the vendor
   document.getElementById("vendor").value = this.data.provider;
   document.getElementById("location").value = this.data.location;
-
+  document.getElementById("energyUsageType").value = this.data.usageType;
+  
   // This is the array of items, which we need to add to the collection
   li = this.data.items;
 
@@ -24,6 +25,9 @@ Template.smsEntry.helpers({
     } else {
       return true
     }
+  },
+  energyType: function() {
+    return ReferenceData.find({dataType: "ENERGY_BILL", activeFlag: true}).fetch();
   },
   settings: function() {
 
@@ -104,6 +108,7 @@ Template.smsEntry.events({
   },
   'click .btnSaveEntry': function(e, t) {
 
+    var energyUsageType = $(e.target.parentNode.parentNode.parentNode).find('[name=energyUsageType]').val();
     var vendor = $(e.target.parentNode.parentNode.parentNode).find('[name=vendor]').val();
     var location = $(e.target.parentNode.parentNode.parentNode).find('[name=location]').val();
     var startDate = $(e.target.parentNode.parentNode.parentNode).find('[name=startDate]').val();
@@ -113,10 +118,10 @@ Template.smsEntry.events({
 
     if (! this._id) {
       // This is a new entry - so we need to insert it
-      Meteor.call('saveSMSEntry', 'Energy', location, vendor, startDate, endDate, li);
+      Meteor.call('saveSMSEntry', 'Energy', energyUsageType, location, vendor, startDate, endDate, li);
     } else {
       // This is an update to an existing entry, so let's update it
-      Meteor.call('updateSMSEntry', this._id, 'Energy', location, vendor, startDate, endDate, li);
+      Meteor.call('updateSMSEntry', this._id, 'Energy', energyUsageType, location, vendor, startDate, endDate, li);
     }
 
     sAlert.success("Saved");
