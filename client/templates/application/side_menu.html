@@ -34,8 +34,8 @@
       </div>
     </form>
     {{/if}}
+-->
 
-  -->
     <!-- /.search form -->
 
     <!-- Sidebar Menu -->
@@ -93,7 +93,6 @@
         {{/if}}
       </li>
 -->
-
       {{#if isAdminRole}}
 
       {{#if isSidebarFull}}
@@ -125,6 +124,14 @@
         <a href="{{pathFor 'adminSettings'}}"><i class="fa fa-cog fa-2x"></i></a>
         {{/if}}
       </li>
+      <li class="{{isCurrentMenu 'ACTIONSETUP'}}">
+        {{#if isSidebarFull}}
+        <a href="{{pathFor 'actionSetupList'}}"><i class="fas fa-list-ol"></i> Action Items Setup</a>
+        {{else}}
+        <a href="{{pathFor 'actionSetupList'}}"><i class="fas fa-list-ol fa-2x"></i></a>
+        {{/if}}
+      </li>
+
       {{/if}}
 
     </ul>

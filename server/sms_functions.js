@@ -45,6 +45,14 @@ Meteor.methods({
     } else {
       var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
+// See if the location exists
+
+      cntLocation = MyLocations.find({organisationId: orgId, description: location, activeFlag: true}).count();
+
+      if (cntLocation === 0) {
+        MyLocations.insert({organisationId: orgId, description: location, activeFlag: true, createdAt: new Date(), createdBy: Meteor.userId()});
+      }
+
       MyMetrics.insert({
           entryType: entryType,
           usageType: usageType,

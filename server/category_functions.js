@@ -29,7 +29,7 @@ Meteor.methods({
       var eventText = "Added target reduction for " + categoryCode;
       var eventDate = new Date();
 
-      Meteor.call('addToMyEvents', 'ADDED_TARGET', actionId, eventText, eventDate, completedBy);
+      Meteor.call('addToMyEvents', 'ADDED_TARGET', categoryId, eventText, eventDate, eventDate);
 
     }
   },

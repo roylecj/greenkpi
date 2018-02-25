@@ -1,0 +1,49 @@
+<template name="actionItemDetail">
+  <tr>
+    <td>
+      {{#if isEditingItem}}
+        <select class="form-control" id="editCategoryCode" name="editCategoryCode">
+          {{#each categoryCodes}}
+          <option value="{{_id}}" {{isSelected this._id}}>{{rootCategoryCode}} / {{categoryCode}} / {{subCategoryCode}}</option>
+          {{/each}}
+        </select>
+      {{else}}
+        {{categoryDesc}}
+      {{/if}}
+    </td>
+
+    <td>
+      {{#if isEditingItem}}
+        <input class="form-control" type="text" name="editReportId" value="{{reportId}}" />
+      {{else}}
+        {{reportId}}
+      {{/if}}
+    </td>
+
+    <td>
+      {{#if isEditingItem}}
+        <input class="form-control" type="text" name="editActionText" value="{{actionText}}" />
+      {{else}}
+        {{actionText}}
+      {{/if}}
+    </td>
+
+    <td>
+      {{#if isActive}}
+      <button class="btn btn-xs btn-success btnInactive"><i class="fa fa-check"></i></button>
+      {{else}}
+      <button class="btn btn-xs btn-danger btnActive"><i class="fa fa-times"></i></button>
+      {{/if}}
+    </td>
+
+    <td>
+      {{#if isEditingItem}}
+      <button class="btn btn-xs btn-success btnSaveItem"><i class="fa fa-check"></i></button>
+      <button class="btn btn-xs btn-danger btnCancelSave"><i class="fa fa-times"></i></button>
+      {{else}}
+      <button class="btn btn-xs btn-primary btnEditItem"><i class="fas fa-pencil-alt"></i></button>
+      <button class="btn btn-xs btn-danger btnDeleteItem"><i class="fa fa-times"></i></button>
+      {{/if}}
+    </td>
+  </tr>
+</template>

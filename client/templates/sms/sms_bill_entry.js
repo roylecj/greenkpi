@@ -17,7 +17,8 @@ Template.billEntry.helpers({
     return Vendors.findOne({code: this.billVendorCode}).description
   },
   usage: function() {
-    return ReferenceData.findOne({_id: this.usageType}).description
+//    return ReferenceData.findOne({_id: this.usageType}).description
+    return CategoryFields.findOne({_id: this.usageType}).categoryCode
   }
 });
 

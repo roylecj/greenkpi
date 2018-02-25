@@ -42,6 +42,30 @@ var catElectricityKitchen = CategoryUse.insert({'rootCategoryCode': 'ENERGY', 'c
 var catElectricityPool = CategoryUse.insert({'rootCategoryCode': 'ENERGY', 'categoryCode': 'Electricity', 'subCategoryCode' : 'Pool', 'coreCategory' : false, 'activeFlag': true, 'sortOrder': 100});
 var catElectricityLaundry = CategoryUse.insert({'rootCategoryCode': 'ENERGY', 'categoryCode': 'Electricity', 'subCategoryCode' : 'Laundry', 'coreCategory' : false, 'activeFlag': true, 'sortOrder': 100});
 
+CategoryFields.insert({
+  rootCategoryCode: "ENERGY",
+  categoryCode: "Electricity",
+  hasStartDate: true,
+  hasEndDate: true,
+  hasTariffType: true,
+  hasField1: true,
+  field1Name: "Meter Reading",
+  hasField2: true,
+  field2Name: "NMI Reading",
+  activeFlag: true
+});
+
+CategoryFields.insert({
+  rootCategoryCode: "ENERGY",
+  categoryCode: "Fuel",
+  hasStartDate: false,
+  hasEndDate: true,
+  hasTariffType: false,
+  hasField1: false,
+  hasField2: false,
+  activeFlag: true
+});
+
 // Actions are linked to categories, and questions (for backward compatibility only)
 
 EcoActions.insert({'questionId': q3020112,'categoryId': catERPTariffs, 'reportId': '302011201', 'actionText' : 'Change to most efficient tariff for energy use and time of use', 'createDate': new Date(), 'activeFlag': true});

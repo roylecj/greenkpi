@@ -73,6 +73,10 @@ Meteor.publish("myCategoryUse", function() {
   return MyCategoryUse.find();
 });
 
+Meteor.publish("categoryFields", function() {
+  return CategoryFields.find();
+});
+
 Meteor.publish("myTargets", function() {
   return MyTargets.find();
 });

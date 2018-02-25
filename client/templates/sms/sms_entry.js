@@ -8,7 +8,9 @@ Template.smsEntry.onRendered(function() {
   document.getElementById("vendor").value = this.data.provider;
   document.getElementById("location").value = this.data.location;
   document.getElementById("energyUsageType").value = this.data.usageType;
-  
+
+  Session.set("energyUsageType", this.data.energyUsageType);
+
   // This is the array of items, which we need to add to the collection
   li = this.data.items;
 
@@ -27,7 +29,8 @@ Template.smsEntry.helpers({
     }
   },
   energyType: function() {
-    return ReferenceData.find({dataType: "ENERGY_BILL", activeFlag: true}).fetch();
+//    return ReferenceData.find({dataType: "ENERGY_BILL", activeFlag: true}).fetch();
+    return CategoryFields.find({rootCategoryCode: "ENERGY", activeFlag: true}).fetch();
   },
   settings: function() {
 
@@ -54,34 +57,90 @@ Template.smsEntry.helpers({
     return lineItems.find().fetch();
   },
   energyTypeItem: function() {
-    return ReferenceData.find({dataType: "ENERGY_TYPE", activeFlag: true}).fetch();
+    var energyType = Session.get("energyUsageType");
+
+    var cat = CategoryFields.findOne({_id: energyType});
+
+    return ReferenceData.find({dataType: "ENERGY_TYPE", categoryFilter: cat.categoryCode, activeFlag: true}).fetch();
   },
   usageTypeItem: function() {
-    return ReferenceData.find({dataType: "USAGE_TYPE", activeFlag: true}).fetch();
+    // Check the type of usage
+    var energyType = Session.get("energyUsageType");
+
+    var cat = CategoryFields.findOne({_id: energyType});
+
+    return ReferenceData.find({dataType: "USAGE_TYPE", categoryFilter: cat.categoryCode, activeFlag: true}).fetch();
   },
   tariffTypeItem: function() {
     return ReferenceData.find({dataType: "TARIFF_TYPE", activeFlag: true}).fetch();
   },
+  hasStartDateField: function() {
+    var energyType = Session.get("energyUsageType");
+
+    var cat = CategoryFields.findOne({_id: energyType});
+
+    return cat.hasStartDate
+  },
+  hasEndDateField: function() {
+    var energyType = Session.get("energyUsageType");
+
+    var cat = CategoryFields.findOne({_id: energyType});
+
+    return cat.hasEndDate
+  },
+  hasTariffType: function() {
+    var energyType = Session.get("energyUsageType");
+
+    var cat = CategoryFields.findOne({_id: energyType});
+
+    return cat.hasTariffType
+  },
+  totalCostEdit: function() {
+    return Session.get("totalCost");
+  }
 });
 
 Template.smsEntry.events({
   'click .btnRemove': function(e, t) {
     lineItems.remove({_id: this._id});
   },
+  'change #energyUsageType': function(e, t) {
+    var energyUsageType = $(e.target).val();
+    Session.set('energyUsageType', energyUsageType);
+  },
+  'change #usage': function(e, t) {
+    var usage = $(e.target).val();
+    var tariffCost = $(document).find('[name=tariffCost]').val();
+
+    if (!isNaN(usage) && !isNaN(tariffCost)) {
+      var totalCost = +usage * +tariffCost;
+      Session.set("totalCost", totalCost);
+    }
+  },
+  'change #tariffCost': function(e, t) {
+    var usage = $(document).find('[name=usage]').val();
+    var tariffCost = $(e.target).val();
+
+    if (!isNaN(usage) && !isNaN(tariffCost)) {
+      var totalCost = +usage * +tariffCost;
+      Session.set("totalCost", totalCost);
+    }
+  },
   'click .btnSaveRow': function(e, t) {
 
     // Find the values on the screen
 
-    var energyType = $(e.target.parentNode.parentNode.parentNode).find('[name=energyType]').val();
-    var energyTypeDesc = $(e.target.parentNode.parentNode.parentNode).find('select[name="energyType"] option:selected').text();
-    var usageType = $(e.target.parentNode.parentNode.parentNode).find('[name=usageType]').val();
-    var usageTypeDesc = $(e.target.parentNode.parentNode.parentNode).find('select[name="usageType"] option:selected').text();
-    var usage = $(e.target.parentNode.parentNode.parentNode).find('[name=usage]').val();
-    var tariffType = $(e.target.parentNode.parentNode.parentNode).find('[name=tariffType]').val();
-    var tariffTypeDesc = $(e.target.parentNode.parentNode.parentNode).find('select[name="tariffType"] option:selected').text();
-    var tariffCost = $(e.target.parentNode.parentNode.parentNode).find('[name=tariffCost]').val();
-    var totalCost = $(e.target.parentNode.parentNode.parentNode).find('[name=totalCost]').val();
+    var energyType = $(document).find('[name=energyType]').val();
+    var energyTypeDesc = $(document).find('select[name="energyType"] option:selected').text();
+    var usageType = $(document).find('[name=usageType]').val();
+    var usageTypeDesc = $(document).find('select[name="usageType"] option:selected').text();
+    var usage = $(document).find('[name=usage]').val();
+    var tariffType = $(document).find('[name=tariffType]').val();
+    var tariffTypeDesc = $(document).find('select[name="tariffType"] option:selected').text();
+    var tariffCost = $(document).find('[name=tariffCost]').val();
+    var totalCost = Session.get("totalCost");
 
+    Session.set("totalCost", "");
     // Insert into local Collection
 
     lineItems.insert({
@@ -98,12 +157,12 @@ Template.smsEntry.events({
 
     // Clear out the variables now so we can add another one.
 
-    $(e.target.parentNode.parentNode.parentNode).find('[name=energyType]').val("");
-    $(e.target.parentNode.parentNode.parentNode).find('[name=usageType]').val("");
-    $(e.target.parentNode.parentNode.parentNode).find('[name=usage]').val("");
-    $(e.target.parentNode.parentNode.parentNode).find('[name=tariffType]').val("");
-    $(e.target.parentNode.parentNode.parentNode).find('[name=tariffCost]').val("");
-    $(e.target.parentNode.parentNode.parentNode).find('[name=totalCost]').val("");
+    $(document).find('[name=energyType]').val("");
+    $(document).find('[name=usageType]').val("");
+    $(document).find('[name=usage]').val("");
+    $(document).find('[name=tariffType]').val("");
+    $(document).find('[name=tariffCost]').val("");
+//    $(document).find('[name=totalCost]').val("");
 
   },
   'click .btnSaveEntry': function(e, t) {
@@ -113,6 +172,10 @@ Template.smsEntry.events({
     var location = $(e.target.parentNode.parentNode.parentNode).find('[name=location]').val();
     var startDate = $(e.target.parentNode.parentNode.parentNode).find('[name=startDate]').val();
     var endDate = $(e.target.parentNode.parentNode.parentNode).find('[name=endDate]').val();
+
+    if (!startDate) {
+      startDate = endDate;
+    }
 
     var li = lineItems.find().fetch();
 

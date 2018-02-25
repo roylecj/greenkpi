@@ -1,3 +1,73 @@
 <template name="actionSetupList">
-  
+  <section class="content-header">
+    <h1>
+      Action Items Setup
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="{{pathFor 'dashboard'}}"><i class="fa fa-home"></i> Home</a></li>
+      <li>Administration</li>
+      <li class="active">Action Items</li>
+    </ol>
+  </section>
+
+  <section class="content">
+  <div class="box box-success">
+    <div class="box-header with-border">
+        <button class="btn btn-xs btn-info pull-right btnAddNew"><i class="fas fa-plus"></i> Add</button>
+
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Report Id</th>
+              <th>Action Text</th>
+              <th>Active</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#if newActionItem}}
+              <tr>
+                <td>
+                  <select class="form-control" id="categoryCode" name="categoryCode">
+                    {{#each categoryCodes}}
+                    <option value="{{_id}}">{{rootCategoryCode}} / {{categoryCode}} / {{subCategoryCode}}</option>
+                    {{/each}}
+                  </select>
+
+                </td>
+
+                <td>
+                  <input class="form-control" type="text" name="reportId" />
+                </td>
+
+                <td>
+                  <input class="form-control" type="text" name="actionText" />
+                </td>
+
+                <td>
+                  {{#if newActive}}
+                  <button class="btn btn-xs btn-success btnInactive"><i class="fa fa-check"></i></button>
+                  {{else}}
+                  <button class="btn btn-xs btn-danger btnActive"><i class="fa fa-times"></i></button>
+                  {{/if}}
+                </td>
+
+                <td>
+                  <button class="btn btn-xs btn-success btnSaveAddNew"><i class="fa fa-check"></i></button>
+                  <button class="btn btn-xs btn-danger btnCancelAddNew"><i class="fa fa-times"></i></button>
+                </td>
+              </tr>
+            {{/if}}
+
+          {{#each actionItems}}
+            {{> actionItemDetail}}
+          {{/each}}
+          </tbody>
+        </table>
+
+    </div>
+  </div>
+</section>
+
 </template>

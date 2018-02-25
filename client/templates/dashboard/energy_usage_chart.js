@@ -4,7 +4,8 @@ Template.energyUsageChart.onRendered(function() {
 
   var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
-  var usageTypeDescription = ReferenceData.findOne({_id: this.data._id}).description;
+//  var usageTypeDescription = ReferenceData.findOne({_id: this.data._id}).description;
+  var usageTypeDescription = CategoryFields.findOne({_id: this.data._id}).categoryCode;
 
   // Select the last 12 months of data
 

@@ -1,6 +1,35 @@
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 Meteor.methods({
+  saveNewAction(categoryCode, reportId, actionText, isActive) {
+    EcoActions.insert({
+      categoryId: categoryCode,
+      reportId: reportId,
+      actionText: actionText,
+      createdAt: new Date(),
+      createdBy: Meteor.userId(),
+      modifiedAt: new Date(),
+      modifiedBy: Meteor.userId(),
+      activeFlag: isActive
+    });
+
+  },
+  updateActionActiveFlag(actionId, activeFlag) {
+    EcoActions.update({_id: actionId}, {$set: {
+      activeFlag: activeFlag,
+      modifiedBy: Meteor.userId(),
+      modifiedAt: new Date()
+    }})
+  },
+  updateActionItem(actionId, categoryId, reportId, actionText) {
+    EcoActions.update({_id: actionId}, {$set: {
+      categoryId: categoryId,
+      reportId: reportId,
+      actionText: actionText,
+      modifiedBy: Meteor.userId(),
+      modifiedAt: new Date(),
+    }})
+  },
   addToMyEvents(eventType, eventId, eventText, eventDate, staffId) {
 
     if (! Meteor.userId()) {

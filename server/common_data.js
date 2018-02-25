@@ -151,6 +151,7 @@
     dataType: "ENERGY_TYPE",
     code: "ER",
     description: "Electricity - Renewable",
+    categoryFilter: "Electricity",
     createdAt: new Date(),
     activeFlag: true
   });
@@ -159,6 +160,7 @@
     dataType: "ENERGY_TYPE",
     code: "ENR",
     description: "Electricity - Non-renewable",
+    categoryFilter: "Electricity",
     createdAt: new Date(),
     activeFlag: true
   });
@@ -167,6 +169,7 @@
     dataType: "ENERGY_TYPE",
     code: "GAS",
     description: "Natural Gas",
+    categoryFilter: "Fuel",
     createdAt: new Date(),
     activeFlag: true
   });
@@ -175,6 +178,7 @@
     dataType: "ENERGY_TYPE",
     code: "DIESEL",
     description: "Diesel",
+    categoryFilter: "Fuel",
     createdAt: new Date(),
     activeFlag: true
   });
@@ -183,6 +187,7 @@
     dataType: "ENERGY_TYPE",
     code: "ULP",
     description: "Unleaded Petrol",
+    categoryFilter: "Fuel",
     createdAt: new Date(),
     activeFlag: true
   });
@@ -191,6 +196,7 @@
     dataType: "USAGE_TYPE",
     code: "KWH",
     description: "KW/h",
+    categoryFilter: "Electricity",
     createdAt: new Date(),
     activeFlag: true
   });
@@ -199,6 +205,7 @@
     dataType: "USAGE_TYPE",
     code: "GJ",
     description: "Gigajoules",
+    categoryFilter: "Electricity",
     createdAt: new Date(),
     activeFlag: true
   });
@@ -215,6 +222,7 @@
     dataType: "USAGE_TYPE",
     code: "L",
     description: "Litres",
+    categoryFilter: "Fuel",
     createdAt: new Date(),
     activeFlag: true
   });
@@ -223,6 +231,7 @@
     dataType: "USAGE_TYPE",
     code: "KL",
     description: "Kilolitres",
+    categoryFilter: "Fuel",
     createdAt: new Date(),
     activeFlag: true
   });
@@ -231,6 +240,7 @@
     dataType: "USAGE_TYPE",
     code: "ML",
     description: "Megalitres",
+    categoryFilter: "Fuel",
     createdAt: new Date(),
     activeFlag: true
   });
@@ -239,6 +249,7 @@
     dataType: "USAGE_TYPE",
     code: "GL",
     description: "Gigalitres",
+    categoryFilter: "Fuel",
     createdAt: new Date(),
     activeFlag: true
   });
