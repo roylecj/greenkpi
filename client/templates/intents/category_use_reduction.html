@@ -1,18 +1,38 @@
 <template name="categoryUseReduction">
   <tr>
-    <td>{{categoryCode}}</td>
     <td>
-      <input type="text" class="form-control" name="targetReduction" id="targetReduction" value="{{targetReduction}}" />
+      {{categoryCode}}
+      {{#if hasNoTarget}}
+      <button class="btn btn-xs btn-success btnCreateTarget pull-right">Create Target</button>
+      {{/if}}
     </td>
     <td>
+      {{#if hasNoTarget}}
+      {{else}}
+        <input type="text" class="form-control" name="targetReduction" id="targetReduction" value="{{targetReduction}}" />
+      {{/if}}
+    </td>
+    <td>
+      {{#if hasNoTarget}}
+      {{else}}
       <input type="text" class="form-control" name="targetRenewables" id="targetRenewables" value="{{targetRenewables}}" />
+      {{/if}}
     </td>
     <td>
-      <input type="date" class="form-control" name="targetDate" id="targetDate" value="{{targetDate}}" />
+      {{#if hasNoTarget}}
+      {{else}}
+      <div name="fg-targetDate" class="form-group">
+        <input type="date" class="form-control" name="targetDate" id="targetDate" value="{{targetDate}}" />
+        <span class="help-block hidden" name="helpText">Invalid Date - needs to be a future date</span>
+      </div>
+      {{/if}}
     </td>
     <td>
+      {{#if hasNoTarget}}
+      {{else}}
       <button class="btn btn-xs btn-success btnSaveTarget"><i class="fas fa-check"></i></button>
       <button class="btn btn-xs btn-danger btnCancelTarget"><i class="fas fa-times"></i></button>
+      {{/if}}
     </td>
   </tr>
 </template>
