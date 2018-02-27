@@ -13,6 +13,7 @@
 
       {{#if noteRecording}}
         <p></p>
+        <div class="row">
         <div class="col-sm-1">
           <label for="noteText" class="control-label">Note:</label>
         </div>
@@ -23,11 +24,21 @@
           <button class="btn btn-xs btn-danger btnCancelSaveNote"><i class="fas fa-times"></i></button>
           <button class="btn btn-xs btn-success btnSaveNote"><i class="fas fa-check"></i></button>
         </div>
+
+    </div>
         {{#if hasNotes}}
-        <p class="mb-1"><div class="label label-primary">Previous Notes</div></p>
+        <p></p>
+      <p class="mb-1">
+                  <div class="label label-primary">Previous Notes</div>
+      </p>
+
+    <div class="row">
+      <div class="col-sm-12">
         {{#each actionNotes}}
           {{> myActionNotes}}
         {{/each}}
+      </div>
+      </div>
         {{/if}}
 
       {{/if}}

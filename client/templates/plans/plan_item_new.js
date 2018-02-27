@@ -286,7 +286,8 @@ Template.planItemNew.events({
   'click .btnSaveNote': function(e, t) {
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
-    var noteText =  $(e.target.parentNode.parentNode).find('[name=noteText]').val();
+    var nodeItem = $(e.target).closest('tr');
+    var noteText =  $(nodeItem).find('[name=noteText]').val();
 
     Meteor.call('addActionNote', this._id, noteText);
 

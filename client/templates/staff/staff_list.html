@@ -23,11 +23,10 @@
               <button class="btn btn-xs btn-success btnSaveAddStaff"><i class="fas fa-check"></i></button>
               <button class="btn btn-xs btn-danger btnCancelAddStaff"><i class="fas fa-times"></i></button>
             </td>
-          {{else}}
+          {{/if}}
           {{#each staffItems}}
             {{> staffItem}}
           {{/each}}
-          {{/if}}
           </tbody>
         </table>
       </div>
