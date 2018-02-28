@@ -51,9 +51,9 @@ Template.settings.events({
   'click .btnSaveGeneral': function(e, t) {
 
     // Check that person name, email address and password are valid
-    var personName =  $(e.target.parentNode.parentNode.parentNode).find('[name=myName]').val();
-    var emailAddress = $(e.target.parentNode.parentNode.parentNode).find('[name=myEmail]').val();
-    var password = $(e.target.parentNode.parentNode.parentNode).find('[name=myPasswd]').val();
+    var personName =  $(document).find('[name=myName]').val();
+    var emailAddress = $(document).find('[name=myEmail]').val();
+    var password = $(document).find('[name=myPasswd]').val();
 
     Meteor.call('updateAccount', personName, emailAddress, password);
 

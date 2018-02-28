@@ -22,9 +22,14 @@ Template.staffItem.events({
   },
   'click .btnSaveStaff': function(e, t) {
     e.preventDefault();
-    var firstName = $(e.target.parentNode.parentNode.parentNode).find('[name=firstName]').val();
-    var lastName = $(e.target.parentNode.parentNode.parentNode).find('[name=lastName]').val();
-    var emailAddress = $(e.target.parentNode.parentNode.parentNode).find('[name=emailAddress]').val();
+
+    var nodeItem;
+
+    nodeItem = $(e.target).closest('tr');
+
+    var firstName = $(nodeItem).find('[name=firstName]').val();
+    var lastName = $(nodeItem).find('[name=lastName]').val();
+    var emailAddress = $(nodeItem).find('[name=emailAddress]').val();
 
     Meteor.call("saveStaff", this._id, firstName, lastName, emailAddress);
 

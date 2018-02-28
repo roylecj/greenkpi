@@ -1,3 +1,6 @@
+Template.categoryUseReduction.onRendered(function() {
+  $('[data-toggle="tooltip"]').tooltip({placement: 'top'});
+})
 Template.categoryUseReduction.helpers({
   hasNoTarget: function() {
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;

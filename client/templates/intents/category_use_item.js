@@ -1,3 +1,7 @@
+Template.categoryUseItem.onRendered(function() {
+  $('[data-toggle="tooltip"]').tooltip({placement: 'top'});
+});
+
 Template.categoryUseItem.helpers({
     isInUse: function() {
       // See if this action is in the myCategoryUse List

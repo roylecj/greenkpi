@@ -1,3 +1,6 @@
+Template.intents.onRendered(function() {
+  $('[data-toggle="tooltip"]').tooltip({placement: 'top'});
+});
 Template.intents.helpers({
   energyCategoryUse: function() {
 
@@ -185,7 +188,11 @@ Template.intents.events({
 
     var energyIntent;
 
-    var energyIntent =  $(e.target.parentNode.parentNode.parentNode).find('[name=energyIntent]').val();
+    var nodeItem;
+
+    nodeItem = $(e.target).closest('tr');
+
+    var energyIntent =  $(nodeItem).find('[name=energyIntent]').val();
 
     Meteor.call("saveIntent", "ENERGY", energyIntent);
 
@@ -197,7 +204,11 @@ Template.intents.events({
 
     var wasteIntent;
 
-    var wasteIntent =  $(e.target.parentNode.parentNode.parentNode).find('[name=wasteIntent]').val();
+    var nodeItem;
+
+    nodeItem = $(e.target).closest('tr');
+
+    var wasteIntent =  $(nodeItem).find('[name=wasteIntent]').val();
 
     Meteor.call("saveIntent", "WASTE", wasteIntent);
     // It is saved now, so we can hide this.
@@ -208,7 +219,11 @@ Template.intents.events({
 
     var waterIntent;
 
-    var waterIntent =  $(e.target.parentNode.parentNode.parentNode).find('[name=waterIntent]').val();
+    var nodeItem;
+
+    nodeItem = $(e.target).closest('tr');
+
+    var waterIntent =  $(nodeItem).find('[name=waterIntent]').val();
 
     Meteor.call("saveIntent", "WATER", waterIntent);
     // It is saved now, so we can hide this.

@@ -24,17 +24,15 @@ Template.adminSettings.helpers({
 });
 
 Template.adminSettings.events({
-  'click .btnTestEmail': function(e, t) {
-    Meteor.call('sendEmail', 'roylecj@gmail.com', 'chris@greenkpi.com.au', 'Test', 'This is a test message');
-  },
   'click .btnSaveSettings': function(e, t) {
 
       e.preventDefault();
-      var passwordLockoutValue =  $(e.target.parentNode.parentNode.parentNode).find('[name=passwordLockoutCount]').val();
+
+      var passwordLockoutValue =  $(document).find('[name=passwordLockoutCount]').val();
 
       Meteor.call('saveSetting', "GLOBAL", "PASSWORD_LOCKOUT", passwordLockoutValue);
 
-      var numberOfMonthsValue =  $(e.target.parentNode.parentNode.parentNode).find('[name=numberOfMonths]').val();
+      var numberOfMonthsValue =  $(document).find('[name=numberOfMonths]').val();
 
       Meteor.call('saveSetting', "GLOBAL", "NUMBER_OF_MONTHS", numberOfMonthsValue);
 

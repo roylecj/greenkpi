@@ -4,9 +4,9 @@
     <td>{{subCategoryCode}}</td>
     <td>
       {{#if isInUse}}
-        <button class="btn btn-xs btnRemoveFromUse btn-success"><i class="fas fa-check"></i></button>
+        <button data-toggle="tooltip" title="Click to remove the use of this energy item" class="btn btn-xs btnRemoveFromUse btn-success"><i class="fas fa-check"></i></button>
       {{else}}
-        <button class="btn btn-xs btnAddToUse btn-danger"><i class="fas fa-times"></i></button>
+        <button data-toggle="tooltip" title="Click to add to the energy items that we use" class="btn btn-xs btnAddToUse btn-danger"><i class="fas fa-times"></i></button>
       {{/if}}
     </td>
   </tr>

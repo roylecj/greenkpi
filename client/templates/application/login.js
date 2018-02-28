@@ -7,12 +7,6 @@ Template.login.onCreated(function() {
     Session.setDefault('sidebarMini', false);
 });
 
-Template.login.onRendered(function() {
-//    Session.set('headingVisible', false);
-//    Session.set('sidebarVisible', false);
-});
-
-
 Template.login.events({
   'click .btnSigningup': function(e, t) {
     e.preventDefault();

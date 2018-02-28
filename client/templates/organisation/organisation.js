@@ -69,21 +69,23 @@ Template.organisation.events({
 
     e.preventDefault();
 
+    var nodeItem;
+
+    nodeItem = $(e.target).closest('tr');
+
     var userId = Meteor.userId();
-    var orgName = $(e.target.parentNode.parentNode.parentNode).find('[name=companyName]').val();
-    var orgDescription = $(e.target.parentNode.parentNode.parentNode).find('[name=companyBrief]').val();
-    var orgSector = $(e.target.parentNode.parentNode.parentNode).find('[name=companySector]').val();
-    var orgEmployees = $(e.target.parentNode.parentNode.parentNode).find('[name=companyEmployees]').val();
+    var orgName = $(nodeItem).find('[name=companyName]').val();
+    var orgDescription = $(nodeItem).find('[name=companyBrief]').val();
+    var orgSector = $(nodeItem).find('[name=companySector]').val();
+    var orgEmployees = $(nodeItem).find('[name=companyEmployees]').val();
     var orgLogoPath = Session.get("companyImage");
-    var orgAddr1 = $(e.target.parentNode.parentNode.parentNode).find('[name=companyAddr1]').val();
-    var orgAddr2 = $(e.target.parentNode.parentNode.parentNode).find('[name=companyAddr2]').val();
-    var orgSuburb = $(e.target.parentNode.parentNode.parentNode).find('[name=companyAddrSuburb]').val();
-    var orgState = $(e.target.parentNode.parentNode.parentNode).find('[name=companyAddrState]').val();
-    var orgPostcode = $(e.target.parentNode.parentNode.parentNode).find('[name=companyAddrPCODE]').val();
+    var orgAddr1 = $(nodeItem).find('[name=companyAddr1]').val();
+    var orgAddr2 = $(nodeItem).find('[name=companyAddr2]').val();
+    var orgSuburb = $(nodeItem).find('[name=companyAddrSuburb]').val();
+    var orgState = $(nodeItem).find('[name=companyAddrState]').val();
+    var orgPostcode = $(nodeItem).find('[name=companyAddrPCODE]').val();
 
     Meteor.call('saveOrganisation', userId, orgName, orgDescription, orgSector, orgEmployees, orgLogoPath, orgAddr1, orgAddr2, orgSuburb, orgState, orgPostcode);
-
-debugger
 
     // Now that we have a user id, and an org, we can link the two, and add them as staff members.
     Meteor.call('addUserStaff', userId);

@@ -76,3 +76,9 @@ Template.griReports.helpers({
     return MyIntents.findOne({intentType: "ENERGY", organisationId: orgId, activeFlag: true}).description
   }
 });
+
+Template.griReports.events({
+  'click .btnPrintReport': function(e, t) {
+    window.print();
+  }
+})

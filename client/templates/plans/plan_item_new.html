@@ -52,9 +52,9 @@
     <td class="col-sm-2">
 
         {{#if hideActions}}
-        <button class="btn btn-xs btn-primary btnPlan"><i class="far fa-clock"></i></button>
-        <button class="btn btn-xs btn-success btnDone"><i class="fas fa-check"></i></button>
-        <button class="btn btn-xs {{hasNote}} btnNote"><i class="far fa-sticky-note"></i></button>
+        <button data-toggle="tooltip" title="Plan to complete" class="btn btn-xs btn-primary btnPlan"><i class="far fa-clock"></i></button>
+        <button data-toggle="tooltip" title="Complete Action" class="btn btn-xs btn-success btnDone"><i class="fas fa-check"></i></button>
+        <button data-toggle="tooltip" title="View or Create a Note" class="btn btn-xs {{hasNote}} btnNote"><i class="far fa-sticky-note"></i></button>
         {{/if}}
 
 

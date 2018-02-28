@@ -1,4 +1,18 @@
 Meteor.methods({
+  saveLocation(locationName) {
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+    cntLocation = MyLocations.find({organisationId: orgId, description: locationName, activeFlag: true}).count();
+
+    if (cntLocation === 0) {
+      var myId = MyLocations.insert({organisationId: orgId, description: locationName, activeFlag: true, createdAt: new Date(), createdBy: Meteor.userId()});
+      return myId
+    } else {
+      throw new Meteor.Error('location already exists');
+      return -1
+    }
+
+
+  },
   updateSMSEntry(id, entryType, usageType, location, provider, startDate, endDate, li) {
 
     if (! Meteor.userId()) {
@@ -46,12 +60,6 @@ Meteor.methods({
       var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
 // See if the location exists
-
-      cntLocation = MyLocations.find({organisationId: orgId, description: location, activeFlag: true}).count();
-
-      if (cntLocation === 0) {
-        MyLocations.insert({organisationId: orgId, description: location, activeFlag: true, createdAt: new Date(), createdBy: Meteor.userId()});
-      }
 
       MyMetrics.insert({
           entryType: entryType,

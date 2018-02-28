@@ -26,6 +26,21 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
 }
+.tooltip {
+  z-index: 1001;
+  pointer-events: none;
+  transition: opacity .1s ease-out;
+  opacity: 0;
+}
+
+.tooltip.hide {
+  opacity: 0;
+}
+
+.tooltip.show {
+  opacity: 1;
+}
+
 .img-logo {
   width: 100px;
   height: 100px;

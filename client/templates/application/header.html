@@ -77,7 +77,10 @@
         <textarea class="form-control" name="feedbackText" id="feedbackText"></textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary btnSaveFeedback" data-dismiss="modal">Save</button>
+        <button name="btnSaveFeedback" id="btnSaveFeedback" type="button" data-tip data-for="sendFeedbackTip" class="btn btn-primary btnSaveFeedback" data-dismiss="modal">Save</button>
+        <ReactTooltip id='sendFeedbackTip' effect='solid' place="bottom">
+          <span>Send user feedback</span>
+        </ReactTooltip>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
       </div>
     </div>

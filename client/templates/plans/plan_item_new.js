@@ -1,4 +1,7 @@
 Template.planItemNew.onRendered(function() {
+
+    $('[data-toggle="tooltip"]').tooltip({placement: 'top'});
+
     if (Session.get("plannedPressed") === this._id) {
       var planDate =  $(e.target.parentNode.parentNode).find('[name=planDate]').val();
 
@@ -183,8 +186,12 @@ Template.planItemNew.events({
   'click .btnDoneSave': function(e, t) {
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
-    var completeDate = $(e.target.parentNode.parentNode.parentNode).find('[name=doneDate]').val();
-    var completedBy = $(e.target.parentNode.parentNode.parentNode).find('[name=doneByUser]').val();
+    var nodeItem;
+
+    nodeItem = $(e.target).closest('tr');
+
+    var completeDate = $(nodeItem).find('[name=doneDate]').val();
+    var completedBy = $(nodeItem).find('[name=doneByUser]').val();
 
     var mDate = moment(completeDate);
     var dateValid = true;
@@ -224,9 +231,12 @@ Template.planItemNew.events({
   'click .btnPlanSave': function(e, t) {
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
-    var planDate =  $(e.target.parentNode.parentNode.parentNode).find('[name=planDate]').val();
-    var plannedBy =  $(e.target.parentNode.parentNode.parentNode).find('[name=plannedByUser]').val();
+    var nodeItem;
 
+    nodeItem = $(e.target).closest('tr');
+
+    var planDate =  $(nodeItem).find('[name=planDate]').val();
+    var plannedBy =  $(nodeItem).find('[name=plannedByUser]').val();
 
     var mDate = moment(planDate);
     var dateValid = true;

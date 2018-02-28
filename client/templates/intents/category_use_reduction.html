@@ -3,7 +3,7 @@
     <td>
       {{categoryCode}}
       {{#if hasNoTarget}}
-      <button class="btn btn-xs btn-success btnCreateTarget pull-right">Create Target</button>
+      <button data-toggle="tooltip" title="Create a target against this form of energy use" class="btn btn-xs btn-success btnCreateTarget pull-right">Create Target</button>
       {{/if}}
     </td>
     <td>
@@ -30,7 +30,7 @@
     <td>
       {{#if hasNoTarget}}
       {{else}}
-      <button class="btn btn-xs btn-success btnSaveTarget"><i class="fas fa-check"></i></button>
+      <button data-toggle="tooltip" title="Save target" class="btn btn-xs btn-success btnSaveTarget"><i class="fas fa-check"></i></button>
       <button class="btn btn-xs btn-danger btnCancelTarget"><i class="fas fa-times"></i></button>
       {{/if}}
     </td>

@@ -43,9 +43,6 @@ Template.actionItemDetail.events({
     Session.set("editingActionItem", "");
   },
   'click .btnSaveItem': function(e, t) {
-
-    debugger
-    
     var categoryCode = $(document).find('[name=editCategoryCode]').val();
     var reportId = $(document).find('[name=editReportId]').val();
     var actionText = $(document).find('[name=editActionText]').val();

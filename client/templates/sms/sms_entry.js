@@ -9,7 +9,8 @@ Template.smsEntry.onRendered(function() {
   document.getElementById("location").value = this.data.location;
   document.getElementById("energyUsageType").value = this.data.usageType;
 
-  Session.set("energyUsageType", this.data.energyUsageType);
+// debugger
+  Session.set("energyUsageType", this.data.usageType);
 
   // This is the array of items, which we need to add to the collection
   li = this.data.items;
@@ -32,24 +33,32 @@ Template.smsEntry.helpers({
 //    return ReferenceData.find({dataType: "ENERGY_BILL", activeFlag: true}).fetch();
     return CategoryFields.find({rootCategoryCode: "ENERGY", activeFlag: true}).fetch();
   },
-  settings: function() {
+  energyUsageType: function() {
+    debugger
 
+    document.getElementById("energyUsageType").value = Session.get("energyUsageType");
+  },
+  addLocation: function() {
+    return Session.get("addLocation")
+  },
+  addProvider: function() {
+    return Session.get("addProvider")
+  },
+  locationItems: function() {
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
-     return {
-       position: "bottom",
-       limit: 5,
-       rules: [
-         {
-           collection: MyLocations,
-           field: "description",
-           matchAll: true,
-           filter: { organisationId: orgId, activeFlag: true },
-           template: Template.locationPill
-         }
-       ]
-     };
+    if (Session.get("addedLocation") !== "") {
+
+    }
+    return MyLocations.find({organisationId: orgId, activeFlag: true}, {sort: {description: 1}}).fetch();
    },
+  addedLocation: function() {
+    if (Session.get("addedLocation") !== "") {
+      document.getElementById("location").value = Session.get("addedLocation");
+
+      Session.set("addedLocation", "");
+    }
+  },
   vendor: function() {
     return ReferenceData.find({dataType: "VENDOR", activeFlag: true}).fetch();
   },
@@ -126,6 +135,31 @@ Template.smsEntry.events({
       Session.set("totalCost", totalCost);
     }
   },
+  'click .btnAddLocation': function(e, t) {
+    Session.set("addLocation", true);
+  },
+  'click .btnCancelSaveLocation': function(e, t) {
+    Session.set("addLocation", false);
+  },
+  'click .btnSaveLocation': function(e, t) {
+    debugger
+    var location = $(document).find('[name=locationName]').val();
+    Meteor.call('saveLocation', location, function(e, result) {
+      debugger
+
+//      document.getElementById("location").value = result;
+      Session.set("addedLocation", result)
+      // Once it has been saved, we can use it...
+    });
+
+    Session.set("addLocation", false);
+  },
+  'click .btnAddProvider': function(e, t) {
+    Session.set("addProvider", true);
+  },
+  'click .btnCancelSaveProvider': function(e, t) {
+    Session.set("addProvider", false);
+  },
   'click .btnSaveRow': function(e, t) {
 
     // Find the values on the screen
@@ -167,11 +201,11 @@ Template.smsEntry.events({
   },
   'click .btnSaveEntry': function(e, t) {
 
-    var energyUsageType = $(e.target.parentNode.parentNode.parentNode).find('[name=energyUsageType]').val();
-    var vendor = $(e.target.parentNode.parentNode.parentNode).find('[name=vendor]').val();
-    var location = $(e.target.parentNode.parentNode.parentNode).find('[name=location]').val();
-    var startDate = $(e.target.parentNode.parentNode.parentNode).find('[name=startDate]').val();
-    var endDate = $(e.target.parentNode.parentNode.parentNode).find('[name=endDate]').val();
+    var energyUsageType = $(document).find('[name=energyUsageType]').val();
+    var vendor = $(document).find('[name=vendor]').val();
+    var location = $(document).find('[name=location]').val();
+    var startDate = $(document).find('[name=startDate]').val();
+    var endDate = $(document).find('[name=endDate]').val();
 
     if (!startDate) {
       startDate = endDate;

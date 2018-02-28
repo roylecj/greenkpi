@@ -22,11 +22,16 @@ Template.userList.events({
   'click .btnSaveAddNew': function(e, t) {
 
     e.preventDefault();
-    var userId =  $(e.target.parentNode.parentNode.parentNode).find('[name=userName]').val();
-    var userFirstName = $(e.target.parentNode.parentNode.parentNode).find('[name=firstName]').val();
-    var userLastName = $(e.target.parentNode.parentNode.parentNode).find('[name=lastName]').val();
-    var emailAddress = $(e.target.parentNode.parentNode.parentNode).find('[name=emailAddress]').val();
-    var userGroup = $(e.target.parentNode.parentNode.parentNode).find('[name=userGroup]').val();
+
+    var nodeItem;
+
+    nodeItem = $(e.target).closest('tr');
+
+    var userId =  $(nodeItem).find('[name=userName]').val();
+    var userFirstName = $(nodeItem).find('[name=firstName]').val();
+    var userLastName = $(nodeItem).find('[name=lastName]').val();
+    var emailAddress = $(nodeItem).find('[name=emailAddress]').val();
+    var userGroup = $(nodeItem).find('[name=userGroup]').val();
     var isActive = Session.get("newActive")
 
     Meteor.call('addUser', userId, userFirstName, userLastName, emailAddress, userGroup, isActive, function(e, result) {

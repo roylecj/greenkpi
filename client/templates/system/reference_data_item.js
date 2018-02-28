@@ -27,9 +27,14 @@ Template.referenceItem.events({
   },
   'click .btnSaveItem': function(e, t) {
       // Save the Reference item
-      var cat =  $(e.target.parentNode.parentNode.parentNode).find('[name=dataType]').val();
-      var description = $(e.target.parentNode.parentNode.parentNode).find('[name=description]').val();
-      var code = $(e.target.parentNode.parentNode.parentNode).find('[name=code]').val();
+
+      var nodeItem;
+
+      nodeItem = $(e.target).closest('tr');
+
+      var cat =  $(nodeItem).find('[name=dataType]').val();
+      var description = $(nodeItem).find('[name=description]').val();
+      var code = $(nodeItem).find('[name=code]').val();
       var isActive = Session.get("isActiveReferenceItem")
 
       Meteor.call('updateReferenceItem', this._id, cat, code, description, isActive);
