@@ -71,7 +71,7 @@ Template.organisation.events({
 
     var nodeItem;
 
-    nodeItem = $(e.target).closest('tr');
+    nodeItem = $(document);
 
     var userId = Meteor.userId();
     var orgName = $(nodeItem).find('[name=companyName]').val();
