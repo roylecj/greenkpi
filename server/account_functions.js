@@ -58,9 +58,11 @@ Meteor.methods({
   addUserStaff: function(userId) {
     // See if the user exists already as a staff member...
 
-    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+    var orgId = MyOrganisation.findOne({userId: userId, activeFlag: true}).organisationId;
 
     var userRecord = Meteor.users.findOne({_id: userId});
+
+console.log("Adding staff");
 
     if (MyStaff.find({userId: userId, activeFlag: true, organisationId: orgId}).count() === 0) {
       MyStaff.insert({
