@@ -10,8 +10,34 @@ Meteor.methods({
       throw new Meteor.Error('location already exists');
       return -1
     }
+  },
+  saveProvider(providerName) {
+    var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
+    cntVendor = ReferenceData.find({dataType: "VENDOR", description: providerName, activeFlag: true}).count();
 
+console.log("cnt=" + cntVendor);
 
+    if (cntVendor === 0) {
+
+      // Check if there is a local one next
+
+      cntVendor = ReferenceData.find({dataType: "VENDOR", description: providerName, organisationId: orgId, activeFlag: true}).count();
+
+      console.log("cnt=" + cntVendor);
+
+      if (cntVendor === 0) {
+
+        console.log("INSERTING VENDOR");
+
+        var myId = ReferenceData.insert({dataType: "VENDOR", code: providerName, organisationId: orgId, description: providerName, activeFlag: true, createdAt: new Date(), createdBy: Meteor.userId()});
+        return myId
+      } else {
+        throw new Meteor.Error("local provider already exists");
+      }
+    } else {
+      throw new Meteor.Error('provider already exists');
+      return -1
+    }
   },
   updateSMSEntry(id, entryType, usageType, location, provider, startDate, endDate, li) {
 

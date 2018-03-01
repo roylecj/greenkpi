@@ -19,6 +19,9 @@ Template.billEntry.helpers({
   usage: function() {
 //    return ReferenceData.findOne({_id: this.usageType}).description
     return CategoryFields.findOne({_id: this.usageType}).categoryCode
+  },
+  locationName: function() {
+    return MyLocations.findOne({_id: this.location}).description
   }
 });
 

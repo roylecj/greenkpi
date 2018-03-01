@@ -44,9 +44,18 @@
         {{/if}}
       </div>
 
+      {{#if hasErrors}}
+        <div class="alert alert-danger" role="alert">
+          <h4>Errors</h4>
+          {{{errorText}}}
+          <p></p>
+        </div>
+      {{/if}}
+
+      <form name="smsEntryForm" id="smsEntryForm" data-parsley-validate>
           <div class="form-group">
             <label>Usage Type</label>
-            <select id="energyUsageType" name="energyUsageType" class="form-control">
+            <select id="energyUsageType" name="energyUsageType" class="form-control" data-parsley-required>
               <option disabled="" selected="">SELECT ONE</option>
                 {{#each energyType}}
                     <option value="{{_id}}">{{categoryCode}}</option>
@@ -80,7 +89,7 @@
             <div class="row">
               <div class="col-xs-10">
               {{addedLocation}}
-                <select id="location" name="location" class="form-control">
+                <select id="location" name="location" class="form-control" data-parsley-required>
                   <option disabled="" selected="">SELECT ONE</option>
                   {{#each locationItems}}
                       <option value="{{_id}}">{{description}}</option>
@@ -114,7 +123,8 @@
             {{else}}
             <div class="row">
               <div class="col-xs-10">
-            <select id="vendor" name="vendor" class="form-control">
+            <select id="vendor" name="vendor" class="form-control" data-parsley-required>
+              <option disabled="" selected="">SELECT ONE</option>
                 {{#each vendor}}
                     <option value="{{code}}">{{description}}</option>
                 {{/each}}
@@ -131,17 +141,22 @@
           {{#if hasStartDateField}}
           <div class="col-sm-6">
             <label>Start Date</label>
-            <input class="form-control" type="date" name="startDate" id="startDate" value="{{startDate}}" />
+            <input class="form-control" type="date" name="startDate" id="startDate" value="{{startDate}}" max="{{validStartDate}}"/>
           </div>
           {{/if}}
 
           {{#if hasEndDateField}}
           <div class="col-sm-6">
-            <label>{{#if hasStartDate}}End Date{{else}}Date{{/if}}</label>
-            <input class="form-control" type="date" name="endDate" id="endDate" value="{{endDate}}"/>
+
+            <div name="fg-endDate" class="form-group">
+              <label>{{#if hasStartDate}}End Date{{else}}Date{{/if}}</label>
+              <input class="form-control" type="date" name="endDate" id="endDate" value="{{endDate}}" max="{{validEndDate}}"/>
+              <span class="help-block hidden" name="helpText">Invalid Date - needs to be in the past</span>
+            </div>
+
           </div>
           {{/if}}
-
+        </form>
           <table class="table table-striped table-hover">
             <thead>
               <tr>
