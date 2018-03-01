@@ -1,5 +1,5 @@
 Template.intents.onRendered(function() {
-  $('[data-toggle="tooltip"]').tooltip({placement: 'top'});
+  $('[data-toggle="tooltip"]').tooltip({trigger: "hover", placement: 'top'});
 });
 Template.intents.helpers({
   energyCategoryUse: function() {
@@ -184,6 +184,9 @@ Template.intents.events({
     Session.set("ShowWasteHistory", ! Session.get("ShowWasteHistory"));
   },
   'click .btnSaveEnergy': function(e, t) {
+    $('[data-toggle="tooltip"]').tooltip("destroy");
+    $('[data-toggle="tooltip"]').tooltip({trigger: "hover", placement: 'top'});
+
     e.preventDefault();
 
     var energyIntent;
@@ -201,6 +204,9 @@ Template.intents.events({
   },
   'click .btnSaveWaste': function(e, t) {
     e.preventDefault();
+    $('[data-toggle="tooltip"]').tooltip("destroy");
+
+    $('[data-toggle="tooltip"]').tooltip({trigger: "hover", placement: 'top'});
 
     var wasteIntent;
 
@@ -216,6 +222,9 @@ Template.intents.events({
   },
   'click .btnSaveWater': function(e, t) {
     e.preventDefault();
+    $('[data-toggle="tooltip"]').tooltip("destroy");
+
+    $('[data-toggle="tooltip"]').tooltip({trigger: "hover", placement: 'top'});
 
     var waterIntent;
 

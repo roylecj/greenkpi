@@ -1,6 +1,6 @@
 Template.planItemNew.onRendered(function() {
 
-    $('[data-toggle="tooltip"]').tooltip({placement: 'top'});
+    $('[data-toggle="tooltip"]').tooltip({trigger: "hover", placement: 'top'});
 
     if (Session.get("plannedPressed") === this._id) {
       var planDate =  $(e.target.parentNode.parentNode).find('[name=planDate]').val();
@@ -166,24 +166,33 @@ debugger
 
 Template.planItemNew.events({
   'click .btnPlan': function(e, t) {
+    $('[data-toggle="tooltip"]').tooltip("destroy");
+
     Session.set("plannedPressed", this._id);
     Session.set("donePressed", "");
     Session.set("noteRecording", "");
 
   },
   'click .btnDone': function(e, t) {
+    $('[data-toggle="tooltip"]').tooltip("destroy");
     Session.set("donePressed", this._id);
     Session.set("plannedPressed", "");
     Session.set("noteRecording", "");
 
   },
   'click .btnDoneCancel': function(e, t) {
+    $('[data-toggle="tooltip"]').tooltip({trigger: "hover", placement: 'top'});
+
     Session.set("donePressed", "");
     Session.set("plannedPressed", "");
     Session.set("noteRecording", "");
 
   },
   'click .btnDoneSave': function(e, t) {
+    $('[data-toggle="tooltip"]').tooltip("destroy");
+
+    $('[data-toggle="tooltip"]').tooltip({trigger: "hover", placement: 'top'});
+
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
     var nodeItem;
@@ -225,10 +234,18 @@ Template.planItemNew.events({
     }
   },
   'click .btnPlanCancel': function(e, t) {
+    $('[data-toggle="tooltip"]').tooltip("destroy");
+    $('[data-toggle="tooltip"]').tooltip({trigger: "hover", placement: 'top'});
+
+
     Session.set("donePressed", "");
     Session.set("plannedPressed", "");
   },
   'click .btnPlanSave': function(e, t) {
+    $('[data-toggle="tooltip"]').tooltip("destroy");
+    $('[data-toggle="tooltip"]').tooltip({trigger: "hover", placement: 'top'});
+
+
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
     var nodeItem;
@@ -272,6 +289,9 @@ Template.planItemNew.events({
     }
   },
   'click .btnDoneNote': function(e, t) {
+    $('[data-toggle="tooltip"]').tooltip("destroy");
+
+    $('[data-toggle="tooltip"]').tooltip({trigger: "hover", placement: 'top'});
 
     if (Session.get("noteRecording") === this._id) {
         Session.set("noteRecording", "");
@@ -280,6 +300,9 @@ Template.planItemNew.events({
     }
   },
   'click .btnPlannedNote': function(e, t) {
+    $('[data-toggle="tooltip"]').tooltip("destroy");
+
+    $('[data-toggle="tooltip"]').tooltip({trigger: "hover", placement: 'top'});
     if (Session.get("noteRecording") === this._id) {
         Session.set("noteRecording", "");
     } else {
@@ -287,6 +310,9 @@ Template.planItemNew.events({
     }
   },
   'click .btnNote': function(e, t) {
+    $('[data-toggle="tooltip"]').tooltip("destroy");
+
+    $('[data-toggle="tooltip"]').tooltip({trigger: "hover", placement: 'top'});
     if (Session.get("noteRecording") === this._id) {
         Session.set("noteRecording", "");
     } else {
@@ -294,6 +320,9 @@ Template.planItemNew.events({
     }
   },
   'click .btnSaveNote': function(e, t) {
+    $('[data-toggle="tooltip"]').tooltip("destroy");
+
+    $('[data-toggle="tooltip"]').tooltip({trigger: "hover", placement: 'top'});
     var orgId = MyOrganisation.findOne({userId: Meteor.userId(), activeFlag: true}).organisationId;
 
     var nodeItem = $(e.target).closest('tr');

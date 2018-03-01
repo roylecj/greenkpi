@@ -1,5 +1,5 @@
 Template.categoryUseItem.onRendered(function() {
-  $('[data-toggle="tooltip"]').tooltip({placement: 'top'});
+  $('[data-toggle="tooltip"]').tooltip({trigger: "hover", placement: 'top'});
 });
 
 Template.categoryUseItem.helpers({
@@ -20,9 +20,16 @@ Template.categoryUseItem.helpers({
 
 Template.categoryUseItem.events({
   'click .btnAddToUse': function(e, t) {
+    $('[data-toggle="tooltip"]').tooltip("destroy");
+
+    $('[data-toggle="tooltip"]').tooltip({trigger: "hover", placement: 'top'});
+
     Meteor.call("addMyCategoryUse", this._id);
   },
   'click .btnRemoveFromUse': function(e, t) {
+    $('[data-toggle="tooltip"]').tooltip("destroy");
+
+    $('[data-toggle="tooltip"]').tooltip({trigger: "hover", placement: 'top'});
     Meteor.call("removeMyCategoryUse", this._id);
   }
 });

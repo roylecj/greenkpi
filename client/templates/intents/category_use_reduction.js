@@ -1,5 +1,5 @@
 Template.categoryUseReduction.onRendered(function() {
-  $('[data-toggle="tooltip"]').tooltip({placement: 'top'});
+  $('[data-toggle="tooltip"]').tooltip({trigger: "hover", placement: 'top'});
 })
 Template.categoryUseReduction.helpers({
   hasNoTarget: function() {
@@ -56,9 +56,17 @@ Template.categoryUseReduction.helpers({
 
 Template.categoryUseReduction.events({
   'click .btnCreateTarget': function(e, t) {
+    $('[data-toggle="tooltip"]').tooltip("destroy");
+
+    $('[data-toggle="tooltip"]').tooltip({trigger: "hover", placement: 'top'});
+
     Session.set("createTarget", this._id);
   },
   'click .btnCancelTarget': function(e, t) {
+    $('[data-toggle="tooltip"]').tooltip("destroy");
+
+    $('[data-toggle="tooltip"]').tooltip({trigger: "hover", placement: 'top'});
+
     Session.set("createTarget", "");
   },
   'keyup #targetDate': function(e, t) {
@@ -116,6 +124,9 @@ Template.categoryUseReduction.events({
     }
   },
   'click .btnSaveTarget': function(e, t) {
+    $('[data-toggle="tooltip"]').tooltip("destroy");
+
+    $('[data-toggle="tooltip"]').tooltip({trigger: "hover", placement: 'top'});
 
     Session.set("createTarget", "");
 
